@@ -1,45 +1,40 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import NewNote from './components/NewNote/NewNote';
 import { v4 as uuidV4 } from 'uuid';
-
-import './App.css';
+import {
+  addDoc,
+  collection,
+  writeBatch,
+  doc,
+  getDoc,
+  deleteDoc,
+} from 'firebase/firestore';
 import NoteList from './components/NoteList/NoteList';
 import NoteLayout from './components/NoteLayout/NoteLayout';
 import Note from './components/Note/Note';
 import EditNote from './components/EditNote/EditNote';
-import { useLocalStorage } from './utils/useLocalStorage';
-
-// const partialNotes = [
-//   {
-//     title: 'Title 1',
-//     tagIds: ['testId'],
-//     id: 'testnoteid1',
-//     markdown: 'markdown body',
-//   },
-//   {
-//     title: 'Title 3',
-//     tagIds: [],
-//     id: 'testnoteid3',
-//     markdown: 'markdown body2',
-//   },
-//   {
-//     title: 'Title 2',
-//     tagIds: ['testId2'],
-//     id: 'testnoteid2',
-//     markdown: 'markdown body2',
-//   },
-// ];
-
-// const partialTags = [
-//   { label: 'test', id: 'testId' },
-//   { label: 'test2', id: 'testId2' },
-// ];
+import {
+  db,
+  getNotes,
+  getTags,
+  searchTagsId,
+} from './services/firestore/firebase';
+import './App.css';
 
 function App() {
-  const [notes, setNotes] = useLocalStorage('NOTES', []);
-  const [tags, setTags] = useLocalStorage('TAGS', []);
+  const [notes, setNotes] = useState([]);
+  const [tags, setTags] = useState([]);
+
+  useEffect(() => {
+    getNotes().then((notes) => {
+      setNotes(notes);
+    });
+    getTags().then((tags) => {
+      setTags(tags);
+    });
+  }, []);
 
   const notesWithTags = useMemo(() => {
     return notes.map((note) => {
@@ -57,6 +52,19 @@ function App() {
         { ...data, id: uuidV4(), tagIds: tags.map((tag) => tag.id) },
       ];
     });
+
+    const newNote = {
+      ...data,
+      tagIds: tags.map((tag) => tag.id),
+    };
+
+    const batch = writeBatch(db);
+
+    addDoc(collection(db, 'notes'), newNote)
+      .then(({ id }) => {
+        batch.commit().then(() => console.log(id));
+      })
+      .catch((err) => console.log(err));
   }
 
   function onUpdateNote(id, { tags, ...data }) {
@@ -69,19 +77,45 @@ function App() {
         }
       });
     });
+
+    const batch = writeBatch(db);
+
+    const newNote = {
+      ...data,
+      tagIds: tags.map((tag) => tag.id),
+    };
+
+    getDoc(doc(db, 'notes', id))
+      .then((docSnapshot) => {
+        batch.update(doc(db, 'notes', docSnapshot.id), newNote);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        batch.commit();
+      });
   }
 
   function onDeleteNote(id) {
     setNotes((prevNotes) => {
       return prevNotes.filter((note) => note.id !== id);
     });
+
+    deleteDoc(doc(db, 'notes', id));
   }
 
   function addTag(tag) {
     setTags((prev) => [...prev, tag]);
+
+    const batch = writeBatch(db);
+
+    addDoc(collection(db, 'tags'), tag)
+      .then(({ id }) => {
+        batch.commit().then(() => console.log(id));
+      })
+      .catch((err) => console.log(err));
   }
 
-  function updateTag(id, label) {
+  async function updateTag(id, label) {
     setTags((prevTags) => {
       return prevTags.map((tag) => {
         if (tag.id === id) {
@@ -91,12 +125,30 @@ function App() {
         }
       });
     });
+
+    const batch = writeBatch(db);
+
+    let searchedTag;
+    await searchTagsId('id', '==', id).then((tags) => (searchedTag = tags));
+
+    getDoc(doc(db, 'tags', searchedTag[0]))
+      .then((docSnapshot) => {
+        batch.update(doc(db, 'tags', docSnapshot.id), { id, label });
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        batch.commit();
+      });
   }
 
-  function deleteTag(id) {
+  async function deleteTag(id) {
     setTags((prevTags) => {
       return prevTags.filter((tag) => tag.id !== id);
     });
+
+    let searchedTag;
+    await searchTagsId('id', '==', id).then((tags) => (searchedTag = tags));
+    await deleteDoc(doc(db, 'tags', searchedTag[0]));
   }
 
   return (
