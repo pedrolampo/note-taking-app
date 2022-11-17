@@ -31,6 +31,32 @@ label {
   color: #fff;
 }
 
+.note-markdown pre {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 5px;
+  padding: 0.5em;
+}
+.note-markdown code {
+  color: rgb(191, 149, 226);
+  color: #e94898;
+}
+
+.note-markdown blockquote {
+  font-style: italic;
+  position: relative;
+  padding-left: 18px;
+}
+.note-markdown blockquote::after {
+  content: '';
+  position: absolute;
+  display: block;
+  height: 100%;
+  width: 0.25em;
+  background-color: #ccc;
+  top: 0;
+  left: 0;
+}
+
 .css-2613qy-menu {
   background-color: red !important;
 }
