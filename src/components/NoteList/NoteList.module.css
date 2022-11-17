@@ -1,11 +1,12 @@
 .card {
   transition: translate ease-in-out 100ms, box-shadow ease-in-out 100ms;
-  /* background-color: #374b62a1; */
+  background-color: #222;
+  box-shadow: 0 0 8px 0 rgba(39, 39, 39, 0.2);
 }
 
-/* .card span {
+.card span {
   color: #fff;
-} */
+}
 
 .card:hover,
 .card:focus {

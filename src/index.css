@@ -11,11 +11,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* color: #fff; */
-  /* background-color: #30363d !important; */
+  color: #fff;
+  background-color: #1f1b24 !important;
 }
 
-/* h1 {
+h1 {
   color: #fff;
 }
 
@@ -23,22 +23,31 @@ button.white-text {
   color: #fff !important;
 }
 
-.select .css-1s2u09g-control {
-  background-color: #374b62a1;
-}
-
 label {
   color: #fff;
 }
 
+.css-2613qy-menu {
+  background-color: red !important;
+}
+
 input.form-control {
-  background-color: #374b62a1;
+  background-color: #222;
   color: #fff;
 }
 input.form-control:focus {
-  background-color: #374b62;
+  background-color: #444;
   color: #fff;
-} */
+}
+
+textarea.form-control {
+  color: #fff;
+  background-color: #222;
+}
+textarea.form-control:focus {
+  color: #fff;
+  background-color: #222;
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

@@ -78,6 +78,35 @@ export default function NoteList({
               <ReactSelect
                 className="select"
                 isMulti
+                styles={{
+                  control: (baseStyles, state) => ({
+                    ...baseStyles,
+                    backgroundColor: state.isFocused ? '#444' : '#222',
+                    color: '#fff',
+                  }),
+                  input: (baseStyles, state) => ({
+                    ...baseStyles,
+                    color: '#fff',
+                  }),
+                  multiValue: (baseStyles) => ({
+                    ...baseStyles,
+                    backgroundColor: '#555',
+                  }),
+                  multiValueLabel: (baseStyles) => ({
+                    ...baseStyles,
+                    color: '#fff',
+                  }),
+                  menu: (baseStyles, state) => ({
+                    ...baseStyles,
+                    backgroundColor: state.isFocused ? '#222' : '#222',
+                    color: '#fff',
+                  }),
+                  option: (baseStyles, state) => ({
+                    ...baseStyles,
+                    backgroundColor: state.isFocused ? '#222' : '#222',
+                    color: '#fff',
+                  }),
+                }}
                 value={selectedTags.map((tag) => {
                   return { label: tag.label, value: tag.id };
                 })}
