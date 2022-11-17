@@ -64,9 +64,8 @@ label {
 .note-markdown pre code {
   padding: 0;
   border-radius: 0;
-  background-color: transparent;
   box-shadow: none;
-  color: #f9916b;
+  background-color: #2c2832;
 }
 
 .note-markdown blockquote {
