@@ -7,8 +7,6 @@ export default function Note({ onDelete }) {
   const note = useNote();
   const navigate = useNavigate();
 
-  if (note == null) return <h3>Loading...</h3>;
-
   return (
     <>
       <Row className="align-items-center mb-4">
