@@ -53,6 +53,7 @@ label {
   padding: 0.1rem 0.5rem;
   border-radius: 5px;
   box-shadow: 0 0 4px 0px #333;
+  font-family: monospace;
 }
 
 .note-markdown pre {
@@ -65,7 +66,7 @@ label {
   border-radius: 0;
   background-color: transparent;
   box-shadow: none;
-  color: #df3ea6;
+  color: #ff7f50;
 }
 
 .note-markdown blockquote {
