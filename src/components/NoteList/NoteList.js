@@ -45,9 +45,12 @@ export default function NoteList({
         <Col xs="auto">
           <Stack gap={2} direction="horizontal">
             <Link to="/new">
-              <Button variant="primary">Create</Button>
+              <Button className="white-text" variant="outline-primary">
+                Create
+              </Button>
             </Link>
             <Button
+              className="white-text"
               onClick={() => setEditTagsModalIsOpen(true)}
               variant="outline-secondary"
             >
@@ -73,6 +76,7 @@ export default function NoteList({
             <Form.Group controlId="tags">
               <Form.Label>Tags</Form.Label>
               <ReactSelect
+                className="select"
                 isMulti
                 value={selectedTags.map((tag) => {
                   return { label: tag.label, value: tag.id };

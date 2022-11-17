@@ -15,6 +15,31 @@ body {
   /* background-color: #30363d !important; */
 }
 
+/* h1 {
+  color: #fff;
+}
+
+button.white-text {
+  color: #fff !important;
+}
+
+.select .css-1s2u09g-control {
+  background-color: #374b62a1;
+}
+
+label {
+  color: #fff;
+}
+
+input.form-control {
+  background-color: #374b62a1;
+  color: #fff;
+}
+input.form-control:focus {
+  background-color: #374b62;
+  color: #fff;
+} */
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
