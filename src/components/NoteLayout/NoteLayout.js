@@ -1,9 +1,4 @@
-import {
-  useParams,
-  Navigate,
-  Outlet,
-  useOutletContext,
-} from 'react-router-dom';
+import { useParams, Outlet, useOutletContext } from 'react-router-dom';
 
 export default function NoteLayout({ notes }) {
   const { id } = useParams();
