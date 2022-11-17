@@ -31,14 +31,25 @@ label {
   color: #fff;
 }
 
+.note-markdown code {
+  background-color: #555;
+  color: #fff;
+  padding: 0.1rem 0.5rem;
+  border-radius: 5px;
+  box-shadow: 0 0 4px 0px #333;
+}
+
 .note-markdown pre {
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 5px;
   padding: 0.5em;
 }
-.note-markdown code {
-  color: rgb(191, 149, 226);
-  color: #e94898;
+.note-markdown pre code {
+  padding: 0;
+  border-radius: 0;
+  background-color: transparent;
+  box-shadow: none;
+  color: #df3ea6;
 }
 
 .note-markdown blockquote {
