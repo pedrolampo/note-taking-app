@@ -9,7 +9,7 @@ export default function NoteLayout({ notes }) {
   const { id } = useParams();
   const note = notes.find((n) => n.id === id);
 
-  if (note == null) return <Navigate to="/" replace />;
+  if (note == null) return <h3 style={{ color: '#fff' }}>Loading...</h3>;
 
   return <Outlet context={note} />;
 }
