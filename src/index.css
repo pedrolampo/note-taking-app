@@ -15,6 +15,22 @@ body {
   background-color: #1f1b24 !important;
 }
 
+.modal .modal-content {
+  background-color: #333;
+  color: white;
+}
+
+.modal .modal-content button.btn-close {
+  background-color: #ccc !important;
+}
+.modal .modal-content button {
+  color: #fff;
+}
+
+.modal .modal-content input {
+  background-color: rgba(34, 34, 34, 0.5);
+}
+
 h1 {
   color: #fff;
 }

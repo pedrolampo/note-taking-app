@@ -192,7 +192,7 @@ function EditTagsModal({
   onDeleteTag,
 }) {
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal className="modal" show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Edit Tags</Modal.Title>
       </Modal.Header>
