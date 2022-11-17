@@ -25,7 +25,9 @@ export default function Note({ onDelete }) {
         <Col xs="auto">
           <Stack gap={2} direction="horizontal">
             <Link to={`/${note.id}/edit`}>
-              <Button variant="primary">Edit</Button>
+              <Button className="white-text" variant="outline-primary">
+                Edit
+              </Button>
             </Link>
             <Button
               onClick={() => {
@@ -37,12 +39,14 @@ export default function Note({ onDelete }) {
               Delete
             </Button>
             <Link to="/">
-              <Button variant="outline-secondary">Back</Button>
+              <Button className="white-text" variant="outline-secondary">
+                Back
+              </Button>
             </Link>
           </Stack>
         </Col>
       </Row>
-      <ReactMarkdown>{note.markdown}</ReactMarkdown>
+      <ReactMarkdown className="note-markdown">{note.markdown}</ReactMarkdown>
     </>
   );
 }

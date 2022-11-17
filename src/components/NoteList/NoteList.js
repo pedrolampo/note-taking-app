@@ -23,6 +23,41 @@ export default function NoteList({
   const [title, setTitle] = useState('');
   const [editTagsModalIsOpen, setEditTagsModalIsOpen] = useState(false);
 
+  const selectStyles = {
+    control: (baseStyles, state) => ({
+      ...baseStyles,
+      backgroundColor: state.isFocused ? '#444' : '#2b2a34',
+      color: '#fff',
+    }),
+    input: (baseStyles) => ({
+      ...baseStyles,
+      color: '#fff',
+    }),
+    multiValue: (baseStyles) => ({
+      ...baseStyles,
+      backgroundColor: '#666',
+    }),
+    multiValueLabel: (baseStyles) => ({
+      ...baseStyles,
+      color: '#fff',
+      backgroundColor: '#666',
+    }),
+    multiValueRemove: (baseStyles) => ({
+      ...baseStyles,
+      backgroundColor: '#666',
+    }),
+    menu: (baseStyles) => ({
+      ...baseStyles,
+      backgroundColor: '#444',
+      color: '#fff',
+    }),
+    option: (baseStyles) => ({
+      ...baseStyles,
+      backgroundColor: '#444',
+      color: '#fff',
+    }),
+  };
+
   const filteredNotes = useMemo(() => {
     return notes.filter((note) => {
       return (
@@ -78,35 +113,7 @@ export default function NoteList({
               <ReactSelect
                 className="select"
                 isMulti
-                styles={{
-                  control: (baseStyles, state) => ({
-                    ...baseStyles,
-                    backgroundColor: state.isFocused ? '#444' : '#222',
-                    color: '#fff',
-                  }),
-                  input: (baseStyles, state) => ({
-                    ...baseStyles,
-                    color: '#fff',
-                  }),
-                  multiValue: (baseStyles) => ({
-                    ...baseStyles,
-                    backgroundColor: '#555',
-                  }),
-                  multiValueLabel: (baseStyles) => ({
-                    ...baseStyles,
-                    color: '#fff',
-                  }),
-                  menu: (baseStyles, state) => ({
-                    ...baseStyles,
-                    backgroundColor: state.isFocused ? '#222' : '#222',
-                    color: '#fff',
-                  }),
-                  option: (baseStyles, state) => ({
-                    ...baseStyles,
-                    backgroundColor: state.isFocused ? '#222' : '#222',
-                    color: '#fff',
-                  }),
-                }}
+                styles={selectStyles}
                 value={selectedTags.map((tag) => {
                   return { label: tag.label, value: tag.id };
                 })}

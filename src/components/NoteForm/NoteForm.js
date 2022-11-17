@@ -17,6 +17,41 @@ export default function NoteForm({
   const [selectedTags, setSelectedTags] = useState(tags);
   const navigate = useNavigate();
 
+  const selectStyles = {
+    control: (baseStyles, state) => ({
+      ...baseStyles,
+      backgroundColor: state.isFocused ? '#444' : '#2b2a34',
+      color: '#fff',
+    }),
+    input: (baseStyles) => ({
+      ...baseStyles,
+      color: '#fff',
+    }),
+    multiValue: (baseStyles) => ({
+      ...baseStyles,
+      backgroundColor: '#666',
+    }),
+    multiValueLabel: (baseStyles) => ({
+      ...baseStyles,
+      color: '#fff',
+      backgroundColor: '#666',
+    }),
+    multiValueRemove: (baseStyles) => ({
+      ...baseStyles,
+      backgroundColor: '#666',
+    }),
+    menu: (baseStyles) => ({
+      ...baseStyles,
+      backgroundColor: '#444',
+      color: '#fff',
+    }),
+    option: (baseStyles) => ({
+      ...baseStyles,
+      backgroundColor: '#444',
+      color: '#fff',
+    }),
+  };
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -44,6 +79,7 @@ export default function NoteForm({
               <Form.Label>Tags</Form.Label>
               <CreatableReactSelect
                 isMulti
+                styles={selectStyles}
                 onCreateOption={(label) => {
                   const newTag = { id: uuidV4(), label };
                   onAddTag(newTag);
@@ -77,11 +113,19 @@ export default function NoteForm({
           />
         </Form.Group>
         <Stack direction="horizontal" gap={2} className="justify-content-end">
-          <Button type="submit" variant="primary">
+          <Button
+            className="white-text"
+            type="submit"
+            variant="outline-primary"
+          >
             Save
           </Button>
           <Link to="..">
-            <Button type="button" variant="outline-secondary">
+            <Button
+              className="white-text"
+              type="button"
+              variant="outline-secondary"
+            >
               Cancel
             </Button>
           </Link>

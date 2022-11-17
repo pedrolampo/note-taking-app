@@ -27,12 +27,16 @@ label {
   color: #fff;
 }
 
+.note-markdown {
+  color: #fff;
+}
+
 .css-2613qy-menu {
   background-color: red !important;
 }
 
 input.form-control {
-  background-color: #222;
+  background-color: #2b2a34;
   color: #fff;
 }
 input.form-control:focus {
@@ -42,11 +46,11 @@ input.form-control:focus {
 
 textarea.form-control {
   color: #fff;
-  background-color: #222;
+  background-color: #2b2a34;
 }
 textarea.form-control:focus {
   color: #fff;
-  background-color: #222;
+  background-color: #2b2a34;
 }
 
 code {
