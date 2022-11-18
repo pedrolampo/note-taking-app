@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useNote } from '../NoteLayout/NoteLayout';
 import { Link, useNavigate } from 'react-router-dom';
-import { Row, Col, Stack, Badge, Button, Modal } from 'react-bootstrap';
+import { Row, Col, Stack, Badge, Button, Modal, Form } from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown';
+import { getPass } from '../../services/firestore/firebase.js';
 
 export default function Note({ onDelete }) {
   const [deleteNoteModalIsOpen, setDeleteNoteModalIsOpen] = useState(false);
@@ -63,26 +64,48 @@ export default function Note({ onDelete }) {
 }
 
 function DeleteNoteModal({ onDelete, show, handleClose, noteId, navigate }) {
+  const passRef = useRef();
+
+  async function handleDelete() {
+    const pass = await getPass().then((data) => {
+      return data;
+    });
+
+    if (passRef.current.value === pass) {
+      onDelete(noteId);
+      navigate('/');
+    } else return;
+  }
+
   return (
     <Modal className="modal" show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Delete note?</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Stack className="justify-content-end" direction="horizontal" gap={2}>
-          <Button
-            onClick={() => {
-              onDelete(noteId);
-              navigate('/');
-            }}
-            variant="outline-danger"
-          >
-            Yes
-          </Button>
-          <Button onClick={handleClose} variant="outline-secondary">
-            No
-          </Button>
-        </Stack>
+        <Row>
+          <Col>
+            <Stack>
+              <Form onSubmit={(e) => e.preventDefault()}>
+                <Form.Control ref={passRef} type="password" />
+              </Form>
+            </Stack>
+          </Col>
+          <Col xs="auto">
+            <Stack
+              className="justify-content-end"
+              direction="horizontal"
+              gap={2}
+            >
+              <Button onClick={() => handleDelete()} variant="outline-danger">
+                Yes
+              </Button>
+              <Button onClick={handleClose} variant="outline-secondary">
+                No
+              </Button>
+            </Stack>
+          </Col>
+        </Row>
       </Modal.Body>
     </Modal>
   );

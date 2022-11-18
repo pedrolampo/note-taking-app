@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { getDocs, collection, query, where } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -71,6 +71,18 @@ export const searchTagsId = (key, op, value) => {
       })
       .catch((err) => {
         rej(`Error al obtener las recetas: ${err}`);
+      });
+  });
+};
+
+export const getPass = () => {
+  return new Promise((res, rej) => {
+    getDoc(doc(db, 'data', '2gPvhD957QgKdgKAAvij'))
+      .then((querySnapshot) => {
+        res(querySnapshot.data().pass);
+      })
+      .catch((err) => {
+        rej(`error al obtener los datos: ${err}`);
       });
   });
 };
