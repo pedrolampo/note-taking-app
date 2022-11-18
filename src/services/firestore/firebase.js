@@ -3,12 +3,12 @@ import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { getDocs, collection, query, where } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyAXQsJcQZ6AOCc7dX0Nuf0yojzPR6y34sA',
-  authDomain: 'note-taking-app-a2250.firebaseapp.com',
-  projectId: 'note-taking-app-a2250',
-  storageBucket: 'note-taking-app-a2250.appspot.com',
-  messagingSenderId: '301706468175',
-  appId: '1:301706468175:web:97d4319d4d4a1fa47a833a',
+  apiKey: process.env.REACT_APP_apiKey,
+  authDomain: process.env.REACT_APP_authDomain,
+  projectId: process.env.REACT_APP_projectId,
+  storageBucket: process.env.REACT_APP_storageBucket,
+  messagingSenderId: process.env.REACT_APP_messagingSenderId,
+  appId: process.env.REACT_APP_appId,
 };
 
 const app = initializeApp(firebaseConfig);
