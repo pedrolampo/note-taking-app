@@ -77,7 +77,7 @@ export const searchTagsId = (key, op, value) => {
 
 export const getPass = () => {
   return new Promise((res, rej) => {
-    getDoc(doc(db, 'data', '2gPvhD957QgKdgKAAvij'))
+    getDoc(doc(db, 'data', process.env.REACT_APP_passId))
       .then((querySnapshot) => {
         res(querySnapshot.data().pass);
       })
