@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Form,
@@ -12,16 +12,20 @@ import {
 } from 'react-bootstrap';
 import ReactSelect from 'react-select';
 import styles from './NoteList.module.css';
+import { getPass } from '../../services/firestore/firebase';
 
 export default function NoteList({
   availableTags,
   notes,
   onUpdateTag,
   onDeleteTag,
+  isLoggedIn,
+  setIsLoggedIn,
 }) {
   const [selectedTags, setSelectedTags] = useState([]);
   const [title, setTitle] = useState('');
   const [editTagsModalIsOpen, setEditTagsModalIsOpen] = useState(false);
+  const [logInModalIsOpen, setLogInModalIsOpen] = useState(false);
 
   const selectStyles = {
     control: (baseStyles, state) => ({
@@ -79,12 +83,25 @@ export default function NoteList({
         </Col>
         <Col xs="auto">
           <Stack gap={2} direction="horizontal">
-            <Link to="/new">
-              <Button className="white-text" variant="outline-primary">
+            <Button
+              style={{ display: isLoggedIn && 'none' }}
+              className="white-text"
+              onClick={() => setLogInModalIsOpen(true)}
+              variant="outline-primary"
+            >
+              Log In
+            </Button>
+            <Link style={{ pointerEvents: !isLoggedIn && 'none' }} to="/new">
+              <Button
+                disabled={!isLoggedIn}
+                className="white-text"
+                variant="outline-primary"
+              >
                 Create
               </Button>
             </Link>
             <Button
+              disabled={!isLoggedIn}
               className="white-text"
               onClick={() => setEditTagsModalIsOpen(true)}
               variant="outline-secondary"
@@ -147,6 +164,12 @@ export default function NoteList({
         show={editTagsModalIsOpen}
         handleClose={() => setEditTagsModalIsOpen(false)}
         availableTags={availableTags}
+      />
+
+      <LogInModal
+        show={logInModalIsOpen}
+        handleClose={() => setLogInModalIsOpen(false)}
+        setIsLoggedIn={setIsLoggedIn}
       />
     </>
   );
@@ -218,6 +241,46 @@ function EditTagsModal({
                 </Col>
               </Row>
             ))}
+          </Stack>
+        </Form>
+      </Modal.Body>
+    </Modal>
+  );
+}
+
+function LogInModal({ show, handleClose, setIsLoggedIn }) {
+  const logInPassRef = useRef();
+
+  async function handleLogIn() {
+    const pass = await getPass().then((data) => {
+      return data;
+    });
+
+    if (logInPassRef.current.value === pass) {
+      sessionStorage.setItem('NOTES_LOGGED_IN', JSON.stringify(true));
+      setIsLoggedIn(true);
+      handleClose();
+    } else return;
+  }
+
+  return (
+    <Modal className="modal" show={show} onHide={handleClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>Log In</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Form onSubmit={(e) => e.preventDefault()}>
+          <Stack gap={2}>
+            <Row>
+              <Col>
+                <Form.Control ref={logInPassRef} type="password" />
+              </Col>
+              <Col xs="auto">
+                <Button onClick={() => handleLogIn()} variant="outline-primary">
+                  Log In
+                </Button>
+              </Col>
+            </Row>
           </Stack>
         </Form>
       </Modal.Body>

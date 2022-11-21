@@ -5,7 +5,7 @@ import { Row, Col, Stack, Badge, Button, Modal, Form } from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown';
 import { getPass } from '../../services/firestore/firebase.js';
 
-export default function Note({ onDelete }) {
+export default function Note({ onDelete, isLoggedIn }) {
   const [deleteNoteModalIsOpen, setDeleteNoteModalIsOpen] = useState(false);
   const note = useNote();
   const navigate = useNavigate();
@@ -27,12 +27,20 @@ export default function Note({ onDelete }) {
         </Col>
         <Col xs="auto">
           <Stack gap={2} direction="horizontal">
-            <Link to={`/${note.id}/edit`}>
-              <Button className="white-text" variant="outline-primary">
+            <Link
+              style={{ pointerEvents: !isLoggedIn && 'none' }}
+              to={`/${note.id}/edit`}
+            >
+              <Button
+                disabled={!isLoggedIn}
+                className="white-text"
+                variant="outline-primary"
+              >
                 Edit
               </Button>
             </Link>
             <Button
+              disabled={!isLoggedIn}
               onClick={() => {
                 // onDelete(note.id);
                 // navigate('/');

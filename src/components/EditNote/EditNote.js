@@ -1,7 +1,12 @@
 import NoteForm from '../NoteForm/NoteForm';
 import { useNote } from '../NoteLayout/NoteLayout';
 
-export default function EditNote({ onSubmit, onAddTag, availableTags }) {
+export default function EditNote({
+  onSubmit,
+  onAddTag,
+  availableTags,
+  isLoggedIn,
+}) {
   const note = useNote();
   return (
     <>
@@ -13,6 +18,7 @@ export default function EditNote({ onSubmit, onAddTag, availableTags }) {
         onSubmit={(data) => onSubmit(note.id, data)}
         onAddTag={onAddTag}
         availableTags={availableTags}
+        isLoggedIn={isLoggedIn}
       />
     </>
   );

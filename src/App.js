@@ -26,6 +26,7 @@ import './App.css';
 function App() {
   const [notes, setNotes] = useState([]);
   const [tags, setTags] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     getNotes().then((notes) => {
@@ -34,6 +35,9 @@ function App() {
     getTags().then((tags) => {
       setTags(tags);
     });
+
+    const wasLoggedIn = JSON.parse(sessionStorage.getItem('NOTES_LOGGED_IN'));
+    if (wasLoggedIn === true) setIsLoggedIn(true);
   }, []);
 
   const notesWithTags = useMemo(() => {
@@ -163,6 +167,8 @@ function App() {
                 availableTags={tags}
                 onUpdateTag={updateTag}
                 onDeleteTag={deleteTag}
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
               />
             }
           />
@@ -173,15 +179,20 @@ function App() {
                 onSubmit={onCreateNote}
                 onAddTag={addTag}
                 availableTags={tags}
+                isLoggedIn={isLoggedIn}
               />
             }
           />
           <Route path="/:id" element={<NoteLayout notes={notesWithTags} />}>
-            <Route index element={<Note onDelete={onDeleteNote} />} />
+            <Route
+              index
+              element={<Note isLoggedIn={isLoggedIn} onDelete={onDeleteNote} />}
+            />
             <Route
               path="edit"
               element={
                 <EditNote
+                  isLoggedIn={isLoggedIn}
                   onSubmit={onUpdateNote}
                   onAddTag={addTag}
                   availableTags={tags}

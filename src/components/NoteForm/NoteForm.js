@@ -11,6 +11,7 @@ export default function NoteForm({
   title = '',
   markdown = '',
   tags = [],
+  isLoggedIn,
 }) {
   const titleRef = useRef(null);
   const markdownRef = useRef(null);
@@ -114,6 +115,7 @@ export default function NoteForm({
         </Form.Group>
         <Stack direction="horizontal" gap={2} className="justify-content-end">
           <Button
+            disabled={!isLoggedIn}
             className="white-text"
             type="submit"
             variant="outline-primary"
