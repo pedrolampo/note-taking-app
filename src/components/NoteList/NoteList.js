@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Form,
@@ -26,6 +26,10 @@ export default function NoteList({
   const [title, setTitle] = useState('');
   const [editTagsModalIsOpen, setEditTagsModalIsOpen] = useState(false);
   const [logInModalIsOpen, setLogInModalIsOpen] = useState(false);
+
+  useEffect(() => {
+    document.title = "Peter's Notes";
+  }, []);
 
   const selectStyles = {
     control: (baseStyles, state) => ({

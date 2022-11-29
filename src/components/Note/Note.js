@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNote } from '../NoteLayout/NoteLayout';
 import { Link, useNavigate } from 'react-router-dom';
 import { Row, Col, Stack, Badge, Button, Modal, Form } from 'react-bootstrap';
@@ -9,6 +9,10 @@ export default function Note({ onDelete, isLoggedIn }) {
   const [deleteNoteModalIsOpen, setDeleteNoteModalIsOpen] = useState(false);
   const note = useNote();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = `${note.title} - Peter's Notes`;
+  }, [note]);
 
   return (
     <>
