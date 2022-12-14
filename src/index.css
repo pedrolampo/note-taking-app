@@ -66,7 +66,15 @@ label {
   padding: 0;
   border-radius: 0;
   box-shadow: none;
-  background-color: transparent;
+  background-color: transparent !important;
+  text-shadow: none !important;
+}
+
+.note-markdown pre pre {
+  border: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+  padding: 0 0.5em !important;
 }
 
 .note-markdown blockquote {
@@ -110,4 +118,12 @@ textarea.form-control:focus {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.note-markdown pre div:not(.code-copy-btn) {
+  background: none !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  padding: 0 0.5em !important;
+  margin: 0 !important;
 }

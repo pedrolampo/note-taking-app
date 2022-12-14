@@ -36,3 +36,34 @@
     transform: rotate(360deg);
   }
 }
+
+.blog-pre {
+  margin-bottom: 3em !important;
+  -webkit-box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000,
+    35px -23px 2px -16px rgba(0, 0, 0, 0);
+  box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000,
+    35px -23px 2px -16px rgba(0, 0, 0, 0);
+  position: relative;
+}
+.blog-pre .code-copy-btn {
+  display: none;
+}
+.blog-pre:hover .code-copy-btn {
+  display: block;
+}
+
+.code-copy-btn {
+  color: white;
+  position: absolute;
+  right: 6px;
+  top: 5px;
+  font-size: 1.1em;
+  fill: white;
+  width: 23px;
+  cursor: pointer;
+  transition: all 250ms ease-in-out;
+}
+
+.code-copy-btn:hover {
+  transform: scale(1.1);
+}
