@@ -48,9 +48,9 @@ label {
 }
 
 .note-markdown code {
-  background-color: #555;
+  background-color: #5555559c;
   color: #fff;
-  padding: 0.1rem 0.5rem;
+  padding: 0.15rem 0.5rem;
   border-radius: 5px;
   box-shadow: 0 0 4px 0px #333;
   font-family: monospace;
