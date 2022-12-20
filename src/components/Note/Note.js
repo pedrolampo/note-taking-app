@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Row, Col, Stack, Badge, Button, Modal, Form } from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import remarkGfm from 'remark-gfm';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { getPass } from '../../services/firestore/firebase.js';
 
@@ -71,16 +72,9 @@ export default function Note({ onDelete, isLoggedIn }) {
           </Stack>
         </Col>
       </Row>
-      {/* <div className="markdown-container">
-        <Button
-          onClick={() => copyToClipboard(note.markdown)}
-          className="markdown-copy-btn"
-          variant="outline-secondary"
-        >
-          Copy
-        </Button> */}
       <ReactMarkdown
         className="note-markdown"
+        remarkPlugins={[remarkGfm]}
         components={{
           pre: Pre,
           code({ node, inline, className, children, ...props }) {
@@ -103,7 +97,6 @@ export default function Note({ onDelete, isLoggedIn }) {
       >
         {note.markdown}
       </ReactMarkdown>
-      {/* </div> */}
 
       <DeleteNoteModal
         onDelete={onDelete}
