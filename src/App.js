@@ -41,12 +41,14 @@ function App() {
   }, []);
 
   const notesWithTags = useMemo(() => {
-    return notes.map((note) => {
-      return {
-        ...note,
-        tags: tags.filter((tag) => note.tagIds.includes(tag.id)),
-      };
-    });
+    return notes
+      .map((note) => {
+        return {
+          ...note,
+          tags: tags.filter((tag) => note.tagIds.includes(tag.id)),
+        };
+      })
+      .sort((a, b) => a.title.localeCompare(b.title));
   }, [notes, tags]);
 
   function onCreateNote({ tags, ...data }) {
