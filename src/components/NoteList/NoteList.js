@@ -26,10 +26,7 @@ export default function NoteList({
   const [title, setTitle] = useState('');
   const [editTagsModalIsOpen, setEditTagsModalIsOpen] = useState(false);
   const [logInModalIsOpen, setLogInModalIsOpen] = useState(false);
-
-  useEffect(() => {
-    document.title = "Peter's Notes";
-  }, []);
+  const [notesLoading, setNotesLoading] = useState(false);
 
   const selectStyles = {
     control: (baseStyles, state) => ({
@@ -78,6 +75,12 @@ export default function NoteList({
       );
     });
   }, [title, selectedTags, notes]);
+
+  useEffect(() => {
+    document.title = "Peter's Notes";
+    if (!filteredNotes.length) setNotesLoading(true);
+    else setNotesLoading(false);
+  }, [filteredNotes]);
 
   return (
     <>
@@ -155,11 +158,21 @@ export default function NoteList({
       </Form>
 
       <Row xs={1} sm={2} lg={3} xl={4} className="g-3">
-        {filteredNotes.map((note) => (
-          <Col key={note.id}>
-            <NoteCard id={note.id} title={note.title} tags={note.tags} />
+        {notesLoading ? (
+          <Col className="loading-card">
+            <NoteCard
+              id=""
+              title="Loading"
+              tags={[{ id: 1, label: 'Loading' }]}
+            />
           </Col>
-        ))}
+        ) : (
+          filteredNotes.map((note) => (
+            <Col key={note.id}>
+              <NoteCard id={note.id} title={note.title} tags={note.tags} />
+            </Col>
+          ))
+        )}
       </Row>
 
       <EditTagsModal

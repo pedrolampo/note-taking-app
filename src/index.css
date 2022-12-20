@@ -145,3 +145,60 @@ code {
 .note-markdown table tr:nth-child(2n) {
   background-color: #201d24;
 }
+
+.loading-card span {
+  position: relative;
+}
+
+.loading-card span::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  translate: -25%;
+  height: 100%;
+  background-color: #484750;
+  border-radius: 5px;
+}
+.loading-card span:not(.badge)::before {
+  translate: -25%;
+  background-color: #484750;
+}
+
+.loading-card span::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(72, 71, 80, 1) 0%,
+    rgba(43, 42, 52, 1) 50%,
+    rgba(72, 71, 80, 1) 100%
+  );
+  animation: loadingAnim 1s ease-in-out infinite;
+}
+.loading-card span:not(.badge)::after {
+  border-radius: 5px;
+  animation: loadingAnim2 1s ease-in-out infinite;
+}
+
+@keyframes loadingAnim {
+  0% {
+    left: -21px;
+  }
+  100% {
+    left: 100%;
+  }
+}
+@keyframes loadingAnim2 {
+  0% {
+    left: -50%;
+  }
+  100% {
+    left: 105%;
+  }
+}
