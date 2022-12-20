@@ -39,10 +39,10 @@
 
 .blog-pre {
   margin-bottom: 3em !important;
-  -webkit-box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000,
-    35px -23px 2px -16px rgba(0, 0, 0, 0);
-  box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000,
-    35px -23px 2px -16px rgba(0, 0, 0, 0);
+  /* -webkit-box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000,
+    35px -23px 2px -16px rgba(0, 0, 0, 0); */
+  /* box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000,
+    35px -23px 2px -16px rgba(0, 0, 0, 0); */
   position: relative;
 }
 .blog-pre .code-copy-btn {
