@@ -120,7 +120,7 @@ export default function NoteList({
       </Row>
 
       <Form>
-        <Row className="mb-4">
+        <Row className="mb-4 search-bar">
           <Col>
             <Form.Group controlId="title">
               <Form.Label>Title</Form.Label>
