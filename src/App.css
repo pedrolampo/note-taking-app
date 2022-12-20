@@ -68,13 +68,32 @@
   justify-content: center;
   align-items: center;
 }
+.code-copy-btn.success {
+  border-color: #3fb950;
+}
+.code-copy-btn.success:hover {
+  border-color: #3fb950;
+}
 
 .code-copy-btn svg {
   width: 20px;
 }
 
 .code-copy-btn:hover {
-  /* transform: scale(1.1); */
   border-color: #b7b7b7;
   fill: #fff;
+}
+
+.code-copy-btn .copy-done-icon.hidden,
+.code-copy-btn .copy-icon.hidden {
+  display: none !important;
+}
+
+.code-copy-btn .copy-done-icon {
+  fill: #3fb950;
+}
+
+.code-copy-btn .copy-btn-popover {
+  /* position: absolute; */
+  left: -100px;
 }
