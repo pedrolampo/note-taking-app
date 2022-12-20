@@ -59,8 +59,11 @@ label {
 .note-markdown pre {
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 5px;
-  padding: 0.5em;
+  padding: 1em 0.5em;
   background-color: #2c2832;
+  overflow: hidden;
+  min-height: 45px;
+  margin-bottom: 1.75em !important;
 }
 .note-markdown pre code {
   padding: 0;

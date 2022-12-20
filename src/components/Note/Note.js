@@ -157,12 +157,6 @@ function DeleteNoteModal({ onDelete, show, handleClose, noteId, navigate }) {
   );
 }
 
-// function copyToClipboard(text) {
-//   let newText = text.substring(4);
-//   newText = newText.slice(0, -3);
-//   navigator.clipboard.writeText(newText);
-// }
-
 function CodeCopyBtn({ children }) {
   const handleClick = (e) => {
     navigator.clipboard.writeText(children[0].props.children[0]);
@@ -170,29 +164,24 @@ function CodeCopyBtn({ children }) {
   };
 
   return (
-    <div className="code-copy-btn">
+    <div className="code-copy-btn" onClick={handleClick}>
       <svg
-        onClick={handleClick}
-        id="svg5612"
-        viewBox="0 0 128 128"
+        aria-hidden="true"
+        height="16"
+        viewBox="0 0 16 16"
         version="1.1"
+        width="16"
+        data-view-component="true"
+        class="octicon octicon-copy js-clipboard-copy-icon m-2"
       >
-        <g id="layer1" transform="translate(0 -924.36)">
-          <g id="g6783" transform="matrix(.99829 0 0 .99829 -101.01 570.97)">
-            <path
-              id="rect6587"
-              d="m134.94 354c-3.324 0-6 2.676-6 6v96c0 3.324 2.676 6 6 6h82c3.324 0 6-2.676 6-6v-62h-40c-3.324 0-6-2.676-6-6v-34h-42z"
-            />
-            <path
-              id="rect6587-3-9-6-6"
-              d="m113.66 374.22c-3.324 0-6 2.676-6 6v96c0 3.324 2.676 6 6 6h82c3.324 0 6-2.676 6-6v-7h-73c-3.324 0-6-2.676-6-6v-89h-9z"
-            />
-            <path
-              id="rect6587-3-2-9-2"
-              d="m180.94 354v30c0 3.324 2.676 6 6 6h36z"
-            />
-          </g>
-        </g>
+        <path
+          fill-rule="evenodd"
+          d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"
+        ></path>
+        <path
+          fill-rule="evenodd"
+          d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"
+        ></path>
       </svg>
     </div>
   );

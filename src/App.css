@@ -49,21 +49,32 @@
   display: none;
 }
 .blog-pre:hover .code-copy-btn {
-  display: block;
+  display: flex;
 }
 
 .code-copy-btn {
   color: white;
   position: absolute;
-  right: 6px;
-  top: 5px;
+  right: 7px;
+  top: 7px;
   font-size: 1.1em;
-  fill: white;
-  width: 23px;
+  fill: #979797;
+  width: 35px;
+  aspect-ratio: 1 / 1;
   cursor: pointer;
   transition: all 250ms ease-in-out;
+  border: 1px solid #4c4747;
+  border-radius: 4px;
+  justify-content: center;
+  align-items: center;
+}
+
+.code-copy-btn svg {
+  width: 20px;
 }
 
 .code-copy-btn:hover {
-  transform: scale(1.1);
+  /* transform: scale(1.1); */
+  border-color: #b7b7b7;
+  fill: #fff;
 }
