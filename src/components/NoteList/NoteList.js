@@ -28,6 +28,8 @@ export default function NoteList({
   const [logInModalIsOpen, setLogInModalIsOpen] = useState(false);
   const [notesLoading, setNotesLoading] = useState(false);
 
+  const loadingNotes = ['1', '2', '3', '4', '5', '6'];
+
   const selectStyles = {
     control: (baseStyles, state) => ({
       ...baseStyles,
@@ -158,21 +160,21 @@ export default function NoteList({
       </Form>
 
       <Row xs={1} sm={2} lg={3} xl={4} className="g-3">
-        {notesLoading ? (
-          <Col className="loading-card">
-            <NoteCard
-              id=""
-              title="Loading"
-              tags={[{ id: 1, label: 'Loading' }]}
-            />
-          </Col>
-        ) : (
-          filteredNotes.map((note) => (
-            <Col key={note.id}>
-              <NoteCard id={note.id} title={note.title} tags={note.tags} />
-            </Col>
-          ))
-        )}
+        {notesLoading
+          ? loadingNotes.map((load) => (
+              <Col className="loading-card">
+                <NoteCard
+                  id=""
+                  title="Loading"
+                  tags={[{ id: 1, label: 'Loading' }]}
+                />
+              </Col>
+            ))
+          : filteredNotes.map((note) => (
+              <Col key={note.id}>
+                <NoteCard id={note.id} title={note.title} tags={note.tags} />
+              </Col>
+            ))}
       </Row>
 
       <EditTagsModal
