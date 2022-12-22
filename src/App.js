@@ -15,6 +15,7 @@ import NoteList from './components/NoteList/NoteList';
 import NoteLayout from './components/NoteLayout/NoteLayout';
 import Note from './components/Note/Note';
 import EditNote from './components/EditNote/EditNote';
+import ScrollToTop from './utils/scrollToTop';
 import {
   db,
   getNotes,
@@ -160,6 +161,7 @@ function App() {
   return (
     <Container className="my-4">
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route
             path="/"
