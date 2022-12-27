@@ -96,6 +96,10 @@ label {
   left: 0;
 }
 
+.note-markdown table {
+  margin-bottom: 1.5em;
+}
+
 .css-2613qy-menu {
   background-color: red !important;
 }
