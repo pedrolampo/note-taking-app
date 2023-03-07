@@ -22,6 +22,12 @@ export default function Note({ onDelete, isLoggedIn }) {
 
   useEffect(() => {
     document.title = `${note.title} - Peter's Notes`;
+
+    document.addEventListener('click', (e) => {
+      if (e.target.tagName === 'A' && !e.target.hasAttribute('target')) {
+        e.target.setAttribute('target', '_blank');
+      }
+    });
   }, [note]);
 
   return (
