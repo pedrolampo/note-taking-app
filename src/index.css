@@ -34,6 +34,9 @@ body {
 h1 {
   color: #fff;
 }
+h1.note-title {
+  margin-top: 0 !important;
+}
 
 button.white-text {
   color: #fff !important;
@@ -133,6 +136,23 @@ code {
   font-size: inherit !important;
   padding: 0 0.5em !important;
   margin: 0 !important;
+}
+
+.h1,
+.h2,
+h1,
+h2 {
+  margin-top: 1.3em !important;
+}
+
+.h3,
+.h4,
+.h5 .h6,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 1.2em !important;
 }
 
 /* Table */
