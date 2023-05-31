@@ -31,7 +31,7 @@ function App() {
 
   useEffect(() => {
     getNotes().then((notes) => {
-      setNotes(notes);
+      setNotes(notes.filter((note) => !note.private));
     });
     getTags().then((tags) => {
       setTags(tags);
