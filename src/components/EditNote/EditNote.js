@@ -10,7 +10,7 @@ export default function EditNote({
   const note = useNote();
   return (
     <>
-      <h1 className="mb-4">Edit Note</h1>
+      <h1 className="mb-4 note-title">Edit Note</h1>
       <NoteForm
         title={note.title}
         markdown={note.markdown}

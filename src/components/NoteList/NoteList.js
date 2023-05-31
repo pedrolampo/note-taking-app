@@ -288,7 +288,12 @@ function LogInModal({ show, handleClose, setIsLoggedIn }) {
         <Modal.Title>Log In</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form onSubmit={(e) => e.preventDefault()}>
+        <Form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleLogIn();
+          }}
+        >
           <Stack gap={2}>
             <Row>
               <Col>
