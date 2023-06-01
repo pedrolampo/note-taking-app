@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNote } from '../NoteLayout/NoteLayout';
 import { Link, useNavigate } from 'react-router-dom';
 import { Row, Col, Stack, Badge, Button, Modal, Form } from 'react-bootstrap';
@@ -23,23 +23,42 @@ export default function Note({ onDelete, isLoggedIn }) {
   useEffect(() => {
     document.title = `${note.title} - Peter's Notes`;
 
-    document.querySelectorAll('h2, h3, h4, h5, h6').forEach((el) => {
-      el.id = el.innerHTML.replace(/\s+/g, '-').toLowerCase();
-    });
-
-    const containingElement = document.querySelector('.note-markdown');
     document.addEventListener('click', (e) => {
-      if (
-        e.target.tagName === 'A' &&
-        !e.target.hasAttribute('target') &&
-        containingElement.contains(e.target)
-      ) {
+      if (e.target.tagName === 'A' && !e.target.hasAttribute('target')) {
         e.target.setAttribute('target', '_blank');
       }
     });
   }, [note]);
 
-  const headings = extractHeadings(note.markdown);
+  const toc = [];
+
+  const addToTOC = function ({ children, ...props }) {
+    const level = Number(props.node.tagName.match(/h(\d)/)?.slice(1));
+    if (level && children && typeof children[0] === 'string') {
+      const id = children[0].toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      toc.push({
+        level: level,
+        id: id,
+        title: children[0],
+      });
+      return React.createElement(props.node.tagName, { id: id }, children);
+    } else {
+      return React.createElement(props.node.tagName, props, children);
+    }
+  };
+
+  function TOC() {
+    console.log(toc);
+    return (
+      <ul className="table-of-contents">
+        {toc.map(({ level, id, title }) => (
+          <li key={id} className={`toc-entry-level-${level}`}>
+            <a href={`#${id}`}>{title}</a>
+          </li>
+        ))}
+      </ul>
+    );
+  }
 
   return (
     <>
@@ -90,12 +109,17 @@ export default function Note({ onDelete, isLoggedIn }) {
         </Col>
       </Row>
       <Row>
-        <TableOfContents headings={headings} />
+        <TOC />
       </Row>
       <ReactMarkdown
         className="note-markdown"
         remarkPlugins={[remarkGfm]}
         components={{
+          h2: addToTOC,
+          h3: addToTOC,
+          h4: addToTOC,
+          h5: addToTOC,
+          h6: addToTOC,
           pre: Pre,
           code({ node, inline, className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || '');
@@ -175,39 +199,6 @@ function DeleteNoteModal({ onDelete, show, handleClose, noteId, navigate }) {
       </Modal.Body>
     </Modal>
   );
-}
-
-function TableOfContents({ headings }) {
-  return (
-    <div className="toc">
-      <h3 className="toc-header">Table of Contents</h3>
-      <hr />
-      <ul>
-        {headings.map((heading) => (
-          <li key={heading.id} className={`level-${heading.level}`}>
-            <a href={`#${heading.id}`}>{heading.text}</a>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function slugify(text) {
-  return text.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-}
-
-function extractHeadings(markdown) {
-  const regex = /^(#+)\s+(.+)$/gm;
-  let match;
-  const headings = [];
-  while ((match = regex.exec(markdown))) {
-    const level = match[1].length;
-    const text = match[2];
-    const id = slugify(text);
-    headings.push({ level, text, id });
-  }
-  return headings;
 }
 
 function CodeCopyBtn({ children }) {

@@ -159,6 +159,39 @@ h6 {
   margin-top: 1.2em !important;
 }
 
+.toc .toc-header {
+  color: #fff;
+  margin-top: 0 !important;
+}
+.toc hr {
+  color: #fff;
+}
+.toc ul {
+  margin-bottom: 0;
+}
+.toc ul a {
+  text-decoration: none;
+}
+.toc ul li::marker {
+  color: #fff;
+}
+.toc .level-3,
+.toc .level-4,
+.toc .level-5,
+.toc .level-6 {
+  margin-left: 1em;
+}
+.toc .level-2,
+.toc .level-3 {
+  margin-top: 0.25em;
+}
+
+.toc .level-4,
+.toc .level-5,
+.toc .level-6 {
+  list-style-type: circle;
+}
+
 /* Table */
 .note-markdown table th,
 .note-markdown table td {
