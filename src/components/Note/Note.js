@@ -37,7 +37,6 @@ export default function Note({ onDelete, isLoggedIn }) {
         e.target.setAttribute('target', '_blank');
       }
     });
-    console.log(note.toc);
   }, [note]);
 
   const headings = extractHeadings(note.markdown);
