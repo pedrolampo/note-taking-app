@@ -37,6 +37,7 @@ export default function Note({ onDelete, isLoggedIn }) {
         e.target.setAttribute('target', '_blank');
       }
     });
+    console.log(note.toc);
   }, [note]);
 
   const headings = extractHeadings(note.markdown);
@@ -89,9 +90,11 @@ export default function Note({ onDelete, isLoggedIn }) {
           </Stack>
         </Col>
       </Row>
-      <Row>
-        <TableOfContents headings={headings} />
-      </Row>
+      {note?.toc === false ? null : (
+        <Row>
+          <TableOfContents headings={headings} />
+        </Row>
+      )}
       <ReactMarkdown
         className="note-markdown"
         remarkPlugins={[remarkGfm]}
