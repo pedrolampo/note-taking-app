@@ -58,29 +58,33 @@ export default function Note({ onDelete, isLoggedIn }) {
         </Col>
         <Col xs="auto">
           <Stack gap={2} direction="horizontal">
-            <Link
-              style={{ pointerEvents: !isLoggedIn && 'none' }}
-              to={`/${note.id}/edit`}
-            >
-              <Button
-                disabled={!isLoggedIn}
-                className="white-text"
-                variant="outline-primary"
-              >
-                Edit
-              </Button>
-            </Link>
-            <Button
-              disabled={!isLoggedIn}
-              onClick={() => {
-                // onDelete(note.id);
-                // navigate('/');
-                setDeleteNoteModalIsOpen(true);
-              }}
-              variant="outline-danger"
-            >
-              Delete
-            </Button>
+            {isLoggedIn && (
+              <>
+                <Link
+                  style={{ pointerEvents: !isLoggedIn && 'none' }}
+                  to={`/${note.id}/edit`}
+                >
+                  <Button
+                    disabled={!isLoggedIn}
+                    className="white-text"
+                    variant="outline-primary"
+                  >
+                    Edit
+                  </Button>
+                </Link>
+                <Button
+                  disabled={!isLoggedIn}
+                  onClick={() => {
+                    // onDelete(note.id);
+                    // navigate('/');
+                    setDeleteNoteModalIsOpen(true);
+                  }}
+                  variant="outline-danger"
+                >
+                  Delete
+                </Button>
+              </>
+            )}
             <Link to="/">
               <Button className="white-text" variant="outline-secondary">
                 Back

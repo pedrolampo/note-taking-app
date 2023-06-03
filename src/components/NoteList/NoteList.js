@@ -100,23 +100,30 @@ export default function NoteList({
             >
               Log In
             </Button>
-            <Link style={{ pointerEvents: !isLoggedIn && 'none' }} to="/new">
-              <Button
-                disabled={!isLoggedIn}
-                className="white-text"
-                variant="outline-primary"
-              >
-                Create
-              </Button>
-            </Link>
-            <Button
-              disabled={!isLoggedIn}
-              className="white-text"
-              onClick={() => setEditTagsModalIsOpen(true)}
-              variant="outline-secondary"
-            >
-              Edit Tags
-            </Button>
+            {isLoggedIn && (
+              <>
+                <Link
+                  style={{ pointerEvents: !isLoggedIn && 'none' }}
+                  to="/new"
+                >
+                  <Button
+                    disabled={!isLoggedIn}
+                    className="white-text"
+                    variant="outline-primary"
+                  >
+                    Create
+                  </Button>
+                </Link>
+                <Button
+                  disabled={!isLoggedIn}
+                  className="white-text"
+                  onClick={() => setEditTagsModalIsOpen(true)}
+                  variant="outline-secondary"
+                >
+                  Edit Tags
+                </Button>
+              </>
+            )}
           </Stack>
         </Col>
       </Row>

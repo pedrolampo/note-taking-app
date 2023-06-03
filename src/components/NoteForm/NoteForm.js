@@ -114,14 +114,16 @@ export default function NoteForm({
           />
         </Form.Group>
         <Stack direction="horizontal" gap={2} className="justify-content-end">
-          <Button
-            disabled={!isLoggedIn}
-            className="white-text"
-            type="submit"
-            variant="outline-primary"
-          >
-            Save
-          </Button>
+          {isLoggedIn && (
+            <Button
+              disabled={!isLoggedIn}
+              className="white-text"
+              type="submit"
+              variant="outline-primary"
+            >
+              Save
+            </Button>
+          )}
           <Link to="..">
             <Button
               className="white-text"
