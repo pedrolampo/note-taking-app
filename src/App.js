@@ -24,6 +24,7 @@ import {
   getNotes,
   getTags,
   searchTagsId,
+  getPowerUser,
 } from './services/firestore/firebase';
 import './App.css';
 
@@ -35,8 +36,9 @@ function App() {
   const [notes, setNotes] = useState([]);
   const [tags, setTags] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [powerUser, setPowerUser] = useState();
 
-  const { login } = useContext(UserContext);
+  const { login, setIsPowerUser } = useContext(UserContext);
 
   useEffect(() => {
     getNotes().then((notes) => {
@@ -46,13 +48,21 @@ function App() {
       setTags(tags);
     });
 
+    getPowerUser().then((poweruser) => {
+      setPowerUser(poweruser.email);
+    });
+    const currentUser = getUserData();
+
+    if (currentUser?.email === powerUser) setIsPowerUser(true);
+    else setIsPowerUser(false);
+
     const loggedUserJSON = getUserData();
 
     if (loggedUserJSON) {
       login(loggedUserJSON);
       setIsLoggedIn(true);
     }
-  }, []); // eslint-disable-line
+  }, [powerUser, isLoggedIn]); // eslint-disable-line
 
   const notesWithTags = useMemo(() => {
     return notes
