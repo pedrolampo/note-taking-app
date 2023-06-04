@@ -91,7 +91,7 @@ export const getPowerUser = () => {
   return new Promise((res, rej) => {
     getDoc(doc(db, 'users', process.env.REACT_APP_poweruserId))
       .then((querySnapshot) => {
-        res(querySnapshot.data().poweruser);
+        res(querySnapshot.data());
       })
       .catch((err) => {
         rej(`error al obtener los datos: ${err}`);
