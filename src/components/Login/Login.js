@@ -71,7 +71,7 @@ const Login = ({ setIsLoggedIn }) => {
             />
           </Row>
           <Row>
-            <Form.Label>Contraseña:</Form.Label>
+            <Form.Label>Password:</Form.Label>
             <Form.Control
               className="loginInput"
               type="password"
