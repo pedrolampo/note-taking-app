@@ -19,6 +19,7 @@ export default function EditNote({
         onAddTag={onAddTag}
         availableTags={availableTags}
         isLoggedIn={isLoggedIn}
+        owner={note.owner}
       />
     </>
   );

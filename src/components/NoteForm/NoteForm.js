@@ -3,6 +3,7 @@ import { Form, Stack, Row, Col, Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import CreatableReactSelect from 'react-select/creatable';
 import { v4 as uuidV4 } from 'uuid';
+import { getUserData } from '../../utils/getUserData';
 
 export default function NoteForm({
   onSubmit,
@@ -10,6 +11,7 @@ export default function NoteForm({
   availableTags,
   title = '',
   markdown = '',
+  owner = '',
   tags = [],
   isLoggedIn,
 }) {
@@ -53,6 +55,12 @@ export default function NoteForm({
     }),
   };
 
+  function checkIfOwner(owner) {
+    if (window.location.href.includes('/new')) return true;
+    if (owner === getUserData()?.email) return true;
+    else return false;
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -60,6 +68,7 @@ export default function NoteForm({
       title: titleRef.current.value,
       markdown: markdownRef.current.value,
       tags: selectedTags,
+      owner: getUserData()?.email,
     });
 
     navigate('..');
@@ -114,7 +123,7 @@ export default function NoteForm({
           />
         </Form.Group>
         <Stack direction="horizontal" gap={2} className="justify-content-end">
-          {isLoggedIn && (
+          {isLoggedIn && checkIfOwner(owner) && (
             <Button
               disabled={!isLoggedIn}
               className="white-text"

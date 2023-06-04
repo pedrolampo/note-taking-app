@@ -29,6 +29,7 @@ import './App.css';
 
 import { NotificationContextProvider } from './context/NotificationContext';
 import UserContext from './context/UserContext';
+import { getUserData } from './utils/getUserData';
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -45,11 +46,10 @@ function App() {
       setTags(tags);
     });
 
-    const loggedUserJSON = window.localStorage.getItem('user');
+    const loggedUserJSON = getUserData();
 
     if (loggedUserJSON) {
-      const objUser = JSON.parse(loggedUserJSON);
-      login(objUser);
+      login(loggedUserJSON);
       setIsLoggedIn(true);
     }
   }, []); // eslint-disable-line

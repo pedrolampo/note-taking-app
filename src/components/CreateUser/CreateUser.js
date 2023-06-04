@@ -44,9 +44,9 @@ const CreateUser = () => {
 
       const userData = {
         name: accountInfo[0].value,
-        // lastname: accountInfo[1].value,
         email: accountInfo[1].value,
         password: accountInfo[2].value,
+        poweruser: false,
         date: Timestamp.fromDate(new Date()),
       };
 

@@ -7,6 +7,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import remarkGfm from 'remark-gfm';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { getPass } from '../../services/firestore/firebase.js';
+import { getUserData } from '../../utils/getUserData';
 
 export default function Note({ onDelete, isLoggedIn }) {
   const [deleteNoteModalIsOpen, setDeleteNoteModalIsOpen] = useState(false);
@@ -19,6 +20,11 @@ export default function Note({ onDelete, isLoggedIn }) {
       {children}
     </pre>
   );
+
+  function checkIfOwner(owner) {
+    if (owner === getUserData()?.email) return true;
+    else return false;
+  }
 
   useEffect(() => {
     document.title = `${note.title} - Peter's Notes`;
@@ -58,7 +64,7 @@ export default function Note({ onDelete, isLoggedIn }) {
         </Col>
         <Col xs="auto">
           <Stack gap={2} direction="horizontal">
-            {isLoggedIn && (
+            {isLoggedIn && checkIfOwner(note.owner) && (
               <>
                 <Link
                   style={{ pointerEvents: !isLoggedIn && 'none' }}
