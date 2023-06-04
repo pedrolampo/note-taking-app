@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import NewNote from './components/NewNote/NewNote';
@@ -16,6 +16,9 @@ import NoteLayout from './components/NoteLayout/NoteLayout';
 import Note from './components/Note/Note';
 import EditNote from './components/EditNote/EditNote';
 import ScrollToTop from './utils/scrollToTop';
+import Notification from './components/Notification/Notification';
+import Login from './components/Login/Login';
+import CreateUser from './components/CreateUser/CreateUser';
 import {
   db,
   getNotes,
@@ -24,10 +27,15 @@ import {
 } from './services/firestore/firebase';
 import './App.css';
 
+import { NotificationContextProvider } from './context/NotificationContext';
+import UserContext from './context/UserContext';
+
 function App() {
   const [notes, setNotes] = useState([]);
   const [tags, setTags] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const { login } = useContext(UserContext);
 
   useEffect(() => {
     getNotes().then((notes) => {
@@ -37,9 +45,14 @@ function App() {
       setTags(tags);
     });
 
-    const wasLoggedIn = JSON.parse(sessionStorage.getItem('NOTES_LOGGED_IN'));
-    if (wasLoggedIn === true) setIsLoggedIn(true);
-  }, []);
+    const loggedUserJSON = window.localStorage.getItem('user');
+
+    if (loggedUserJSON) {
+      const objUser = JSON.parse(loggedUserJSON);
+      login(objUser);
+      setIsLoggedIn(true);
+    }
+  }, []); // eslint-disable-line
 
   const notesWithTags = useMemo(() => {
     return notes
@@ -160,53 +173,63 @@ function App() {
 
   return (
     <Container className="my-4">
-      <BrowserRouter>
-        <ScrollToTop />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <NoteList
-                notes={notesWithTags}
-                availableTags={tags}
-                onUpdateTag={updateTag}
-                onDeleteTag={deleteTag}
-                isLoggedIn={isLoggedIn}
-                setIsLoggedIn={setIsLoggedIn}
-              />
-            }
-          />
-          <Route
-            path="/new"
-            element={
-              <NewNote
-                onSubmit={onCreateNote}
-                onAddTag={addTag}
-                availableTags={tags}
-                isLoggedIn={isLoggedIn}
-              />
-            }
-          />
-          <Route path="/:id" element={<NoteLayout notes={notesWithTags} />}>
+      <NotificationContextProvider>
+        <BrowserRouter>
+          <ScrollToTop />
+          <Routes>
             <Route
-              index
-              element={<Note isLoggedIn={isLoggedIn} onDelete={onDeleteNote} />}
-            />
-            <Route
-              path="edit"
+              path="/"
               element={
-                <EditNote
-                  isLoggedIn={isLoggedIn}
-                  onSubmit={onUpdateNote}
-                  onAddTag={addTag}
+                <NoteList
+                  notes={notesWithTags}
                   availableTags={tags}
+                  onUpdateTag={updateTag}
+                  onDeleteTag={deleteTag}
+                  isLoggedIn={isLoggedIn}
+                  setIsLoggedIn={setIsLoggedIn}
                 />
               }
             />
-          </Route>
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-      </BrowserRouter>
+            <Route
+              path="/new"
+              element={
+                <NewNote
+                  onSubmit={onCreateNote}
+                  onAddTag={addTag}
+                  availableTags={tags}
+                  isLoggedIn={isLoggedIn}
+                />
+              }
+            />
+            <Route path="/:id" element={<NoteLayout notes={notesWithTags} />}>
+              <Route
+                index
+                element={
+                  <Note isLoggedIn={isLoggedIn} onDelete={onDeleteNote} />
+                }
+              />
+              <Route
+                path="edit"
+                element={
+                  <EditNote
+                    isLoggedIn={isLoggedIn}
+                    onSubmit={onUpdateNote}
+                    onAddTag={addTag}
+                    availableTags={tags}
+                  />
+                }
+              />
+            </Route>
+            <Route
+              path="/login"
+              element={<Login setIsLoggedIn={setIsLoggedIn} />}
+            />
+            <Route path={'/createUser'} element={<CreateUser />} />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+          <Notification />
+        </BrowserRouter>
+      </NotificationContextProvider>
     </Container>
   );
 }

@@ -1,0 +1,26 @@
+.loginContainer {
+  margin: 0 auto;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  height: 75vh;
+  justify-content: center;
+}
+
+form.login-form {
+  width: 50%;
+  align-self: center;
+}
+
+.loginContainer label {
+  padding-top: 1rem;
+  padding-left: 0;
+}
+
+.loginButtonsContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-evenly;
+  margin-top: 2rem;
+}

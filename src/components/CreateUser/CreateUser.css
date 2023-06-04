@@ -1,0 +1,16 @@
+.createAccContainer {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 3rem;
+}
+
+.createAccContainer h3 {
+  color: white;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.createAccContainer label {
+  padding-left: 0;
+}
