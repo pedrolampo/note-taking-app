@@ -61,7 +61,7 @@ const Login = ({ setIsLoggedIn }) => {
       <Container className="loginContainer">
         <Form className="login-form" onSubmit={handleLogin}>
           <Row>
-            <Form.Label>Email:</Form.Label>
+            <Form.Label>Email</Form.Label>
             <Form.Control
               className="loginInput"
               type="text"
@@ -71,7 +71,7 @@ const Login = ({ setIsLoggedIn }) => {
             />
           </Row>
           <Row>
-            <Form.Label>Password:</Form.Label>
+            <Form.Label>Password</Form.Label>
             <Form.Control
               className="loginInput"
               type="password"
