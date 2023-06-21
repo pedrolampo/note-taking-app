@@ -6,11 +6,12 @@ import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import remarkGfm from 'remark-gfm';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { getPass } from '../../services/firestore/firebase.js';
+import { getPass, searchUsers } from '../../services/firestore/firebase.js';
 import { getUserData } from '../../utils/getUserData';
 
 export default function Note({ onDelete, isLoggedIn }) {
   const [deleteNoteModalIsOpen, setDeleteNoteModalIsOpen] = useState(false);
+  const [ownerName, setOwnerName] = useState(null);
   const note = useNote();
   const navigate = useNavigate();
 
@@ -20,6 +21,10 @@ export default function Note({ onDelete, isLoggedIn }) {
       {children}
     </pre>
   );
+
+  searchUsers('email', '==', note.owner).then((user) => {
+    setOwnerName(user[0]?.name);
+  });
 
   function checkIfOwner(owner) {
     if (owner === getUserData()?.email) return true;
@@ -59,6 +64,9 @@ export default function Note({ onDelete, isLoggedIn }) {
                   {tag.label}
                 </Badge>
               ))}
+              {ownerName ? (
+                <Badge className="text-truncate bg-success">{ownerName}</Badge>
+              ) : null}
             </Stack>
           )}
         </Col>
