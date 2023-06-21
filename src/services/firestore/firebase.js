@@ -70,7 +70,27 @@ export const searchTagsId = (key, op, value) => {
         res(tags);
       })
       .catch((err) => {
-        rej(`Error al obtener las recetas: ${err}`);
+        rej(`Error obtaining tags: ${err}`);
+      });
+  });
+};
+
+export const searchUsers = (key, op, value) => {
+  return new Promise((res, rej) => {
+    const collectionQuery =
+      key && op && value
+        ? query(collection(db, 'users'), where(key, op, value))
+        : collection(db, 'users');
+
+    getDocs(collectionQuery)
+      .then((querySnapshot) => {
+        const users = querySnapshot.docs.map((doc) => {
+          return doc.data();
+        });
+        res(users);
+      })
+      .catch((err) => {
+        rej(`Error obtaining users: ${err}`);
       });
   });
 };
