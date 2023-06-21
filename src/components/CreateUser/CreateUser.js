@@ -51,7 +51,8 @@ const CreateUser = () => {
       };
 
       createUserWithEmailAndPassword(auth, email, password)
-        .then(() => {
+        .then((userCredential) => {
+          userData.uid = userCredential.user.uid;
           addDoc(collection(db, 'users'), userData).catch((err) => {
             console.log(err);
           });
