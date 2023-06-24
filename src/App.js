@@ -2,7 +2,7 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import NewNote from './components/NewNote/NewNote';
-import { v4 as uuidV4 } from 'uuid';
+// import { v4 as uuidV4 } from 'uuid';
 import {
   addDoc,
   collection,
@@ -76,13 +76,6 @@ function App() {
   }, [notes, tags]);
 
   function onCreateNote({ tags, ...data }) {
-    setNotes((prevNotes) => {
-      return [
-        ...prevNotes,
-        { ...data, id: uuidV4(), tagIds: tags.map((tag) => tag.id) },
-      ];
-    });
-
     const newNote = {
       ...data,
       tagIds: tags.map((tag) => tag.id),
@@ -92,6 +85,12 @@ function App() {
 
     addDoc(collection(db, 'notes'), newNote)
       .then(({ id }) => {
+        setNotes((prevNotes) => {
+          return [
+            ...prevNotes,
+            { ...data, id: id, tagIds: tags.map((tag) => tag.id) },
+          ];
+        });
         batch.commit().then(() => console.log(id));
       })
       .catch((err) => console.log(err));
