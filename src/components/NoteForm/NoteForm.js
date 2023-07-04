@@ -133,7 +133,6 @@ export default function NoteForm({
           <div className="edit-note-labels">
             <Form.Label htmlFor="markdown">Body</Form.Label>
             <Form.Check
-              variant="variant-secondary"
               id="toggle"
               type="switch"
               onChange={(e) => setShowOverview(e.target.checked)}
