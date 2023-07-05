@@ -9,6 +9,7 @@
   color: white;
   font-size: 2rem;
   margin: 0;
+  transition: 250ms ease-in-out;
 }
 
 .createAccContainer label {

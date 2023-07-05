@@ -21,6 +21,8 @@ export default function NoteList({
   onDeleteTag,
   isLoggedIn,
   setIsLoggedIn,
+  lightmode,
+  setLightmode,
 }) {
   const [selectedTags, setSelectedTags] = useState([]);
   const [title, setTitle] = useState('');
@@ -98,12 +100,16 @@ export default function NoteList({
         </Col>
         <Col xs="auto">
           <Stack gap={2} direction="horizontal">
+            <Form.Switch
+              checked={lightmode}
+              onChange={(e) => setLightmode(e.target.checked)}
+            />
             <Link to="/login">
               <Button
                 style={{ display: isLoggedIn && 'none' }}
-                className="white-text"
+                className={lightmode ? undefined : 'white-text'}
                 // onClick={() => setLogInModalIsOpen(true)}
-                variant="outline-primary"
+                variant={lightmode ? 'primary' : 'outline-primary'}
               >
                 Log In
               </Button>
@@ -112,8 +118,8 @@ export default function NoteList({
               <Link style={{ pointerEvents: !isLoggedIn && 'none' }} to="/new">
                 <Button
                   disabled={!isLoggedIn}
-                  className="white-text"
-                  variant="outline-primary"
+                  className={lightmode ? undefined : 'white-text'}
+                  variant={lightmode ? 'primary' : 'outline-primary'}
                 >
                   Create
                 </Button>
@@ -122,9 +128,9 @@ export default function NoteList({
             {isLoggedIn && isPowerUser && (
               <Button
                 disabled={!isLoggedIn}
-                className="white-text"
                 onClick={() => setEditTagsModalIsOpen(true)}
-                variant="outline-secondary"
+                className={lightmode ? undefined : 'white-text'}
+                variant={lightmode ? 'secondary' : 'outline-secondary'}
               >
                 Edit Tags
               </Button>
@@ -132,9 +138,9 @@ export default function NoteList({
             {isLoggedIn && (
               <Button
                 disabled={!isLoggedIn}
-                className="white-text"
                 onClick={() => handleLogOut()}
-                variant="outline-danger"
+                className={lightmode ? undefined : 'white-text'}
+                variant={lightmode ? 'danger' : 'outline-secondary'}
               >
                 Log Out
               </Button>
@@ -161,7 +167,7 @@ export default function NoteList({
               <ReactSelect
                 className="select"
                 isMulti
-                styles={selectStyles}
+                styles={lightmode ? undefined : selectStyles}
                 value={selectedTags.map((tag) => {
                   return { label: tag.label, value: tag.id };
                 })}

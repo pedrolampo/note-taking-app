@@ -1,0 +1,108 @@
+body:has(.lightmode) {
+  background-color: #fff !important;
+  color: #000;
+}
+
+.lightmode .modal.modal-content {
+  color: #000;
+  background-color: #fff;
+}
+.lightmode h1 {
+  color: #000;
+}
+
+.lightmode button.white-text {
+  color: #000 !important;
+}
+.lightmode label {
+  color: #000;
+}
+
+.lightmode .note-markdown {
+  color: #000;
+}
+
+.lightmode .note-markdown code {
+  background-color: transparent;
+  color: rgb(255, 0, 179);
+  box-shadow: none;
+}
+
+.lightmode .note-markdown pre {
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+
+.lightmode input.form-control {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  color: #000;
+}
+.lightmode input.form-control:focus {
+  color: #000;
+}
+
+.lightmode textarea.form-control {
+  color: #000;
+  background-color: #fff;
+}
+.lightmode textarea.form-control:focus {
+  color: #000;
+}
+
+.lightmode .toc .toc-header {
+  color: #000;
+}
+.lightmode .toc hr {
+  color: inherit;
+}
+.lightmode .toc ul li::marker {
+  color: #000;
+}
+
+.lightmode .note-markdown table th,
+.lightmode .note-markdown table td {
+  border: 1px solid #00000050;
+}
+.lightmode .note-markdown table tr {
+  background-color: #ccc;
+}
+
+.lightmode .note-markdown table tr:nth-child(2n) {
+  background-color: #fff;
+}
+
+.lightmode .loading-card span::before {
+  background-color: #ccc;
+}
+.lightmode .loading-card span:not(.badge)::before {
+  background-color: #ccc;
+}
+
+.lightmode .loading-card span::after {
+  background: linear-gradient(90deg, #ccc 0%, #8b8b8b 50%, #ccc 100%);
+}
+
+.lightmode .createAccContainer h3 {
+  color: #000;
+}
+
+.lightmode div.notification1 {
+  background-color: #fff;
+  color: #000;
+}
+
+.lightmode .card {
+  background-color: #fff;
+  box-shadow: none;
+}
+.lightmode .card span:not(.badge) {
+  color: #000;
+}
+
+.lightmode .code-copy-btn {
+  fill: #555555;
+}
+.lightmode .code-copy-btn:hover {
+  fill: #000;
+}

@@ -37,6 +37,7 @@ function App() {
   const [tags, setTags] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [powerUser, setPowerUser] = useState();
+  const [lightmode, setLightmode] = useState(false);
 
   const { login, setIsPowerUser } = useContext(UserContext);
 
@@ -62,6 +63,11 @@ function App() {
       login(loggedUserJSON);
       setIsLoggedIn(true);
     }
+
+    const isLightmodeOn = localStorage.getItem('IS_LIGHTMODE');
+    if (isLightmodeOn) {
+      setLightmode(JSON.parse(isLightmodeOn));
+    }
   }, [powerUser, isLoggedIn]); // eslint-disable-line
 
   const notesWithTags = useMemo(() => {
@@ -74,6 +80,11 @@ function App() {
       })
       .sort((a, b) => a.title.localeCompare(b.title));
   }, [notes, tags]);
+
+  function handleLightmode(value) {
+    setLightmode(value);
+    localStorage.setItem('IS_LIGHTMODE', JSON.stringify(value));
+  }
 
   function onCreateNote({ tags, ...data }) {
     const newNote = {
@@ -181,7 +192,7 @@ function App() {
   }
 
   return (
-    <Container className="my-4">
+    <Container className={lightmode ? 'lightmode my-4' : 'my-4'}>
       <NotificationContextProvider>
         <BrowserRouter>
           <ScrollToTop />
@@ -196,6 +207,8 @@ function App() {
                   onDeleteTag={deleteTag}
                   isLoggedIn={isLoggedIn}
                   setIsLoggedIn={setIsLoggedIn}
+                  lightmode={lightmode}
+                  setLightmode={handleLightmode}
                 />
               }
             />
@@ -207,14 +220,30 @@ function App() {
                   onAddTag={addTag}
                   availableTags={tags}
                   isLoggedIn={isLoggedIn}
+                  lightmode={lightmode}
+                  setLightmode={handleLightmode}
                 />
               }
             />
-            <Route path="/:id" element={<NoteLayout notes={notesWithTags} />}>
+            <Route
+              path="/:id"
+              element={
+                <NoteLayout
+                  lightmode={lightmode}
+                  setLightmode={handleLightmode}
+                  notes={notesWithTags}
+                />
+              }
+            >
               <Route
                 index
                 element={
-                  <Note isLoggedIn={isLoggedIn} onDelete={onDeleteNote} />
+                  <Note
+                    lightmode={lightmode}
+                    setLightmode={handleLightmode}
+                    isLoggedIn={isLoggedIn}
+                    onDelete={onDeleteNote}
+                  />
                 }
               />
               <Route
@@ -225,15 +254,22 @@ function App() {
                     onSubmit={onUpdateNote}
                     onAddTag={addTag}
                     availableTags={tags}
+                    lightmode={lightmode}
+                    setLightmode={handleLightmode}
                   />
                 }
               />
             </Route>
             <Route
               path="/login"
-              element={<Login setIsLoggedIn={setIsLoggedIn} />}
+              element={
+                <Login lightmode={lightmode} setIsLoggedIn={setIsLoggedIn} />
+              }
             />
-            <Route path={'/createUser'} element={<CreateUser />} />
+            <Route
+              path={'/createUser'}
+              element={<CreateUser lightmode={lightmode} />}
+            />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
           <Notification />

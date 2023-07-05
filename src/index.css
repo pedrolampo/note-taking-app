@@ -13,6 +13,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: #fff;
   background-color: #1f1b24 !important;
+  transition: color 200ms ease-in-out, background-color 200ms ease-in-out;
 }
 
 ::-webkit-scrollbar {
@@ -40,6 +41,7 @@ body {
 .modal .modal-content {
   background-color: #333;
   color: white;
+  transition: color 200ms ease-in-out, background-color 200ms ease-in-out;
 }
 
 .modal .modal-content button.btn-close {
@@ -47,14 +49,17 @@ body {
 }
 .modal .modal-content button {
   color: #fff;
+  transition: color 200ms ease-in-out;
 }
 
 .modal .modal-content input {
   background-color: rgba(34, 34, 34, 0.5);
+  transition: background-color 200ms ease-in-out;
 }
 
 h1 {
   color: #fff;
+  transition: color 200ms ease-in-out;
 }
 h1.note-title {
   margin-top: 0 !important;
@@ -62,14 +67,17 @@ h1.note-title {
 
 button.white-text {
   color: #fff !important;
+  transition: color 200ms ease-in-out;
 }
 
 label {
   color: #fff;
+  transition: color 200ms ease-in-out;
 }
 
 .note-markdown {
   color: #fff;
+  transition: color 200ms ease-in-out;
 }
 
 .note-markdown code {
@@ -79,6 +87,7 @@ label {
   border-radius: 5px;
   box-shadow: 0 0 4px 0px #333;
   font-family: monospace;
+  transition: color 200ms ease-in-out, background-color 200ms ease-in-out;
 }
 
 .note-markdown pre {
@@ -89,6 +98,7 @@ label {
   overflow: hidden;
   min-height: 45px;
   margin-bottom: 1.75em !important;
+  transition: color 200ms ease-in-out, background-color 200ms ease-in-out;
 }
 .note-markdown pre code {
   padding: 0;
@@ -96,6 +106,7 @@ label {
   box-shadow: none;
   background-color: transparent !important;
   text-shadow: none !important;
+  transition: color 200ms ease-in-out, background-color 200ms ease-in-out;
 }
 
 .note-markdown pre pre {
@@ -103,12 +114,14 @@ label {
   box-shadow: none !important;
   background-color: transparent !important;
   padding: 0 0.5em !important;
+  transition: color 200ms ease-in-out, background-color 200ms ease-in-out;
 }
 
 .note-markdown blockquote {
   font-style: italic;
   position: relative;
   padding-left: 18px;
+  transition: color 200ms ease-in-out, background-color 200ms ease-in-out;
 }
 .note-markdown blockquote::after {
   content: '';
@@ -119,10 +132,12 @@ label {
   background-color: #ccc;
   top: 0;
   left: 0;
+  transition: color 200ms ease-in-out, background-color 200ms ease-in-out;
 }
 
 .note-markdown table {
   margin-bottom: 1.5em;
+  transition: color 200ms ease-in-out, background-color 200ms ease-in-out;
 }
 
 .css-2613qy-menu {
@@ -132,10 +147,12 @@ label {
 input.form-control {
   background-color: #2b2a34;
   color: #fff;
+  transition: color 200ms ease-in-out, background-color 200ms ease-in-out;
 }
 input.form-control:focus {
   background-color: #444;
   color: #fff;
+  transition: color 200ms ease-in-out, background-color 200ms ease-in-out;
 }
 
 textarea.form-control {
@@ -180,9 +197,11 @@ h6 {
 .toc .toc-header {
   color: #fff;
   margin-top: 0 !important;
+  transition: color 200ms ease-in-out, background-color 200ms ease-in-out;
 }
 .toc hr {
   color: #fff;
+  transition: color 200ms ease-in-out, background-color 200ms ease-in-out;
 }
 .toc ul {
   margin-bottom: 0;
@@ -192,6 +211,7 @@ h6 {
 }
 .toc ul li::marker {
   color: #fff;
+  transition: color 200ms ease-in-out, background-color 200ms ease-in-out;
 }
 .toc .level-4,
 .toc .level-5,
@@ -218,15 +238,24 @@ h6 {
 
 .note-markdown table tr {
   background-color: #2c2832;
+  transition: color 200ms ease-in-out, background-color 200ms ease-in-out;
 }
 
 .note-markdown table tr:nth-child(2n) {
   background-color: #201d24;
+  transition: color 200ms ease-in-out, background-color 200ms ease-in-out;
 }
 
 .note-markdown p:has(img) {
   min-width: 100%;
   overflow: auto;
+}
+
+.note-markdown a {
+  text-decoration: none;
+}
+.note-markdown a:hover {
+  text-decoration: underline;
 }
 
 .loading-card span {
@@ -243,10 +272,12 @@ h6 {
   height: 100%;
   background-color: #484750;
   border-radius: 5px;
+  transition: background-color 200ms ease-in-out;
 }
 .loading-card span:not(.badge)::before {
   translate: -25%;
   background-color: #484750;
+  transition: background-color 200ms ease-in-out;
 }
 
 .loading-card span::after {

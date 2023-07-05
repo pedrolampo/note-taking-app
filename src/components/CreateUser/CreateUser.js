@@ -8,7 +8,7 @@ import './CreateUser.css';
 import UserContext from '../../context/UserContext';
 import { Button, Col, Container, Form, Row, Stack } from 'react-bootstrap';
 
-const CreateUser = () => {
+const CreateUser = ({ lightmode }) => {
   const { user } = useContext(UserContext);
   const { setNotification } = useContext(NotificationContext);
   const navigate = useNavigate();
@@ -79,7 +79,10 @@ const CreateUser = () => {
         <Col xs="auto">
           <Stack gap={2} direction="horizontal">
             <Link to="/login">
-              <Button className="white-text" variant="outline-secondary">
+              <Button
+                className={lightmode ? undefined : 'white-text'}
+                variant={lightmode ? 'secondary' : 'outline-secondary'}
+              >
                 Back
               </Button>
             </Link>
@@ -106,8 +109,12 @@ const CreateUser = () => {
           </Row>
           <Row className="mt-4 justify-content-end" xs="auto">
             <Button
-              variant="outline-primary"
-              className="button createUserButton white-text"
+              className={
+                lightmode
+                  ? 'button createUserButton'
+                  : 'button createUserButton white-text'
+              }
+              variant={lightmode ? 'primary' : 'outline-primary'}
               type="submit"
             >
               Confirm

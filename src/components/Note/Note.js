@@ -9,7 +9,12 @@ import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { getPass, searchUsers } from '../../services/firestore/firebase.js';
 import { getUserData } from '../../utils/getUserData';
 
-export default function Note({ onDelete, isLoggedIn }) {
+export default function Note({
+  onDelete,
+  isLoggedIn,
+  lightmode,
+  setLightmode,
+}) {
   const [deleteNoteModalIsOpen, setDeleteNoteModalIsOpen] = useState(false);
   const [ownerName, setOwnerName] = useState(null);
   const note = useNote();
@@ -72,6 +77,10 @@ export default function Note({ onDelete, isLoggedIn }) {
         </Col>
         <Col xs="auto">
           <Stack gap={2} direction="horizontal">
+            <Form.Switch
+              checked={lightmode}
+              onChange={(e) => setLightmode(e.target.checked)}
+            />
             {isLoggedIn && checkIfOwner(note.owner) && (
               <>
                 <Link
@@ -80,8 +89,8 @@ export default function Note({ onDelete, isLoggedIn }) {
                 >
                   <Button
                     disabled={!isLoggedIn}
-                    className="white-text"
-                    variant="outline-primary"
+                    className={lightmode ? undefined : 'white-text'}
+                    variant={lightmode ? 'primary' : 'outline-primary'}
                   >
                     Edit
                   </Button>
@@ -93,14 +102,17 @@ export default function Note({ onDelete, isLoggedIn }) {
                     // navigate('/');
                     setDeleteNoteModalIsOpen(true);
                   }}
-                  variant="outline-danger"
+                  variant={lightmode ? 'danger' : 'outline-danger'}
                 >
                   Delete
                 </Button>
               </>
             )}
             <Link to="/">
-              <Button className="white-text" variant="outline-secondary">
+              <Button
+                className={lightmode ? undefined : 'white-text'}
+                variant={lightmode ? 'secondary' : 'outline-secondary'}
+              >
                 Back
               </Button>
             </Link>
@@ -122,7 +134,7 @@ export default function Note({ onDelete, isLoggedIn }) {
             return !inline && match ? (
               <SyntaxHighlighter
                 children={String(children).replace(/\n$/, '')}
-                style={oneDark}
+                style={lightmode ? undefined : oneDark}
                 language={match[1]}
                 PreTag="div"
                 {...props}

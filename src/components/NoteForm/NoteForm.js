@@ -17,6 +17,7 @@ export default function NoteForm({
   markdown = '',
   owner = '',
   tags = [],
+  lightmode,
   isLoggedIn,
 }) {
   const titleRef = useRef(null);
@@ -106,7 +107,7 @@ export default function NoteForm({
               <Form.Label>Tags</Form.Label>
               <CreatableReactSelect
                 isMulti
-                styles={selectStyles}
+                styles={lightmode ? undefined : selectStyles}
                 onCreateOption={(label) => {
                   const newTag = { id: uuidV4(), label };
                   onAddTag(newTag);
@@ -161,7 +162,7 @@ export default function NoteForm({
                     return !inline && match ? (
                       <SyntaxHighlighter
                         children={String(children).replace(/\n$/, '')}
-                        style={oneDark}
+                        style={lightmode ? undefined : oneDark}
                         language={match[1]}
                         PreTag="div"
                         {...props}
@@ -183,18 +184,18 @@ export default function NoteForm({
           {isLoggedIn && checkIfOwner(owner) && (
             <Button
               disabled={!isLoggedIn}
-              className="white-text"
               type="submit"
-              variant="outline-primary"
+              className={lightmode ? undefined : 'white-text'}
+              variant={lightmode ? 'primary' : 'outline-primary'}
             >
               Save
             </Button>
           )}
           <Link to="..">
             <Button
-              className="white-text"
               type="button"
-              variant="outline-secondary"
+              className={lightmode ? undefined : 'white-text'}
+              variant={lightmode ? 'secondary' : 'outline-secondary'}
             >
               Cancel
             </Button>

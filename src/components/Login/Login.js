@@ -6,7 +6,7 @@ import { useNavigate, Navigate, Link } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { Button, Col, Container, Form, Row, Stack } from 'react-bootstrap';
 
-const Login = ({ setIsLoggedIn }) => {
+const Login = ({ setIsLoggedIn, lightmode }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { user, login } = useContext(UserContext);
@@ -50,7 +50,10 @@ const Login = ({ setIsLoggedIn }) => {
         <Col xs="auto">
           <Stack gap={2} direction="horizontal">
             <Link to="/">
-              <Button className="white-text" variant="outline-secondary">
+              <Button
+                className={lightmode ? undefined : 'white-text'}
+                variant={lightmode ? 'secondary' : 'outline-secondary'}
+              >
                 Back
               </Button>
             </Link>
@@ -83,16 +86,16 @@ const Login = ({ setIsLoggedIn }) => {
           <Row>
             <Stack className="loginButtonsContainer">
               <Button
-                className="white-text"
-                variant="outline-primary"
+                className={lightmode ? undefined : 'white-text'}
+                variant={lightmode ? 'primary' : 'outline-primary'}
                 type="submit"
               >
                 Log In
               </Button>
               <Link className="createUser" to={'/createUser'}>
                 <Button
-                  className="white-text"
-                  variant="outline-secondary"
+                  className={lightmode ? undefined : 'white-text'}
+                  variant={lightmode ? 'secondary' : 'outline-secondary'}
                   type="submit"
                 >
                   Create User

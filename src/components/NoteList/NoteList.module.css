@@ -1,5 +1,6 @@
 .card {
-  transition: translate ease-in-out 100ms, box-shadow ease-in-out 100ms;
+  transition: translate ease-in-out 100ms, box-shadow ease-in-out 100ms,
+    background-color 200ms ease-in-out;
   background-color: #2b2a34;
   box-shadow: 0 0 8px 0 rgba(39, 39, 39, 0.2);
   text-align: center;
@@ -7,6 +8,7 @@
 
 .card span {
   color: #fff;
+  transition: color 200ms ease-in-out;
 }
 
 .card:hover,
