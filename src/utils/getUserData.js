@@ -3,5 +3,12 @@ export function getUserData() {
 
   if (!userData || userData === null) return null;
 
-  return userData;
+  const decoded = {
+    ...userData,
+    apiKey: window.atob(userData.apiKey),
+    uid: window.atob(userData.uid),
+  };
+  console.log(decoded);
+
+  return decoded;
 }

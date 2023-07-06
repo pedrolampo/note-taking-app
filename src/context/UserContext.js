@@ -7,7 +7,14 @@ export const UserContextProvider = ({ children }) => {
 
   const login = (user) => {
     setUser(user);
-    window.localStorage.setItem('user', JSON.stringify(user));
+
+    const encoded = {
+      ...user,
+      apiKey: window.btoa(user.apiKey),
+      uid: window.btoa(user.uid),
+    };
+
+    window.localStorage.setItem('user', JSON.stringify(encoded));
   };
 
   const logout = () => {
