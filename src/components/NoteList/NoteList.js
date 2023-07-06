@@ -160,7 +160,7 @@ export default function NoteList({
                 disabled={!isLoggedIn}
                 onClick={() => handleLogOut()}
                 className={lightmode ? undefined : 'white-text'}
-                variant={lightmode ? 'danger' : 'outline-secondary'}
+                variant={lightmode ? 'danger' : 'outline-danger'}
               >
                 Log Out
               </Button>
