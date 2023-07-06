@@ -8,7 +8,6 @@ export function getUserData() {
     apiKey: window.atob(userData.apiKey),
     uid: window.atob(userData.uid),
   };
-  console.log(decoded);
 
   return decoded;
 }
