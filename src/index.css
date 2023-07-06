@@ -194,6 +194,36 @@ h6 {
   margin-top: 1.2em !important;
 }
 
+.edit-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.lightmode-icons {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 100ms ease-in-out;
+}
+.lightmode-icons svg {
+  width: 24px;
+  height: 24px;
+}
+.lightmode-icons:hover {
+  background-color: #bec3c9;
+}
+.lightmode-icons .sun {
+  fill: #fff;
+  transition: 100ms ease-in-out;
+}
+.lightmode-icons:hover .sun {
+  fill: #000;
+}
+
 .toc .toc-header {
   color: #fff;
   margin-top: 0 !important;

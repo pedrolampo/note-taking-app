@@ -13,6 +13,7 @@ import {
 import ReactSelect from 'react-select';
 import styles from './NoteList.module.css';
 import UserContext from '../../context/UserContext';
+import { moon, sun } from '../../utils/icons';
 
 export default function NoteList({
   availableTags,
@@ -100,10 +101,29 @@ export default function NoteList({
         </Col>
         <Col xs="auto">
           <Stack gap={2} direction="horizontal">
-            <Form.Switch
+            {lightmode ? (
+              <div
+                className="lightmode-icons"
+                onClick={() => setLightmode(false)}
+              >
+                <svg>
+                  <path d={moon}></path>
+                </svg>
+              </div>
+            ) : (
+              <div
+                className="lightmode-icons"
+                onClick={() => setLightmode(true)}
+              >
+                <svg className="sun">
+                  <path d={sun}></path>
+                </svg>
+              </div>
+            )}
+            {/* <Form.Switch
               checked={lightmode}
               onChange={(e) => setLightmode(e.target.checked)}
-            />
+            /> */}
             <Link to="/login">
               <Button
                 style={{ display: isLoggedIn && 'none' }}

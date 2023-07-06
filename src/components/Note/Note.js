@@ -8,6 +8,7 @@ import remarkGfm from 'remark-gfm';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { getPass, searchUsers } from '../../services/firestore/firebase.js';
 import { getUserData } from '../../utils/getUserData';
+import { moon, sun } from '../../utils/icons';
 
 export default function Note({
   onDelete,
@@ -77,10 +78,25 @@ export default function Note({
         </Col>
         <Col xs="auto">
           <Stack gap={2} direction="horizontal">
-            <Form.Switch
-              checked={lightmode}
-              onChange={(e) => setLightmode(e.target.checked)}
-            />
+            {lightmode ? (
+              <div
+                className="lightmode-icons"
+                onClick={() => setLightmode(false)}
+              >
+                <svg>
+                  <path d={moon}></path>
+                </svg>
+              </div>
+            ) : (
+              <div
+                className="lightmode-icons"
+                onClick={() => setLightmode(true)}
+              >
+                <svg className="sun">
+                  <path d={sun}></path>
+                </svg>
+              </div>
+            )}
             {isLoggedIn && checkIfOwner(note.owner) && (
               <>
                 <Link

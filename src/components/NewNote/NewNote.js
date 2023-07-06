@@ -1,5 +1,5 @@
-import { Form } from 'react-bootstrap';
 import NoteForm from '../NoteForm/NoteForm';
+import { moon, sun } from '../../utils/icons';
 
 export default function NewNote({
   onSubmit,
@@ -11,12 +11,22 @@ export default function NewNote({
 }) {
   return (
     <>
-      <h1 className="mb-4 note-title">New Note</h1>
-      <Form.Switch
-        className="lightmode-switch"
-        checked={lightmode}
-        onChange={(e) => setLightmode(e.target.checked)}
-      />
+      <div className="edit-header">
+        <h1 className="mb-4 note-title">New Note</h1>
+        {lightmode ? (
+          <div className="lightmode-icons" onClick={() => setLightmode(false)}>
+            <svg>
+              <path d={moon}></path>
+            </svg>
+          </div>
+        ) : (
+          <div className="lightmode-icons" onClick={() => setLightmode(true)}>
+            <svg className="sun">
+              <path d={sun}></path>
+            </svg>
+          </div>
+        )}
+      </div>
       <NoteForm
         onSubmit={onSubmit}
         onAddTag={onAddTag}
