@@ -97,7 +97,7 @@ export default function NoteList({
     <>
       <Row className="align-items-center mb-4">
         <Col>
-          <h1 className="note-title">Notes</h1>
+          <h1 className="note-title">Peter's Notes</h1>
         </Col>
         <Col xs="auto">
           <Stack gap={2} direction="horizontal">
@@ -120,20 +120,48 @@ export default function NoteList({
                 </svg>
               </div>
             )}
-            {/* <Form.Switch
-              checked={lightmode}
-              onChange={(e) => setLightmode(e.target.checked)}
-            /> */}
-            <Link to="/login">
+            {!isLoggedIn && (
+              <Link to="/login">
+                <Button
+                  className={lightmode ? undefined : 'white-text'}
+                  variant={lightmode ? 'primary' : 'outline-primary'}
+                >
+                  Log In
+                </Button>
+              </Link>
+            )}
+            {isLoggedIn && (
+              <Link to="/tasks">
+                <Button
+                  disabled={!isLoggedIn}
+                  style={{ display: !isLoggedIn && 'none' }}
+                  className={lightmode ? 'todo-btn' : 'white-text todo-btn'}
+                  variant={lightmode ? 'secondary' : 'outline-secondary'}
+                >
+                  Switch to Tasks
+                </Button>
+              </Link>
+            )}
+            {isLoggedIn && (
               <Button
-                style={{ display: isLoggedIn && 'none' }}
+                disabled={!isLoggedIn}
+                onClick={() => handleLogOut()}
                 className={lightmode ? undefined : 'white-text'}
-                // onClick={() => setLogInModalIsOpen(true)}
-                variant={lightmode ? 'primary' : 'outline-primary'}
+                variant={lightmode ? 'danger' : 'outline-danger'}
               >
-                Log In
+                Log Out
               </Button>
-            </Link>
+            )}
+          </Stack>
+        </Col>
+      </Row>
+
+      <Row className="align-items-center mb-4">
+        <Col>
+          <h2 className="note-title">Notes</h2>
+        </Col>
+        <Col xs="auto">
+          <Stack gap={2} direction="horizontal">
             {isLoggedIn && (
               <Link style={{ pointerEvents: !isLoggedIn && 'none' }} to="/new">
                 <Button
@@ -153,16 +181,6 @@ export default function NoteList({
                 variant={lightmode ? 'secondary' : 'outline-secondary'}
               >
                 Edit Tags
-              </Button>
-            )}
-            {isLoggedIn && (
-              <Button
-                disabled={!isLoggedIn}
-                onClick={() => handleLogOut()}
-                className={lightmode ? undefined : 'white-text'}
-                variant={lightmode ? 'danger' : 'outline-danger'}
-              >
-                Log Out
               </Button>
             )}
           </Stack>

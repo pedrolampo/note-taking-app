@@ -64,6 +64,19 @@ h1 {
 h1.note-title {
   margin-top: 0 !important;
 }
+h2.note-title {
+  margin-top: 0 !important;
+  color: #fff;
+  font-size: 2.25rem;
+  transition: color 200ms ease-in-out;
+}
+.lightmode h2.note-title {
+  color: #000;
+}
+
+.todo-btn {
+  border: none !important;
+}
 
 button.white-text {
   color: #fff !important;
@@ -369,4 +382,41 @@ h6 {
   border: 1px solid #ced4da;
   border-radius: 0.375rem;
   padding: 0 1em;
+}
+
+.no-tasks {
+  text-align: center;
+  color: #fff;
+  transition: color 200ms ease-in-out;
+}
+.lightmode .no-tasks {
+  color: #000;
+}
+.table-responsive {
+  overflow: visible !important;
+}
+
+.table-responsive .todos-dots::before {
+  display: none !important;
+}
+.table-responsive button::after {
+  display: none;
+}
+.todo-table .dropstart button {
+  padding: 0 !important;
+  width: 100%;
+  text-align: left;
+}
+
+.todo-table {
+  vertical-align: middle !important;
+}
+.todo-table td span {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+}
+
+.todos-context-menu {
+  cursor: pointer;
 }

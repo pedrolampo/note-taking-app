@@ -19,10 +19,13 @@ import ScrollToTop from './utils/scrollToTop';
 import Notification from './components/Notification/Notification';
 import Login from './components/Login/Login';
 import CreateUser from './components/CreateUser/CreateUser';
+import Todo from './components/Todo/Todo';
+import NewTodo from './components/NewTodo/NewTodo';
 import {
   db,
   getNotes,
   getTags,
+  getTodos,
   searchTagsId,
   getPowerUser,
 } from './services/firestore/firebase';
@@ -35,6 +38,7 @@ import { getUserData } from './utils/getUserData';
 function App() {
   const [notes, setNotes] = useState([]);
   const [tags, setTags] = useState([]);
+  const [todos, setTodos] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [powerUser, setPowerUser] = useState();
   const [lightmode, setLightmode] = useState(false);
@@ -47,6 +51,9 @@ function App() {
     });
     getTags().then((tags) => {
       setTags(tags);
+    });
+    getTodos('owner', '==', getUserData()?.email).then((toDos) => {
+      setTodos(toDos);
     });
 
     getPowerUser().then((poweruser) => {
@@ -141,6 +148,27 @@ function App() {
     });
 
     deleteDoc(doc(db, 'notes', id));
+  }
+
+  function onCreateTodo(data) {
+    const batch = writeBatch(db);
+
+    addDoc(collection(db, 'todos'), data)
+      .then(({ id }) => {
+        setTodos((prevTodos) => {
+          return [...prevTodos, data];
+        });
+        batch.commit().then(() => console.log(id));
+      })
+      .catch((err) => console.log(err));
+  }
+
+  async function onDeleteTask(id) {
+    await deleteDoc(doc(db, 'todos', id));
+
+    setTodos((prevTasks) => {
+      return prevTasks.filter((task) => task.id !== id);
+    });
   }
 
   function addTag(tag) {
@@ -260,6 +288,31 @@ function App() {
                 }
               />
             </Route>
+            <Route
+              path="/tasks"
+              element={
+                <Todo
+                  todos={todos}
+                  isLoggedIn={isLoggedIn}
+                  lightmode={lightmode}
+                  setTodos={setTodos}
+                  setLightmode={handleLightmode}
+                  setIsLoggedIn={setIsLoggedIn}
+                  onDeleteTask={onDeleteTask}
+                />
+              }
+            />
+            <Route
+              path="/tasks/new"
+              element={
+                <NewTodo
+                  onSubmit={onCreateTodo}
+                  isLoggedIn={isLoggedIn}
+                  lightmode={lightmode}
+                  setLightmode={handleLightmode}
+                />
+              }
+            />
             <Route
               path="/login"
               element={

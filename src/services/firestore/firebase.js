@@ -75,6 +75,27 @@ export const searchTagsId = (key, op, value) => {
   });
 };
 
+export const getTodos = (key, op, owner) => {
+  return new Promise((res, rej) => {
+    if (owner == null) return;
+    const collectionQuery = query(
+      collection(db, 'todos'),
+      where(key, op, owner)
+    );
+
+    getDocs(collectionQuery)
+      .then((querySnapshot) => {
+        const todos = querySnapshot.docs.map((doc) => {
+          return { id: doc.id, ...doc.data() };
+        });
+        res(todos);
+      })
+      .catch((err) => {
+        rej(`Error obtaining to do's: ${err}`);
+      });
+  });
+};
+
 export const searchUsers = (key, op, value) => {
   return new Promise((res, rej) => {
     const collectionQuery =
