@@ -404,17 +404,23 @@ h6 {
 }
 .todo-table .dropstart button {
   padding: 0 !important;
-  width: 100%;
   text-align: left;
 }
 
 .todo-table {
   vertical-align: middle !important;
 }
+.todo-table th {
+  width: 20%;
+}
 .todo-table td span {
   display: flex;
   gap: 0.5em;
   align-items: center;
+}
+.todo-table td > .dropstart {
+  display: flex;
+  justify-content: center;
 }
 
 .todos-context-menu {

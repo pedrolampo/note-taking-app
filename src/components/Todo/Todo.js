@@ -273,7 +273,7 @@ export default function Todo({
         <h2 className="no-tasks">You have no tasks</h2>
       ) : (
         <Table
-          className="todo-table"
+          className="todo-table table-fixed"
           variant={lightmode ? undefined : 'dark'}
           responsive
           striped
