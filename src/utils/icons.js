@@ -142,3 +142,23 @@ export const personal = (
     <circle cx="12" cy="7" r="4"></circle>
   </svg>
 );
+
+export const sortArrows = (
+  <img alt="sort arrows" src="media/images/sortArrows.png" />
+);
+export const sortArrowsUp = (
+  <img alt="sort arrows" src="media/images/sortArrowsUp.png" />
+);
+export const sortArrowsDown = (
+  <img alt="sort arrows" src="media/images/sortArrowsDown.png" />
+);
+
+export const sortArrowsLight = (
+  <img alt="sort arrows" src="media/images/sortArrowsLight.png" />
+);
+export const sortArrowsLightUp = (
+  <img alt="sort arrows" src="media/images/sortArrowsLightUp.png" />
+);
+export const sortArrowsLightDown = (
+  <img alt="sort arrows" src="media/images/sortArrowsLightDown.png" />
+);

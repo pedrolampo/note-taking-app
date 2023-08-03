@@ -1,6 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, Col, Dropdown, Row, Stack, Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { doc, getDoc, writeBatch } from 'firebase/firestore';
+import { db } from '../../services/firestore/firebase';
+import UserContext from '../../context/UserContext';
 
 import {
   done,
@@ -13,11 +16,13 @@ import {
   sun,
   todo,
   work,
+  sortArrows,
+  sortArrowsDown,
+  sortArrowsUp,
+  sortArrowsLight,
+  sortArrowsLightDown,
+  sortArrowsLightUp,
 } from '../../utils/icons';
-
-import UserContext from '../../context/UserContext';
-import { doc, getDoc, writeBatch } from 'firebase/firestore';
-import { db } from '../../services/firestore/firebase';
 
 export default function Todo({
   todos,
@@ -30,8 +35,15 @@ export default function Todo({
 }) {
   // const [editTaskModalIsOpen, setEditTaskModalIsOpen] = useState(false);
   // const [editTaskId, setEditTaskId] = useState('');
+  const [sortedTasks, setSortedTasks] = useState([]);
+  const [sortOrder, setSortOrder] = useState('desc');
+  const [sortType, setSortType] = useState('');
 
   const { logout } = useContext(UserContext);
+
+  useEffect(() => {
+    setSortedTasks(todos);
+  }, [todos]);
 
   function handleLogOut() {
     setIsLoggedIn(false);
@@ -67,6 +79,21 @@ export default function Todo({
       default:
         break;
     }
+  }
+
+  function getSortIcon(value) {
+    if (lightmode) {
+      if (value === sortType && sortOrder === 'desc') {
+        return sortArrowsLightUp;
+      } else if (value === sortType && sortOrder === 'asc') {
+        return sortArrowsLightDown;
+      } else return sortArrowsLight;
+    }
+    if (value === sortType && sortOrder === 'desc') {
+      return sortArrowsUp;
+    } else if (value === sortType && sortOrder === 'asc') {
+      return sortArrowsDown;
+    } else return sortArrows;
   }
 
   async function handleQuickEdit(task, action, value) {
@@ -185,6 +212,80 @@ export default function Todo({
     }
   }
 
+  function sortTable(param) {
+    setSortOrder((prevValue) => (prevValue === 'desc' ? 'asc' : 'desc'));
+
+    switch (param) {
+      case 'title':
+        setSortType('title');
+        if (sortOrder === 'asc') {
+          setSortedTasks(
+            [...todos].sort((a, b) => a.title.localeCompare(b.title))
+          );
+        } else {
+          setSortedTasks(
+            [...todos].sort((a, b) => b.title.localeCompare(a.title))
+          );
+        }
+        break;
+
+      case 'status':
+        setSortType('status');
+        if (sortOrder === 'asc') {
+          setSortedTasks(
+            [...todos].sort((a, b) =>
+              a.status.label.localeCompare(b.status.label)
+            )
+          );
+        } else {
+          setSortedTasks(
+            [...todos].sort((a, b) =>
+              b.status.label.localeCompare(a.status.label)
+            )
+          );
+        }
+        break;
+
+      case 'priority':
+        setSortType('priority');
+        if (sortOrder === 'asc') {
+          setSortedTasks(
+            [...todos].sort((a, b) =>
+              a.priority.label.localeCompare(b.priority.label)
+            )
+          );
+        } else {
+          setSortedTasks(
+            [...todos].sort((a, b) =>
+              b.priority.label.localeCompare(a.priority.label)
+            )
+          );
+        }
+        break;
+
+      case 'category':
+        setSortType('category');
+        if (sortOrder === 'asc') {
+          setSortedTasks(
+            [...todos].sort((a, b) =>
+              a.category.label.localeCompare(b.category.label)
+            )
+          );
+        } else {
+          setSortedTasks(
+            [...todos].sort((a, b) =>
+              b.category.label.localeCompare(a.category.label)
+            )
+          );
+        }
+        break;
+
+      default:
+        setSortType('');
+        return setSortedTasks(todos);
+    }
+  }
+
   return (
     <>
       <Row className="align-items-center mb-4">
@@ -282,15 +383,23 @@ export default function Todo({
         >
           <thead>
             <tr>
-              <th>Title</th>
-              <th>Status</th>
-              <th>Priority</th>
-              <th>Category</th>
+              <th onClick={() => sortTable('title')}>
+                Title {getSortIcon('title')}
+              </th>
+              <th onClick={() => sortTable('status')}>
+                Status {getSortIcon('status')}
+              </th>
+              <th onClick={() => sortTable('priority')}>
+                Priority {getSortIcon('priority')}
+              </th>
+              <th onClick={() => sortTable('category')}>
+                Category {getSortIcon('category')}
+              </th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            {todos.map((task) => (
+            {sortedTasks.map((task) => (
               <tr key={task.id}>
                 <td>{task.title}</td>
                 <td>

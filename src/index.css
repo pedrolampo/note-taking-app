@@ -412,6 +412,11 @@ h6 {
 }
 .todo-table th {
   width: 20%;
+  max-height: 45px;
+  vertical-align: middle;
+}
+.todo-table th img {
+  max-height: 16px;
 }
 .todo-table td span {
   display: flex;
