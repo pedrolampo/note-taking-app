@@ -46,6 +46,7 @@ function App() {
   const { login, setIsPowerUser } = useContext(UserContext);
 
   useEffect(() => {
+    // Get all data and log in info on load
     getNotes().then((notes) => {
       setNotes(notes.filter((note) => !note.private));
     });
@@ -77,6 +78,7 @@ function App() {
     }
   }, [powerUser, isLoggedIn]); // eslint-disable-line
 
+  // Array containing all the notes with their tags
   const notesWithTags = useMemo(() => {
     return notes
       .map((note) => {
@@ -88,11 +90,13 @@ function App() {
       .sort((a, b) => a.title.localeCompare(b.title));
   }, [notes, tags]);
 
+  // Set lightmode and store user pref
   function handleLightmode(value) {
     setLightmode(value);
     localStorage.setItem('IS_LIGHTMODE', JSON.stringify(value));
   }
 
+  // Handle create new note and push it to firebase
   function onCreateNote({ tags, ...data }) {
     const newNote = {
       ...data,
@@ -114,6 +118,7 @@ function App() {
       .catch((err) => console.log(err));
   }
 
+  // Handle update existing note and push it to firebase
   function onUpdateNote(id, { tags, ...data }) {
     setNotes((prevNotes) => {
       return prevNotes.map((note) => {
@@ -142,6 +147,7 @@ function App() {
       });
   }
 
+  // Handle delete existing note
   function onDeleteNote(id) {
     setNotes((prevNotes) => {
       return prevNotes.filter((note) => note.id !== id);
@@ -150,6 +156,7 @@ function App() {
     deleteDoc(doc(db, 'notes', id));
   }
 
+  // Handles creating a new task
   function onCreateTodo(data) {
     const batch = writeBatch(db);
 
@@ -163,6 +170,7 @@ function App() {
       .catch((err) => console.log(err));
   }
 
+  // Handles deleting an existing task
   async function onDeleteTask(id) {
     await deleteDoc(doc(db, 'todos', id));
 
@@ -171,6 +179,7 @@ function App() {
     });
   }
 
+  // Handles adding a new note tag
   function addTag(tag) {
     setTags((prev) => [...prev, tag]);
 
@@ -183,6 +192,7 @@ function App() {
       .catch((err) => console.log(err));
   }
 
+  // Handles editing an existing note tag
   async function updateTag(id, label) {
     setTags((prevTags) => {
       return prevTags.map((tag) => {
@@ -209,6 +219,7 @@ function App() {
       });
   }
 
+  // Handles deleting an existing note tag
   async function deleteTag(id) {
     setTags((prevTags) => {
       return prevTags.filter((tag) => tag.id !== id);
