@@ -14,9 +14,9 @@ export default function NewTodo({
 }) {
   const titleRef = useRef();
   const navigate = useNavigate();
-  const [status, setStatus] = useState({});
-  const [category, setCategory] = useState({});
-  const [priority, setPriority] = useState({});
+  const [status, setStatus] = useState({ label: 'Todo', value: 'todo' });
+  const [category, setCategory] = useState({ label: 'Work', value: 'work' });
+  const [priority, setPriority] = useState({ label: 'High', value: 'high' });
 
   const selectStyles = {
     control: (baseStyles, state) => ({
