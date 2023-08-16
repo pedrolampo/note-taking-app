@@ -313,6 +313,16 @@ export default function Todo({
                 </svg>
               </div>
             )}
+            <Link to="/">
+              <Button
+                className={
+                  lightmode ? 'todo-btn text-black' : 'white-text todo-btn'
+                }
+                variant={lightmode ? 'outline-secondary' : 'outline-secondary'}
+              >
+                Switch to Notes
+              </Button>
+            </Link>
             {!isLoggedIn && (
               <Link to="/login">
                 <Button
@@ -320,18 +330,6 @@ export default function Todo({
                   variant={lightmode ? 'primary' : 'outline-primary'}
                 >
                   Log In
-                </Button>
-              </Link>
-            )}
-            {isLoggedIn && (
-              <Link to="/">
-                <Button
-                  disabled={!isLoggedIn}
-                  style={{ display: !isLoggedIn && 'none' }}
-                  className={lightmode ? 'todo-btn' : 'white-text todo-btn'}
-                  variant={lightmode ? 'secondary' : 'outline-secondary'}
-                >
-                  Switch to Notes
                 </Button>
               </Link>
             )}

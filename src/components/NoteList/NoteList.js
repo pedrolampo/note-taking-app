@@ -120,6 +120,16 @@ export default function NoteList({
                 </svg>
               </div>
             )}
+            <Link to="/tasks">
+              <Button
+                className={
+                  lightmode ? 'todo-btn text-black' : 'white-text todo-btn'
+                }
+                variant={lightmode ? 'outline-secondary' : 'outline-secondary'}
+              >
+                Switch to Tasks
+              </Button>
+            </Link>
             {!isLoggedIn && (
               <Link to="/login">
                 <Button
@@ -127,18 +137,6 @@ export default function NoteList({
                   variant={lightmode ? 'primary' : 'outline-primary'}
                 >
                   Log In
-                </Button>
-              </Link>
-            )}
-            {isLoggedIn && (
-              <Link to="/tasks">
-                <Button
-                  disabled={!isLoggedIn}
-                  style={{ display: !isLoggedIn && 'none' }}
-                  className={lightmode ? 'todo-btn' : 'white-text todo-btn'}
-                  variant={lightmode ? 'secondary' : 'outline-secondary'}
-                >
-                  Switch to Tasks
                 </Button>
               </Link>
             )}

@@ -72,7 +72,7 @@ function App() {
       setIsLoggedIn(true);
     }
 
-    const isLightmodeOn = localStorage.getItem('IS_LIGHTMODE');
+    const isLightmodeOn = localStorage.getItem('PNOTES_IS_LIGHTMODE');
     if (isLightmodeOn) {
       setLightmode(JSON.parse(isLightmodeOn));
     }
@@ -93,7 +93,7 @@ function App() {
   // Set lightmode and store user pref
   function handleLightmode(value) {
     setLightmode(value);
-    localStorage.setItem('IS_LIGHTMODE', JSON.stringify(value));
+    localStorage.setItem('PNOTES_IS_LIGHTMODE', JSON.stringify(value));
   }
 
   // Handle create new note and push it to firebase
