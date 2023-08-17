@@ -9,8 +9,8 @@ export const UserContextProvider = ({ children }) => {
     setUser(user);
 
     const encoded = {
-      ...user,
-      apiKey: window.btoa(user.apiKey),
+      email: user.email,
+      auth: window.btoa(JSON.stringify(user.auth)),
       uid: window.btoa(user.uid),
     };
 
