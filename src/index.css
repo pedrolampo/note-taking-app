@@ -431,3 +431,16 @@ h6 {
 .todos-context-menu {
   cursor: pointer;
 }
+
+@media screen and (max-width: 575px) {
+  .edit-note-form {
+    flex-direction: column;
+  }
+  .edit-note-form textarea.form-control {
+    width: 100%;
+  }
+  .edit-note-form .note-markdown {
+    width: 100%;
+    min-height: 75px;
+  }
+}

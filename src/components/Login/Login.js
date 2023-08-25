@@ -61,7 +61,7 @@ const Login = ({ setIsLoggedIn, lightmode }) => {
         </Col>
       </Row>
 
-      <Container className="loginContainer">
+      <Container xs="auto" className="loginContainer">
         <Form className="login-form" onSubmit={handleLogin}>
           <Row>
             <Form.Label>Email</Form.Label>
@@ -84,7 +84,20 @@ const Login = ({ setIsLoggedIn, lightmode }) => {
             />
           </Row>
           <Row>
-            <Stack className="loginButtonsContainer">
+            <Stack
+              gap={4}
+              direction="horizontal"
+              className="justify-content-center mt-4"
+            >
+              <Link className="createUser" to={'/createUser'}>
+                <Button
+                  className={lightmode ? undefined : 'white-text'}
+                  variant={lightmode ? 'secondary' : 'outline-secondary'}
+                  type="button"
+                >
+                  Create User
+                </Button>
+              </Link>
               <Button
                 className={lightmode ? undefined : 'white-text'}
                 variant={lightmode ? 'primary' : 'outline-primary'}
@@ -92,15 +105,6 @@ const Login = ({ setIsLoggedIn, lightmode }) => {
               >
                 Log In
               </Button>
-              <Link className="createUser" to={'/createUser'}>
-                <Button
-                  className={lightmode ? undefined : 'white-text'}
-                  variant={lightmode ? 'secondary' : 'outline-secondary'}
-                  type="submit"
-                >
-                  Create User
-                </Button>
-              </Link>
             </Stack>
           </Row>
         </Form>
