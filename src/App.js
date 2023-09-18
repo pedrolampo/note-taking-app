@@ -231,7 +231,7 @@ function App() {
   }
 
   return (
-    <Container fluid className={lightmode ? 'lightmode my-4' : 'my-4'}>
+    <Container className={lightmode ? 'lightmode my-4' : 'my-4'}>
       <NotificationContextProvider>
         <BrowserRouter>
           <ScrollToTop />
