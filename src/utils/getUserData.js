@@ -5,8 +5,9 @@ export function getUserData() {
 
   const decoded = {
     ...userData,
-    apiKey: window.atob(userData.apiKey),
+    email: window.atob(userData.email),
     uid: window.atob(userData.uid),
+    accessToken: window.atob(userData.accessToken),
   };
 
   return decoded;

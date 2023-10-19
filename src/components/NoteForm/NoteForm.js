@@ -17,6 +17,7 @@ export default function NoteForm({
   markdown = '',
   owner = '',
   tags = [],
+  toc = true,
   lightmode,
   isLoggedIn,
 }) {
@@ -24,6 +25,7 @@ export default function NoteForm({
   const markdownRef = useRef(null);
   const [selectedTags, setSelectedTags] = useState(tags);
   const [noteMd, setNoteMd] = useState('');
+  const [hasToc, setHasToc] = useState(toc);
   const [showOverview, setShowOverview] = useState(false);
   const navigate = useNavigate();
 
@@ -86,6 +88,7 @@ export default function NoteForm({
       title: titleRef.current.value,
       markdown: markdownRef.current.value,
       tags: selectedTags,
+      toc: hasToc,
       owner: getUserData()?.email,
     });
 
@@ -133,13 +136,23 @@ export default function NoteForm({
         <Form.Group controlId="markdown">
           <div className="edit-note-labels">
             <Form.Label htmlFor="markdown">Body</Form.Label>
-            <Form.Check
-              id="toggle"
-              type="switch"
-              onChange={(e) => setShowOverview(e.target.checked)}
-              label="Toggle Note Overview"
-              reverse
-            />
+            <div style={{ display: 'flex', gap: '1.5em' }}>
+              <Form.Check
+                id="toc"
+                type="switch"
+                checked={hasToc}
+                onChange={(e) => setHasToc(e.target.checked)}
+                label="Include ToC"
+                reverse
+              />
+              <Form.Check
+                id="toggle"
+                type="switch"
+                onChange={(e) => setShowOverview(e.target.checked)}
+                label="Toggle Note Overview"
+                reverse
+              />
+            </div>
           </div>
           <div className={showOverview ? 'edit-note-form' : undefined}>
             <Form.Control

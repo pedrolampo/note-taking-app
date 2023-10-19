@@ -33,6 +33,7 @@ export default function EditNote({
         title={note.title}
         markdown={note.markdown}
         tags={note.tags}
+        toc={note.toc}
         onSubmit={(data) => onSubmit(note.id, data)}
         onAddTag={onAddTag}
         availableTags={availableTags}
