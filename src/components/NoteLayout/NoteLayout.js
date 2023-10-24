@@ -11,6 +11,8 @@ export default function NoteLayout({ notes }) {
   const note = notes.find((n) => n.id === id);
   const navigate = useNavigate();
 
+  // TODO: change text to "not found" after few seconds
+  // TODO: trigger re-render when loaded
   if (note == null) {
     return (
       <>

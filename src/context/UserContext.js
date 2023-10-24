@@ -9,9 +9,8 @@ export const UserContextProvider = ({ children }) => {
     setUser(user);
 
     const safeUser = {
-      email: window.btoa(user.email),
-      uid: window.btoa(user.uid),
-      accessToken: window.btoa(user.accessToken),
+      email: user.email,
+      uid: user.uid,
     };
 
     window.localStorage.setItem('user', JSON.stringify(safeUser));

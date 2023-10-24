@@ -57,6 +57,7 @@ function App() {
       setTodos(toDos);
     });
 
+    // *** TODO: REFACTOR CODE FOR MULTIPLE POWERUSERS ***
     getPowerUser().then((poweruser) => {
       setPowerUser(poweruser.email);
     });
@@ -65,10 +66,8 @@ function App() {
     if (currentUser?.email === powerUser) setIsPowerUser(true);
     else setIsPowerUser(false);
 
-    const loggedUserJSON = getUserData();
-
-    if (loggedUserJSON) {
-      login(loggedUserJSON);
+    if (currentUser) {
+      login(currentUser);
       setIsLoggedIn(true);
     }
 

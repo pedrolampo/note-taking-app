@@ -128,6 +128,7 @@ export const getPass = () => {
   });
 };
 
+// TODO: REFACTOR CODE FOR MULTIPLE POWERUSERS
 export const getPowerUser = () => {
   return new Promise((res, rej) => {
     getDoc(doc(db, 'users', process.env.REACT_APP_poweruserId))
