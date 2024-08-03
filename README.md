@@ -1,5 +1,18 @@
 # Note Taking App
 
+## Table of Contents
+
+1. [Project Overview](#project-overview)
+2. [Features](#features)
+3. [Architecture](#architecture)
+4. [Setup and Installation](#setup-and-installation)
+5. [Usage](#usage)
+6. [Firebase Configuration](#firebase-configuration)
+7. [Available Scripts](#available-scripts)
+8. [Contributing](#contributing)
+9. [License](#license)
+10. [Live Demo](#live-demo)
+
 ## Project Overview
 
 Note Taking App is a responsive web application for creating, managing, and organizing notes and/or documentation. Built with React, it offers a user-friendly interface and robust functionality for personal and professional use.
@@ -29,7 +42,7 @@ cd note-taking-app
 npm install
 ```
 
-### Usage
+## Usage
 
 To start the development server:
 
