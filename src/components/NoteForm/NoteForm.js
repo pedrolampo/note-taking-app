@@ -18,6 +18,7 @@ export default function NoteForm({
   owner = '',
   tags = [],
   toc = true,
+  isPrivate = false,
   lightmode,
   isLoggedIn,
 }) {
@@ -26,6 +27,7 @@ export default function NoteForm({
   const [selectedTags, setSelectedTags] = useState(tags);
   const [noteMd, setNoteMd] = useState('');
   const [hasToc, setHasToc] = useState(toc);
+  const [privateNote, setPrivateNote] = useState(isPrivate);
   const [showOverview, setShowOverview] = useState(false);
   const navigate = useNavigate();
 
@@ -89,6 +91,7 @@ export default function NoteForm({
       markdown: markdownRef.current.value,
       tags: selectedTags,
       toc: hasToc,
+      private: privateNote,
       owner: getUserData()?.email,
     });
 
@@ -143,6 +146,14 @@ export default function NoteForm({
                 checked={hasToc}
                 onChange={(e) => setHasToc(e.target.checked)}
                 label="Include ToC"
+                reverse
+              />
+              <Form.Check
+                id="isPrivate"
+                type="switch"
+                checked={privateNote}
+                onChange={(e) => setPrivateNote(e.target.checked)}
+                label="Private"
                 reverse
               />
               <Form.Check

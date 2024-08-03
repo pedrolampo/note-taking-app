@@ -15,13 +15,21 @@
   height: 8px;
 }
 
+.sidebar a {
+  text-decoration: none;
+}
+
 .sidebar h4 {
   margin: 0 !important;
   padding-bottom: 1em;
+  color: var(--white);
 }
 
 .lightmode .sidebar {
   background-color: #ededed;
   color: #000;
   border-color: var(--grey);
+}
+.lightmode .sidebar h4 {
+  color: var(--black);
 }

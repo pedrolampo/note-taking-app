@@ -80,6 +80,9 @@ export default function Note({
               <h1 className="note-title">{note.title}</h1>
               {note.tags.length > 0 && (
                 <Stack gap={1} direction="horizontal" className="flex-wrap">
+                  {note.private && (
+                    <Badge className="text-truncate bg-danger">Private</Badge>
+                  )}
                   {note.tags.map((tag) => (
                     <Badge key={tag.id} className="text-truncate">
                       {tag.label}

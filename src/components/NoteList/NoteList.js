@@ -236,7 +236,12 @@ export default function NoteList({
             ))
           : filteredNotes.map((note) => (
               <Col key={note.id}>
-                <NoteCard id={note.id} title={note.title} tags={note.tags} />
+                <NoteCard
+                  id={note.id}
+                  title={note.title}
+                  tags={note.tags}
+                  isPrivate={note.private}
+                />
               </Col>
             ))}
       </Row>
@@ -252,7 +257,7 @@ export default function NoteList({
   );
 }
 
-function NoteCard({ id, title, tags }) {
+function NoteCard({ id, title, tags, isPrivate }) {
   return (
     <Card
       as={Link}
@@ -271,6 +276,9 @@ function NoteCard({ id, title, tags }) {
               direction="horizontal"
               className="justify-content-center flex-wrap"
             >
+              {isPrivate && (
+                <Badge className="text-truncate bg-danger">Private</Badge>
+              )}
               {tags.map((tag) => (
                 <Badge key={tag.id} className="text-truncate">
                   {tag.label}

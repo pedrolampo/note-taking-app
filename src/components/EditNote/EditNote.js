@@ -38,6 +38,7 @@ export default function EditNote({
         onAddTag={onAddTag}
         availableTags={availableTags}
         isLoggedIn={isLoggedIn}
+        isPrivate={note.private}
         owner={note.owner}
         lightmode={lightmode}
       />

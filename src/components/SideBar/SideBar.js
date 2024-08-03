@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Accordion from '../Accordion/Accordion';
 
 import './SideBar.css';
@@ -15,7 +16,9 @@ export default function SideBar({ tags, notes, lightmode }) {
 
   return (
     <div className="sidebar">
-      <h4>Peter's Notes</h4>
+      <Link to="/">
+        <h4>Peter's Notes</h4>
+      </Link>
 
       {sortedTags.map((tag) => (
         <Accordion tag={tag} notes={notes} lightmode={lightmode} key={tag.id} />
