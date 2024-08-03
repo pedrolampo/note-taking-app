@@ -2,7 +2,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-bottom: 1em;
+  margin-top: 0.7em;
+  border-bottom: 1px solid #ffffff30;
+  padding-bottom: 0.7em;
+}
+.lightmode .accordion {
+  border-color: #00000050;
 }
 
 .accordion .accordion-header {
@@ -10,6 +15,7 @@
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+  font-size: 1em;
 }
 .accordion .accordion-header img {
   width: 2em;
@@ -27,8 +33,9 @@
   gap: 0.5em;
   max-height: 9999px;
   overflow: hidden;
-  margin-top: 0.51em;
+  margin-top: 0.5em;
   /* transition: max-height 1s ease-in-out; */
+  font-size: 0.95em;
 }
 .accordion .accordion-body.collapsed {
   max-height: 0;
@@ -37,7 +44,7 @@
 
 .accordion .accordion-body .accordion-body-note {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   font-size: 0.85em;
   border-radius: 3px;
@@ -49,13 +56,16 @@
   transition: color 200ms ease-in-out;
 }
 .accordion .accordion-body .accordion-body-note:hover {
-  background-color: #3138436e;
+  background-color: #37333d;
 }
 .accordion .accordion-body .accordion-body-note.selected {
-  background-color: var(--bg-hover);
+  background-color: #37333d;
 }
-.accordion .accordion-body .accordion-note-qty {
-  color: var(--text-dim);
+.lightmode .accordion-body .accordion-body-note:hover {
+  background-color: #c1c1c1;
+}
+.lightmode .accordion-body .accordion-body-note.selected {
+  background-color: #c1c1c1;
 }
 
 .accordion .accordion-body .see-more {

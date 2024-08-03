@@ -23,6 +23,10 @@
   margin: 0 !important;
   padding-bottom: 1em;
   color: var(--white);
+  border-bottom: 1px solid #ffffff30;
+}
+.lightmode .sidebar h4 {
+  border-color: #00000050;
 }
 
 .lightmode .sidebar {

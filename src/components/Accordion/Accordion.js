@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import './Accordion.css';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 export default function Accordion({ tag, notes, lightmode }) {
   const filteredNotes = useMemo(() => {
@@ -12,6 +12,10 @@ export default function Accordion({ tag, notes, lightmode }) {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [currentNotes, setCurrentNotes] = useState(5);
   const [slicedItems, setSlicedItems] = useState(filteredNotes?.slice(0, 5));
+
+  let { id } = useParams();
+
+  console.log(id);
 
   useEffect(() => {
     setSlicedItems(filteredNotes?.slice(0, currentNotes));
@@ -38,10 +42,9 @@ export default function Accordion({ tag, notes, lightmode }) {
           <Link
             to={`/${note.id}`}
             key={note.id}
-            className={`accordion-body-note`}
+            className={`accordion-body-note ${note.id === id && 'selected'}`}
           >
             <span>{note.title}</span>
-            <span className="accordion-note-qty">{note.qty}</span>
           </Link>
         ))}
         {currentNotes < filteredNotes?.length && (
@@ -49,7 +52,7 @@ export default function Accordion({ tag, notes, lightmode }) {
             className="see-more"
             onClick={() => setCurrentNotes((prev) => prev + 5)}
           >
-            See more
+            Load more...
           </span>
         )}
       </div>
