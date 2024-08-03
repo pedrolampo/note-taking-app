@@ -5,6 +5,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.1] - 2024-08-03
+
+### Added
+
+- Sidebar with a note list on the Note view
+  - SideBar component shows a list of Tags sorted alphabetically
+  - Every tag is an Accordion component containing every Note related to the Tag
+  - NOTE: Sidebar is not supported in mobile for UX purposes
+- Create new CSS files for Note and NoteForm components
+- Started development of private notes for each user (WIP)
+  - You can now set notes to Private, but it will only be a visual change (Private badge)
+  - Private notes will only be available for the owner of the Note
+
+### Updated
+
+- Header and NoteForm view in mobile UI
+
+### Fixed
+
+- Fixed lightmode issues on some components
+
+### Removed
+
+- Tasks (just hidden, not fully removed)
+
 ## [1.2.2] - 2023-10-19
 
 ### Added
