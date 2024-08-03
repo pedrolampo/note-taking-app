@@ -12,10 +12,10 @@
   padding: 1.5em 6em;
   /* padding-left: 23em; */
   width: 100%;
-  display: grid;
-  place-items: center;
   max-height: 100vh;
   overflow: auto;
+  display: flex;
+  justify-content: center;
   align-items: flex-start;
 }
 
