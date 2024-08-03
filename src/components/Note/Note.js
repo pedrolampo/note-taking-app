@@ -74,7 +74,7 @@ export default function Note({
         <SideBar tags={tags} notes={notes} lightmode={lightmode} />
       </Col>
       <Col>
-        <Container>
+        <Container className="note-container">
           <Row className="align-items-center mb-4">
             <Col>
               <h1 className="note-title">{note.title}</h1>

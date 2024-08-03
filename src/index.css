@@ -237,6 +237,9 @@ h6 {
   fill: #000;
 }
 
+.toc {
+  margin-bottom: 1.5em;
+}
 .toc .toc-header {
   color: #fff;
   margin-top: 0 !important;

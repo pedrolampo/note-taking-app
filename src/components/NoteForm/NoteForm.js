@@ -9,6 +9,8 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import remarkGfm from 'remark-gfm';
 
+import './NoteForm.css';
+
 export default function NoteForm({
   onSubmit,
   onAddTag,
@@ -101,7 +103,7 @@ export default function NoteForm({
   return (
     <Form onSubmit={(e) => handleSubmit(e)}>
       <Stack gap={4}>
-        <Row>
+        <Row className="title-tags-row">
           <Col>
             <Form.Group controlId="title">
               <Form.Label>Title</Form.Label>
@@ -139,7 +141,10 @@ export default function NoteForm({
         <Form.Group controlId="markdown">
           <div className="edit-note-labels">
             <Form.Label htmlFor="markdown">Body</Form.Label>
-            <div style={{ display: 'flex', gap: '1.5em' }}>
+            <div
+              className="toggles-container"
+              style={{ display: 'flex', gap: '1.5em' }}
+            >
               <Form.Check
                 id="toc"
                 type="switch"

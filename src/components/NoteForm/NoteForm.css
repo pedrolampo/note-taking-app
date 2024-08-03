@@ -1,0 +1,16 @@
+@media screen and (max-width: 1100px) {
+  .title-tags-row {
+    flex-direction: column;
+    gap: 2em;
+  }
+
+  .edit-note-labels {
+    flex-direction: column-reverse;
+    gap: 2em;
+  }
+
+  .edit-note-labels .toggles-container {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
