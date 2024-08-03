@@ -230,7 +230,7 @@ function App() {
   }
 
   return (
-    <Container className={lightmode ? 'lightmode my-4' : 'my-4'}>
+    <Container className={lightmode ? 'lightmode py-4' : 'py-4'}>
       <NotificationContextProvider>
         <BrowserRouter>
           <ScrollToTop />
@@ -281,6 +281,8 @@ function App() {
                     setLightmode={handleLightmode}
                     isLoggedIn={isLoggedIn}
                     onDelete={onDeleteNote}
+                    tags={tags}
+                    notes={notesWithTags}
                   />
                 }
               />

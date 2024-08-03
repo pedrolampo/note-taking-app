@@ -1,0 +1,19 @@
+.py-4:has(.note-main-container) {
+  padding: 0 !important;
+  margin: 0 !important;
+  max-width: 99%;
+}
+
+.note-main-container > :first-child {
+  flex: 0;
+}
+
+.note-main-container > :nth-child(2) {
+  padding: 1.5em 6em;
+  /* padding-left: 23em; */
+  width: 100%;
+  display: grid;
+  place-items: center;
+  max-height: 100vh;
+  overflow: auto;
+}

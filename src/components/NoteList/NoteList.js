@@ -120,7 +120,7 @@ export default function NoteList({
                 </svg>
               </div>
             )}
-            <Link to="/tasks">
+            {/* <Link to="/tasks">
               <Button
                 className={
                   lightmode ? 'todo-btn text-black' : 'white-text todo-btn'
@@ -129,7 +129,7 @@ export default function NoteList({
               >
                 Switch to Tasks
               </Button>
-            </Link>
+            </Link> */}
             {!isLoggedIn && (
               <Link to="/login">
                 <Button

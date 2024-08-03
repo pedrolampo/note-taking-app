@@ -1,0 +1,75 @@
+.accordion {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+
+.accordion .accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.accordion .accordion-header img {
+  width: 2em;
+  transition: rotate 0.2s ease-in-out;
+  rotate: -180deg;
+}
+.accordion .accordion-header.collapsed img {
+  rotate: 0deg;
+}
+
+.accordion .accordion-body {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  gap: 0.5em;
+  max-height: 9999px;
+  overflow: hidden;
+  margin-top: 0.51em;
+  /* transition: max-height 1s ease-in-out; */
+}
+.accordion .accordion-body.collapsed {
+  max-height: 0;
+  margin: 0;
+}
+
+.accordion .accordion-body .accordion-body-note {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85em;
+  border-radius: 3px;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  color: #fff;
+  text-decoration: none;
+  transition: background-color 0.1s ease-in-out;
+  transition: color 200ms ease-in-out;
+}
+.accordion .accordion-body .accordion-body-note:hover {
+  background-color: #3138436e;
+}
+.accordion .accordion-body .accordion-body-note.selected {
+  background-color: var(--bg-hover);
+}
+.accordion .accordion-body .accordion-note-qty {
+  color: var(--text-dim);
+}
+
+.accordion .accordion-body .see-more {
+  font-size: 0.85em;
+  padding: 0.5em 1em;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: 0.1s ease-in-out;
+}
+.accordion .accordion-body .see-more:hover {
+  color: var(--text-main);
+  background-color: #3138436e;
+}
+
+.lightmode .accordion .accordion-body .accordion-body-note {
+  color: #000;
+}
