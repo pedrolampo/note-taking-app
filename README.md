@@ -1,70 +1,112 @@
-# Getting Started with Create React App
+# Note Taking App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Overview
+
+Note Taking App is a responsive web application for creating, managing, and organizing notes and/or documentation. Built with React, it offers a user-friendly interface and robust functionality for personal and professional use.
+
+## Features
+
+- **Note Management**: Create, edit, and delete notes.
+- **Categorization**: Organize notes by categories.
+- **Responsive Design**: Works seamlessly on desktop and mobile devices.
+
+## Architecture
+
+The app follows a modern web development architecture, utilizing a React frontend with Firebase as backend. The design is based on a component-based architecture for scalability and maintainability.
+
+## Setup and Installation
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm (v6 or higher)
+
+### Installation
+
+```sh
+git clone https://github.com/pedrolampo/note-taking-app.git
+cd note-taking-app
+npm install
+```
+
+### Usage
+
+To start the development server:
+
+```sh
+npm start
+```
+
+Access the app at http://localhost:3000.
+
+## Firebase Configuration
+
+This project uses Firebase for the backend services, specifically Firestore Database and Authentication. To configure Firebase, follow these steps:
+
+### 1. Set Up Firebase
+
+1. Go to the [Firebase Console](https://console.firebase.google.com/) and create a new project.
+2. In your project, navigate to **Project Settings** and find your Firebase configuration under **Your Apps**.
+
+### 2. Configure Environment Variables
+
+For security reasons, sensitive information like API keys should not be hardcoded in your codebase. Instead, use a `.env` file to store these values.
+
+Create a `.env` file in the root of your project and add the following environment variables with your Firebase configuration:
+
+```
+REACT_APP_apiKey=YOUR_API_KEY
+REACT_APP_authDomain=YOUR_AUTH_DOMAIN
+REACT_APP_projectId=YOUR_PROJECT_ID
+REACT_APP_storageBucket=YOUR_STORAGE_BUCKET
+REACT_APP_messagingSenderId=YOUR_MESSAGING_SENDER_ID
+REACT_APP_appId=YOUR_APP_ID
+REACT_APP_poweruserId=YOUR_POWERUSER_ID
+```
+
+Replace `YOUR_*` with the corresponding values from your Firebase project settings.
+
+### 3. Initialize Firebase in the Project
+
+The project comes with the configutarion of Firebase and built-in functions within the `src/services/firestore/firebase.js` file.
+
+This includes the following functions:
+
+- getNotes
+- getTags
+- serachTagsId
+- getTodos (deprecated at the moment)
+- searchUsers
+- getPass
+- getPowerUser (TODO: refactor for multiple powerusers)
+
+### 4. Firestore Database Structure
+
+The Firestore Database is structured with the following collections:
+
+data: Collection for storing general data.
+notes: Collection for storing user notes.
+tags: Collection for storing the created tags.
+users: Collection for storing user profiles and information.
+
+### 5. Authentication Setup
+
+Use Firebase Authentication to manage user sign-in and sign-up. You can configure various authentication methods (email/password, Google, etc.) through the Firebase Console.
 
 ## Available Scripts
 
-In the project directory, you can run:
+- npm start: Starts the development server.
+- npm test: Launches the test runner.
+- npm run build: Builds the app for production.
 
-### `npm start`
+## Contributing
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Contributions are welcome! Please open an issue or submit a pull request.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## License
 
-### `npm test`
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/pedrolampo/note-taking-app/blob/main/LICENSE) file for details.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Live Demo
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Check out the live demo [here](https://peters-notes.vercel.app/).
