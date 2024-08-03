@@ -39,4 +39,17 @@
     align-items: flex-start !important;
     gap: 1.5em;
   }
+
+  .note-main-container .note-container > :first-child > :nth-child(2) {
+    width: 100%;
+  }
+
+  .note-main-container
+    .note-container
+    > :first-child
+    > :nth-child(2)
+    .hstack
+    > :first-child {
+    margin-right: auto;
+  }
 }
