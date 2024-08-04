@@ -46,9 +46,15 @@ function App() {
   const { login, setIsPowerUser } = useContext(UserContext);
 
   useEffect(() => {
+    const currentUser = getUserData();
     // Get all data and log in info on load
     getNotes().then((notes) => {
-      setNotes(notes.filter((note) => !note.private));
+      setNotes(
+        notes.filter(
+          (note) =>
+            !note.private || (note.private && note.owner === currentUser?.email)
+        )
+      );
     });
     getTags().then((tags) => {
       setTags(tags);
@@ -61,7 +67,6 @@ function App() {
     getPowerUser().then((poweruser) => {
       setPowerUser(poweruser.email);
     });
-    const currentUser = getUserData();
 
     if (currentUser?.email === powerUser) setIsPowerUser(true);
     else setIsPowerUser(false);
