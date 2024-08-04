@@ -15,8 +15,6 @@ export default function Accordion({ tag, notes, lightmode }) {
 
   let { id } = useParams();
 
-  console.log(id);
-
   useEffect(() => {
     setSlicedItems(filteredNotes?.slice(0, currentNotes));
   }, [filteredNotes, currentNotes]);
