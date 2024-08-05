@@ -25,9 +25,9 @@ import {
   db,
   getNotes,
   getTags,
-  getTodos,
+  // getTodos,
   searchTagsId,
-  getPowerUser,
+  getPowerUsers,
 } from './services/firestore/firebase';
 import './App.css';
 
@@ -40,10 +40,10 @@ function App() {
   const [tags, setTags] = useState([]);
   const [todos, setTodos] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [powerUser, setPowerUser] = useState();
+  const [powerUsers, setPowerUsers] = useState();
   const [lightmode, setLightmode] = useState(false);
 
-  const { login, setIsPowerUser } = useContext(UserContext);
+  const { user, login, setIsPowerUser } = useContext(UserContext);
 
   useEffect(() => {
     const currentUser = getUserData();
@@ -59,28 +59,33 @@ function App() {
     getTags().then((tags) => {
       setTags(tags);
     });
-    getTodos('owner', '==', getUserData()?.email).then((toDos) => {
-      setTodos(toDos);
+    // getTodos('owner', '==', getUserData()?.email).then((toDos) => {
+    //   setTodos(toDos);
+    // });
+
+    // Fetch for poweruser &
+    // Set current user permissions if isPowerUser
+    getPowerUsers().then((poweruser) => {
+      setPowerUsers(poweruser);
+    });
+    powerUsers?.forEach((admin) => {
+      if (admin.email === user?.email && admin.poweruser) {
+        setIsPowerUser(true);
+      }
     });
 
-    // *** TODO: REFACTOR CODE FOR MULTIPLE POWERUSERS ***
-    getPowerUser().then((poweruser) => {
-      setPowerUser(poweruser.email);
-    });
-
-    if (currentUser?.email === powerUser) setIsPowerUser(true);
-    else setIsPowerUser(false);
-
+    // AUTO LOGIN AT START
     if (currentUser) {
       login(currentUser);
       setIsLoggedIn(true);
     }
 
+    //  CHECK FOR LIGHTMODE USER PREF
     const isLightmodeOn = localStorage.getItem('PNOTES_IS_LIGHTMODE');
     if (isLightmodeOn) {
       setLightmode(JSON.parse(isLightmodeOn));
     }
-  }, [powerUser, isLoggedIn]); // eslint-disable-line
+  }, [isLoggedIn]); // eslint-disable-line
 
   // Array containing all the notes with their tags
   const notesWithTags = useMemo(() => {

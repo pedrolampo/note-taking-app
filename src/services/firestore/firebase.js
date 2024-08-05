@@ -128,15 +128,22 @@ export const getPass = () => {
   });
 };
 
-// TODO: REFACTOR CODE FOR MULTIPLE POWERUSERS
-export const getPowerUser = () => {
+export const getPowerUsers = (key, op, value) => {
   return new Promise((res, rej) => {
-    getDoc(doc(db, 'users', process.env.REACT_APP_poweruserId))
+    const collectionQuery =
+      key && op && value
+        ? query(collection(db, 'users'), where(key, op, value))
+        : collection(db, 'users');
+
+    getDocs(collectionQuery)
       .then((querySnapshot) => {
-        res(querySnapshot.data());
+        const users = querySnapshot.docs.map((doc) => {
+          return doc.data();
+        });
+        res(users.filter((user) => user.poweruser));
       })
       .catch((err) => {
-        rej(`error al obtener los datos: ${err}`);
+        rej(`Error obtaining users: ${err}`);
       });
   });
 };
