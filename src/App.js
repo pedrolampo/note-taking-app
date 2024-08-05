@@ -45,6 +45,7 @@ function App() {
 
   const { user, login, setIsPowerUser } = useContext(UserContext);
 
+  // Fetch for poweruser &
   getPowerUsers().then((poweruser) => {
     setPowerUsers(poweruser);
   });
@@ -67,9 +68,7 @@ function App() {
     //   setTodos(toDos);
     // });
 
-    // Fetch for poweruser &
     // Set current user permissions if isPowerUser
-
     powerUsers?.forEach((admin) => {
       if (admin.email === user?.email && admin.poweruser) {
         setIsPowerUser(true);
