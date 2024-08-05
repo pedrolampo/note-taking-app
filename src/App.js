@@ -45,6 +45,10 @@ function App() {
 
   const { user, login, setIsPowerUser } = useContext(UserContext);
 
+  getPowerUsers().then((poweruser) => {
+    setPowerUsers(poweruser);
+  });
+
   useEffect(() => {
     const currentUser = getUserData();
     // Get all data and log in info on load
@@ -65,27 +69,25 @@ function App() {
 
     // Fetch for poweruser &
     // Set current user permissions if isPowerUser
-    getPowerUsers().then((poweruser) => {
-      setPowerUsers(poweruser);
-    });
+
     powerUsers?.forEach((admin) => {
       if (admin.email === user?.email && admin.poweruser) {
         setIsPowerUser(true);
       }
     });
 
-    // AUTO LOGIN AT START
+    // Auto login at start
     if (currentUser) {
       login(currentUser);
       setIsLoggedIn(true);
     }
 
-    //  CHECK FOR LIGHTMODE USER PREF
+    //  Check for Lightmode user prefs
     const isLightmodeOn = localStorage.getItem('PNOTES_IS_LIGHTMODE');
     if (isLightmodeOn) {
       setLightmode(JSON.parse(isLightmodeOn));
     }
-  }, [isLoggedIn]); // eslint-disable-line
+  }, [powerUsers, isLoggedIn]); // eslint-disable-line
 
   // Array containing all the notes with their tags
   const notesWithTags = useMemo(() => {
