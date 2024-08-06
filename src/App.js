@@ -45,11 +45,6 @@ function App() {
 
   const { user, login, setIsPowerUser } = useContext(UserContext);
 
-  // Fetch for poweruser &
-  getPowerUsers().then((poweruser) => {
-    setPowerUsers(poweruser);
-  });
-
   useEffect(() => {
     const currentUser = getUserData();
     // Get all data and log in info on load
@@ -69,10 +64,14 @@ function App() {
     // });
 
     // Set current user permissions if isPowerUser
-    powerUsers?.forEach((admin) => {
-      if (admin.email === user?.email && admin.poweruser) {
-        setIsPowerUser(true);
-      }
+    // powerUsers?.forEach((admin) => {
+    //   if (admin.email === user?.email && admin.poweruser) {
+    //     setIsPowerUser(true);
+    //   }
+    // });
+    // Fetch for poweruser &
+    getPowerUsers().then((poweruser) => {
+      setPowerUsers(poweruser);
     });
 
     // Auto login at start
@@ -81,12 +80,22 @@ function App() {
       setIsLoggedIn(true);
     }
 
+    console.log('Inner UseEffect');
+
     //  Check for Lightmode user prefs
     const isLightmodeOn = localStorage.getItem('PNOTES_IS_LIGHTMODE');
     if (isLightmodeOn) {
       setLightmode(JSON.parse(isLightmodeOn));
     }
-  }, [powerUsers, isLoggedIn]); // eslint-disable-line
+  }, [isLoggedIn]); // eslint-disable-line
+
+  useEffect(() => {
+    powerUsers?.forEach((admin) => {
+      if (admin.email === user?.email && admin.poweruser) {
+        setIsPowerUser(true);
+      }
+    });
+  }, [powerUsers]); // eslint-disable-line
 
   // Array containing all the notes with their tags
   const notesWithTags = useMemo(() => {

@@ -257,7 +257,7 @@ export default function NoteList({
   );
 }
 
-function NoteCard({ id, title, tags, isPrivate }) {
+export function NoteCard({ id, title, tags, isPrivate }) {
   return (
     <Card
       as={Link}
