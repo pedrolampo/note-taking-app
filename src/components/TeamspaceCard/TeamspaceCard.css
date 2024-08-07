@@ -1,0 +1,18 @@
+.teamspace-card {
+  transition: translate ease-in-out 100ms, box-shadow ease-in-out 100ms,
+    background-color 200ms ease-in-out;
+  background-color: #2b2a34;
+  box-shadow: 0 0 8px 0 rgba(39, 39, 39, 0.2);
+  text-align: left;
+}
+
+.teamspace-card span {
+  color: #fff;
+  transition: color 200ms ease-in-out;
+}
+
+.teamspace-card:hover,
+.teamspace-card:focus {
+  translate: 0 -5px;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2);
+}

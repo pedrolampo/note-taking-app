@@ -38,7 +38,7 @@ export default function Accordion({ tag, notes, lightmode }) {
       <div className={`accordion-body ${isCollapsed ? 'collapsed' : ''}`}>
         {slicedItems?.map((note) => (
           <Link
-            to={`/${note.id}`}
+            to={`/note/${note.id}`}
             key={note.id}
             className={`accordion-body-note ${note.id === id && 'selected'}`}
           >

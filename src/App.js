@@ -11,16 +11,17 @@ import {
   getDoc,
   deleteDoc,
 } from 'firebase/firestore';
-import NoteList from './components/NoteList/NoteList';
-import NoteLayout from './components/NoteLayout/NoteLayout';
+import NoteList from './views/NoteList/NoteList';
+import NoteLayout from './views/NoteLayout/NoteLayout';
+import Login from './views/Login/Login';
+import Teamspace from './views/Teamspace/Teamspace';
 import Note from './components/Note/Note';
 import EditNote from './components/EditNote/EditNote';
 import ScrollToTop from './utils/scrollToTop';
 import Notification from './components/Notification/Notification';
-import Login from './components/Login/Login';
 import CreateUser from './components/CreateUser/CreateUser';
-import Todo from './components/Todo/Todo';
-import NewTodo from './components/NewTodo/NewTodo';
+// import Todo from './components/Todo/Todo';
+// import NewTodo from './components/NewTodo/NewTodo';
 import {
   db,
   getNotes,
@@ -28,6 +29,7 @@ import {
   // getTodos,
   searchTagsId,
   getPowerUsers,
+  getTeamspaces,
 } from './services/firestore/firebase';
 import './App.css';
 
@@ -38,7 +40,8 @@ import { getUserData } from './utils/getUserData';
 function App() {
   const [notes, setNotes] = useState([]);
   const [tags, setTags] = useState([]);
-  const [todos, setTodos] = useState([]);
+  // const [todos, setTodos] = useState([]);
+  const [teamspaces, setTeamspaces] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [powerUsers, setPowerUsers] = useState();
   const [lightmode, setLightmode] = useState(false);
@@ -59,17 +62,20 @@ function App() {
     getTags().then((tags) => {
       setTags(tags);
     });
+    getTeamspaces().then((tspaces) => {
+      let filteredTeamspaces = [];
+      if (isLoggedIn) {
+        filteredTeamspaces = tspaces.filter((space) =>
+          space.collaborators.includes(user.uid)
+        );
+      }
+      setTeamspaces(filteredTeamspaces);
+    });
     // getTodos('owner', '==', getUserData()?.email).then((toDos) => {
     //   setTodos(toDos);
     // });
 
-    // Set current user permissions if isPowerUser
-    // powerUsers?.forEach((admin) => {
-    //   if (admin.email === user?.email && admin.poweruser) {
-    //     setIsPowerUser(true);
-    //   }
-    // });
-    // Fetch for poweruser &
+    // Fetch for powerusers
     getPowerUsers().then((poweruser) => {
       setPowerUsers(poweruser);
     });
@@ -80,8 +86,6 @@ function App() {
       setIsLoggedIn(true);
     }
 
-    console.log('Inner UseEffect');
-
     //  Check for Lightmode user prefs
     const isLightmodeOn = localStorage.getItem('PNOTES_IS_LIGHTMODE');
     if (isLightmodeOn) {
@@ -90,6 +94,7 @@ function App() {
   }, [isLoggedIn]); // eslint-disable-line
 
   useEffect(() => {
+    // Set current user permissions if isPowerUser
     powerUsers?.forEach((admin) => {
       if (admin.email === user?.email && admin.poweruser) {
         setIsPowerUser(true);
@@ -176,27 +181,27 @@ function App() {
   }
 
   // Handles creating a new task
-  function onCreateTodo(data) {
-    const batch = writeBatch(db);
+  // function onCreateTodo(data) {
+  //   const batch = writeBatch(db);
 
-    addDoc(collection(db, 'todos'), data)
-      .then(({ id }) => {
-        setTodos((prevTodos) => {
-          return [...prevTodos, data];
-        });
-        batch.commit().then(() => console.log(id));
-      })
-      .catch((err) => console.log(err));
-  }
+  //   addDoc(collection(db, 'todos'), data)
+  //     .then(({ id }) => {
+  //       setTodos((prevTodos) => {
+  //         return [...prevTodos, data];
+  //       });
+  //       batch.commit().then(() => console.log(id));
+  //     })
+  //     .catch((err) => console.log(err));
+  // }
 
   // Handles deleting an existing task
-  async function onDeleteTask(id) {
-    await deleteDoc(doc(db, 'todos', id));
+  // async function onDeleteTask(id) {
+  //   await deleteDoc(doc(db, 'todos', id));
 
-    setTodos((prevTasks) => {
-      return prevTasks.filter((task) => task.id !== id);
-    });
-  }
+  //   setTodos((prevTasks) => {
+  //     return prevTasks.filter((task) => task.id !== id);
+  //   });
+  // }
 
   // Handles adding a new note tag
   function addTag(tag) {
@@ -267,9 +272,26 @@ function App() {
                   setIsLoggedIn={setIsLoggedIn}
                   lightmode={lightmode}
                   setLightmode={handleLightmode}
+                  tags={tags}
+                  teamspaces={teamspaces}
                 />
               }
             />
+            {/* <Route
+              path="/teamspace/:id"
+              element={
+                <NoteList
+                  notes={notesWithTags}
+                  availableTags={tags}
+                  onUpdateTag={updateTag}
+                  onDeleteTag={deleteTag}
+                  isLoggedIn={isLoggedIn}
+                  setIsLoggedIn={setIsLoggedIn}
+                  lightmode={lightmode}
+                  setLightmode={handleLightmode}
+                />
+              }
+            /> */}
             <Route
               path="/new"
               element={
@@ -284,7 +306,7 @@ function App() {
               }
             />
             <Route
-              path="/:id"
+              path="/note/:id"
               element={
                 <NoteLayout
                   lightmode={lightmode}
@@ -303,6 +325,7 @@ function App() {
                     onDelete={onDeleteNote}
                     tags={tags}
                     notes={notesWithTags}
+                    teamspaces={teamspaces}
                   />
                 }
               />
@@ -320,7 +343,7 @@ function App() {
                 }
               />
             </Route>
-            <Route
+            {/* <Route
               path="/tasks"
               element={
                 <Todo
@@ -344,7 +367,7 @@ function App() {
                   setLightmode={handleLightmode}
                 />
               }
-            />
+            /> */}
             <Route
               path="/login"
               element={
@@ -354,6 +377,19 @@ function App() {
             <Route
               path={'/createUser'}
               element={<CreateUser lightmode={lightmode} />}
+            />
+            <Route
+              path={'/teamspace/:id'}
+              element={
+                <Teamspace
+                  notes={notesWithTags}
+                  tags={tags}
+                  lightmode={lightmode}
+                  teamspaces={teamspaces}
+                  setLightmode={setLightmode}
+                  isLoggedIn={isLoggedIn}
+                />
+              }
             />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>

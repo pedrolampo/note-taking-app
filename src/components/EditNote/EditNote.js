@@ -1,5 +1,5 @@
 import NoteForm from '../NoteForm/NoteForm';
-import { useNote } from '../NoteLayout/NoteLayout';
+import { useNote } from '../../views/NoteLayout/NoteLayout';
 import { moon, sun } from '../../utils/icons';
 
 export default function EditNote({

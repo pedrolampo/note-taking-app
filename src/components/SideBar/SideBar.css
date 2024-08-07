@@ -1,7 +1,7 @@
 .sidebar {
   width: 17em;
   height: 100vh;
-  border-right: 1px solid #ffffff25;
+  /* border-right: 1px solid #ffffff25; */
   padding: 1.5em 1em;
   color: #fff;
   /* position: fixed; */
@@ -16,17 +16,20 @@
   color: #000;
   border-color: var(--grey);
 }
-.sidebar::-webkit-scrollbar {
-  width: 6px;
+.sidebar ::-webkit-scrollbar {
+  width: 5px;
   height: 8px;
 }
 
 .sidebar a {
   text-decoration: none;
 }
+.sidebar a:has(h4) {
+  margin-bottom: 1em;
+}
 .sidebar h4 {
   margin: 0 !important;
-  padding-bottom: 1em;
+  padding-bottom: 0.75em;
   color: var(--white);
   border-bottom: 1px solid #ffffff30;
 }
@@ -35,10 +38,16 @@
   color: var(--black);
 }
 
+.sidebar .sidebar-content {
+  overflow: auto;
+  padding-right: 0.5em;
+}
+
 .sidebar .sidebar-search-container {
-  margin-top: 1em;
+  margin-top: 2em;
+  margin-bottom: 3em;
   border-bottom: 1px solid #ffffff30;
-  padding-bottom: 1em;
+  padding-bottom: 0.75em;
 }
 .lightmode .sidebar-search-container {
   border-color: #00000050;
@@ -55,6 +64,73 @@
 .lightmode .sidebar .sidebar-search svg {
   fill: var(--black);
 }
+
+.sidebar .sidebar-teamspaces-container {
+  margin-top: 1em;
+  margin-bottom: 3em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+.lightmode .sidebar-teamspaces-container {
+  border-color: #00000050;
+  color: var(--black);
+}
+.sidebar .sidebar-teamspaces-container .sidebar-teamspaces-header {
+  width: 100%;
+  border-bottom: 1px solid #ffffff30;
+  padding-bottom: 0.75em;
+  font-size: 1.15em;
+}
+.sidebar .sidebar-teamspaces-container .teamspaces-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+.sidebar .sidebar-teamspaces-container .teamspaces-body a {
+  color: var(--white);
+  text-decoration: none;
+  margin-left: 0.75em;
+  font-size: 0.9em;
+  border-radius: 3px;
+  padding: 0.25em 0.5em;
+}
+.sidebar .sidebar-teamspaces-container .teamspaces-body a.selected {
+  background-color: #37333d;
+}
+.lightmode .sidebar .sidebar-teamspaces-container .teamspaces-body a.selected {
+  background-color: #c1c1c1;
+}
+.lightmode .sidebar-teamspaces-container .sidebar-teamspaces-header {
+  border-color: #00000050;
+}
+.lightmode .sidebar .sidebar-teamspaces-container .teamspaces-body a {
+  color: var(--black);
+}
+.sidebar .sidebar-teamspaces-container a:hover {
+  background-color: #37333d;
+}
+.lightmode .sidebar-teamspaces-container a:hover {
+  background-color: #c1c1c1;
+}
+
+.sidebar .tags-container {
+  overflow: auto;
+  overflow-x: hidden;
+  flex: 1;
+}
+.sidebar .tags-container h4 {
+  font-size: 1.15em;
+}
+.sidebar .tags-container .accordion {
+  margin: 0.75em 0 0.75em 0.75em;
+}
+.sidebar .tags-container :last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+/* .sidebar .tags-container .tags-body {
+} */
 
 .sidebar .search-overlay {
   position: absolute;
@@ -96,4 +172,16 @@
   overflow: auto;
   max-height: 70vh;
   z-index: 1;
+}
+
+.sidebar .create-button {
+  font-size: 1.2em;
+  padding-top: 1em;
+  border-top: 1px solid #ffffff30;
+  color: var(--white);
+  text-decoration: none;
+}
+.lightmode .sidebar .create-button {
+  color: var(--black);
+  border-color: #00000050;
 }

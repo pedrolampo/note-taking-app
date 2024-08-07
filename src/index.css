@@ -446,4 +446,11 @@ h6 {
     width: 100%;
     min-height: 75px;
   }
+  h2.note-title {
+    font-size: 1.75rem;
+  }
+
+  .edit-header {
+    align-items: flex-start;
+  }
 }

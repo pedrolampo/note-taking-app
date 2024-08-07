@@ -116,3 +116,7 @@ body:has(.lightmode) {
 .lightmode .code-copy-btn:hover {
   fill: var(--black);
 }
+
+.lightmode svg path {
+  stroke: var(--black);
+}

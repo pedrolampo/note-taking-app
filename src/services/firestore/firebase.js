@@ -147,3 +147,23 @@ export const getPowerUsers = (key, op, value) => {
       });
   });
 };
+
+export const getTeamspaces = (key, op, value) => {
+  return new Promise((res, rej) => {
+    const collectionQuery =
+      key && op && value
+        ? query(collection(db, 'teamspaces'), where(key, op, value))
+        : collection(db, 'teamspaces');
+
+    getDocs(collectionQuery)
+      .then((querySnapshot) => {
+        const teamspaces = querySnapshot.docs.map((doc) => {
+          return { id: doc.id, ...doc.data() };
+        });
+        res(teamspaces);
+      })
+      .catch((err) => {
+        rej(`Error obtaining teamspaces: ${err}`);
+      });
+  });
+};

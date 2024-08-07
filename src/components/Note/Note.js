@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNote } from '../NoteLayout/NoteLayout';
+import { useNote } from '../../views/NoteLayout/NoteLayout.js';
 import { Link, useNavigate } from 'react-router-dom';
 import { Row, Col, Stack, Badge, Button, Container } from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown';
@@ -15,8 +15,12 @@ import {
   extractHeadings,
   TableOfContents,
 } from '../../utils/noteFunctions.js';
-import './Note.css';
 import SideBar from '../SideBar/SideBar.js';
+import useWindowDimensions from '../../utils/getWindowDimensions.js';
+import BurgerMenu from '../BurgerMenu/BurgerMenu.js';
+import BurgerBtn from '../BurgerBtn/BurgerBtn.js';
+
+import './Note.css';
 
 export default function Note({
   onDelete,
@@ -25,11 +29,15 @@ export default function Note({
   setLightmode,
   tags,
   notes,
+  teamspaces,
 }) {
   const [deleteNoteModalIsOpen, setDeleteNoteModalIsOpen] = useState(false);
   const [ownerName, setOwnerName] = useState(null);
+  const [isBurgerOpen, setIsBurgerOpen] = useState(false);
+
   const note = useNote();
   const navigate = useNavigate();
+  const windowDimensions = useWindowDimensions();
 
   const Pre = ({ children }) => (
     <pre className="blog-pre">
@@ -68,16 +76,41 @@ export default function Note({
 
   const headings = extractHeadings(note.markdown);
 
+  if (isBurgerOpen) {
+    return (
+      <BurgerMenu
+        notes={notes}
+        teamspaces={teamspaces}
+        setIsBurgerOpen={setIsBurgerOpen}
+        isLoggedIn={isLoggedIn}
+      />
+    );
+  }
+
   return (
     <Row className="note-main-container">
       <Col>
-        <SideBar tags={tags} notes={notes} lightmode={lightmode} />
+        <SideBar
+          tags={tags}
+          notes={notes}
+          lightmode={lightmode}
+          teamspaces={teamspaces}
+        />
       </Col>
       <Col>
         <Container className="note-container">
           <Row className="align-items-center mb-4">
             <Col>
-              <h1 className="note-title">{note.title}</h1>
+              <Row>
+                <Col>
+                  <h1 className="note-title">{note.title}</h1>
+                </Col>
+                {windowDimensions.width < 1100 && (
+                  <Col>
+                    <BurgerBtn action={setIsBurgerOpen} />
+                  </Col>
+                )}
+              </Row>
               {note.tags.length > 0 && (
                 <Stack gap={1} direction="horizontal" className="flex-wrap">
                   {note.private && (
@@ -121,7 +154,7 @@ export default function Note({
                   <>
                     <Link
                       style={{ pointerEvents: !isLoggedIn && 'none' }}
-                      to={`/${note.id}/edit`}
+                      to={`/note/${note.id}/edit`}
                     >
                       <Button
                         disabled={!isLoggedIn}

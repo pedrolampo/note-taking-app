@@ -2,15 +2,14 @@ import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Col, Container, Form, Row } from 'react-bootstrap';
 import { NoteCard } from '../../views/NoteList/NoteList';
-import Accordion from '../Accordion/Accordion';
 import { searchIconBlack } from '../../utils/icons';
-import './SideBar.css';
+import './BurgerMenu.css';
 
-export default function SideBar({
-  tags,
+export default function BurgerMenu({
   notes,
   teamspaces,
   lightmode,
+  setIsBurgerOpen,
   isLoggedIn,
 }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -26,41 +25,35 @@ export default function SideBar({
     });
   }, [title, notes]);
 
-  const sortedTags = tags.sort((a, b) => {
-    if (a.label.toLowerCase() < b.label.toLowerCase()) {
-      return -1;
-    }
-    if (a.label.toLowerCase() > b.label.toLowerCase()) {
-      return 1;
-    }
-    return 0;
-  });
-
   return (
-    <div className="sidebar">
-      <Link to="/">
-        <h4>Peter's Notes</h4>
-      </Link>
+    <div className="burger-menu">
+      <div className="burger-header">
+        <Link onClick={() => setIsBurgerOpen(false)} to="/">
+          <h4>Peter's Notes</h4>
+        </Link>
+        <span onClick={() => setIsBurgerOpen(false)}>&#9587;</span>
+      </div>
 
-      <div className="sidebar-content">
-        <div className="sidebar-search-container">
+      <div className="burger-menu-content">
+        <div className="burger-menu-search-container">
           <span
             onClick={() => setIsSearchOpen(true)}
-            className="sidebar-search"
+            className="burger-menu-search"
           >
             {searchIconBlack} Quick Search
           </span>
         </div>
 
         {isLoggedIn && (
-          <div className="sidebar-teamspaces-container">
-            <h4 className="sidebar-teamspaces-header">Teamspaces</h4>
+          <div className="burger-menu-teamspaces-container">
+            <h4 className="burger-menu-teamspaces-header">Teamspaces</h4>
             <div className="teamspaces-body">
               {teamspaces.map((space) => (
                 <Link
-                  className={`${space.id === id && 'selected'}`}
+                  onClick={() => setIsBurgerOpen(false)}
                   key={space.id}
                   to={`/teamspace/${space.id}`}
+                  className={`${space.id === id && 'selected'}`}
                 >
                   {space.name}
                 </Link>
@@ -68,24 +61,14 @@ export default function SideBar({
             </div>
           </div>
         )}
-
-        <div className="tags-container">
-          <h4 className="tags-header">Tags</h4>
-          <div className="tags-body">
-            {sortedTags.map((tag) => (
-              <Accordion
-                tag={tag}
-                notes={notes}
-                lightmode={lightmode}
-                key={tag.id}
-              />
-            ))}
-          </div>
-        </div>
       </div>
 
-      <Link to="/new" className="create-button">
-        &#43; Create
+      <Link
+        onClick={() => setIsBurgerOpen(false)}
+        to="/new"
+        className="create-button"
+      >
+        New Note
       </Link>
 
       {isSearchOpen && (
@@ -108,7 +91,13 @@ export default function SideBar({
             {title && (
               <Row xs={1} sm={2} lg={3} xl={4} className="g-3 search-results">
                 {filteredNotes.map((note) => (
-                  <Col onClick={() => setIsSearchOpen(false)} key={note.id}>
+                  <Col
+                    onClick={() => {
+                      setIsSearchOpen(false);
+                      setIsBurgerOpen(false);
+                    }}
+                    key={note.id}
+                  >
                     <NoteCard
                       id={note.id}
                       title={note.title}

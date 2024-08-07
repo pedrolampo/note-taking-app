@@ -1,0 +1,65 @@
+.py-4:has(.teamspace-main-container) {
+  padding: 0 !important;
+  margin: 0 !important;
+  max-width: 99%;
+}
+
+.teamspace-main-container > :first-child {
+  flex: 0;
+}
+
+.teamspace-main-container > :nth-child(2) {
+  padding: 1.5em 6em;
+  /* padding-left: 23em; */
+  width: 100%;
+  max-height: 100vh;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.teamspace-main-container .empty-teamspace {
+  color: var(--white);
+  font-size: 1.25em;
+}
+.lightmode .teamspace-main-container .empty-teamspace {
+  color: var(--black);
+}
+
+.teamspace-main-container .teamspace-container .col:has(svg) {
+  flex: 0;
+  padding-left: 0;
+}
+
+@media screen and (max-width: 1100px) {
+  .teamspace-main-container > :first-child {
+    display: none;
+  }
+  .teamspace-main-container > :nth-child(2) {
+    padding: 1.5em;
+  }
+
+  .teamspace-main-container .note-container {
+    max-width: calc(100vw - 3em);
+  }
+
+  .teamspace-main-container .note-container > :first-child {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 1.5em;
+  }
+
+  .teamspace-main-container .note-container > :first-child > :nth-child(2) {
+    width: 100%;
+  }
+
+  .teamspace-main-container
+    .note-container
+    > :first-child
+    > :nth-child(2)
+    .hstack
+    > :first-child {
+    margin-right: auto;
+  }
+}
