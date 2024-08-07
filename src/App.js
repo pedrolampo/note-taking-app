@@ -15,6 +15,7 @@ import NoteList from './views/NoteList/NoteList';
 import NoteLayout from './views/NoteLayout/NoteLayout';
 import Login from './views/Login/Login';
 import Teamspace from './views/Teamspace/Teamspace';
+import Teamspaces from './views/Teamspaces/Teamspaces';
 import Note from './components/Note/Note';
 import EditNote from './components/EditNote/EditNote';
 import ScrollToTop from './utils/scrollToTop';
@@ -379,6 +380,16 @@ function App() {
             <Route
               path={'/createUser'}
               element={<CreateUser lightmode={lightmode} />}
+            />
+            <Route
+              path="/teamspaces"
+              element={
+                <Teamspaces
+                  lightmode={lightmode}
+                  isLoggedIn={isLoggedIn}
+                  teamspaces={teamspaces}
+                />
+              }
             />
             <Route
               path={'/teamspace/:id'}
