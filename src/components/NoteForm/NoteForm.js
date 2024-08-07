@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Form, Stack, Row, Col, Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import CreatableReactSelect from 'react-select/creatable';
+import Select from 'react-select';
 import { v4 as uuidV4 } from 'uuid';
 import { getUserData } from '../../utils/getUserData';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
@@ -23,14 +24,18 @@ export default function NoteForm({
   isPrivate = false,
   lightmode,
   isLoggedIn,
+  teamspaces = [],
+  availableTeamspaces,
 }) {
   const titleRef = useRef(null);
   const markdownRef = useRef(null);
   const [selectedTags, setSelectedTags] = useState(tags);
+  const [selectedTeamspaces, setSelectedTeamspaces] = useState(teamspaces);
   const [noteMd, setNoteMd] = useState('');
   const [hasToc, setHasToc] = useState(toc);
   const [privateNote, setPrivateNote] = useState(isPrivate);
   const [showOverview, setShowOverview] = useState(false);
+
   const navigate = useNavigate();
 
   const selectStyles = {
@@ -95,6 +100,7 @@ export default function NoteForm({
       toc: hasToc,
       private: privateNote,
       owner: getUserData()?.email,
+      teamspaces: selectedTeamspaces,
     });
 
     navigate('..');
@@ -131,6 +137,36 @@ export default function NoteForm({
                   setSelectedTags(
                     tags.map((tag) => {
                       return { label: tag.label, id: tag.value };
+                    })
+                  );
+                }}
+              />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group controlId="teamspaces">
+              <Form.Label>Teamspaces</Form.Label>
+              <Select
+                isMulti
+                styles={lightmode ? undefined : selectStyles}
+                value={selectedTeamspaces.map((space) => {
+                  return {
+                    label: availableTeamspaces.find((el) => el.id === space)
+                      ?.name,
+                    value: space,
+                  };
+                })}
+                options={availableTeamspaces.map((space) => {
+                  return {
+                    label: space.name,
+                    value: space.id,
+                  };
+                })}
+                onChange={(tspaces) => {
+                  console.log(tspaces);
+                  setSelectedTeamspaces(
+                    tspaces.map((space) => {
+                      return space.value;
                     })
                   );
                 }}

@@ -8,6 +8,7 @@ export default function NewNote({
   lightmode,
   setLightmode,
   isLoggedIn,
+  teamspaces,
 }) {
   return (
     <>
@@ -33,6 +34,7 @@ export default function NewNote({
         availableTags={availableTags}
         isLoggedIn={isLoggedIn}
         lightmode={lightmode}
+        availableTeamspaces={teamspaces}
       />
     </>
   );

@@ -281,7 +281,7 @@ export default function NoteList({
             </Row>
           </Form>
 
-          <Row xs={1} sm={2} lg={3} xl={4} className="g-3">
+          <Row xs={1} sm={2} lg={3} xxl={4} className="g-3">
             {notesLoading
               ? loadingNotes.map((load) => (
                   <Col key={load} className="loading-card">

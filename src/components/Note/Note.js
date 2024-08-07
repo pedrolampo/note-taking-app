@@ -95,6 +95,7 @@ export default function Note({
           notes={notes}
           lightmode={lightmode}
           teamspaces={teamspaces}
+          isLoggedIn={isLoggedIn}
         />
       </Col>
       <Col>

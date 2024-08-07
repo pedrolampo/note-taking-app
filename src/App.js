@@ -302,6 +302,7 @@ function App() {
                   isLoggedIn={isLoggedIn}
                   lightmode={lightmode}
                   setLightmode={handleLightmode}
+                  teamspaces={teamspaces}
                 />
               }
             />
@@ -339,6 +340,7 @@ function App() {
                     availableTags={tags}
                     lightmode={lightmode}
                     setLightmode={handleLightmode}
+                    teamspaces={teamspaces}
                   />
                 }
               />

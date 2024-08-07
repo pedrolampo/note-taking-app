@@ -9,6 +9,7 @@ export default function EditNote({
   isLoggedIn,
   lightmode,
   setLightmode,
+  teamspaces,
 }) {
   const note = useNote();
   return (
@@ -41,6 +42,8 @@ export default function EditNote({
         isPrivate={note.private}
         owner={note.owner}
         lightmode={lightmode}
+        availableTeamspaces={teamspaces}
+        teamspaces={note.teamspaces}
       />
     </>
   );
