@@ -21,6 +21,7 @@ Note Taking App is a responsive web application for creating, managing, and orga
 
 - **Note Management**: Create, edit, and delete notes.
 - **Categorization**: Organize notes by categories.
+- **Teamspaces**: Create workspaces to share private notes with colleagues.
 - **Responsive Design**: Works seamlessly on desktop and mobile devices.
 
 ## Architecture
@@ -74,7 +75,7 @@ REACT_APP_projectId=YOUR_PROJECT_ID
 REACT_APP_storageBucket=YOUR_STORAGE_BUCKET
 REACT_APP_messagingSenderId=YOUR_MESSAGING_SENDER_ID
 REACT_APP_appId=YOUR_APP_ID
-REACT_APP_poweruserId=YOUR_POWERUSER_ID
+REACT_APP_passId=YOUR_PASS_ID
 ```
 
 Replace `YOUR_*` with the corresponding values from your Firebase project settings.
@@ -90,17 +91,19 @@ This includes the following functions:
 - serachTagsId
 - getTodos (deprecated at the moment)
 - searchUsers
+- getTeamspaces
 - getPass
-- getPowerUser (TODO: refactor for multiple powerusers)
+- getPowerUsers
 
 ### 4. Firestore Database Structure
 
 The Firestore Database is structured with the following collections:
 
-data: Collection for storing general data.
-notes: Collection for storing user notes.
-tags: Collection for storing the created tags.
-users: Collection for storing user profiles and information.
+- data: Collection for storing general data.
+- notes: Collection for storing user notes.
+- tags: Collection for storing the created tags.
+- teamspaces: Collection for storing teamspaces data.
+- users: Collection for storing user profiles and information.
 
 ### 5. Authentication Setup
 
