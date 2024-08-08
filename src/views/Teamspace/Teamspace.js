@@ -59,6 +59,11 @@ export default function Teamspace({
               <h1 className="note-title">{currentTeamspace?.name} Teamspace</h1>
             </Col>
             <Col xs="auto">
+              {windowDimensions.width < 1100 && (
+                <Col className="burger-btn">
+                  <BurgerBtn action={setIsBurgerOpen} />
+                </Col>
+              )}
               <Stack gap={2} direction="horizontal">
                 {lightmode ? (
                   <div
@@ -103,11 +108,6 @@ export default function Teamspace({
                 </Link>
               </Stack>
             </Col>
-            {windowDimensions.width < 1100 && (
-              <Col>
-                <BurgerBtn action={setIsBurgerOpen} />
-              </Col>
-            )}
           </Row>
 
           {!filteredNotes.length ? (

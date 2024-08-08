@@ -8,10 +8,14 @@ import {
   Row,
   Stack,
 } from 'react-bootstrap';
+import useWindowDimensions from '../../utils/getWindowDimensions';
 import SideBar from '../../components/SideBar/SideBar';
 import { moon, sun } from '../../utils/icons';
 
 import './Teamspaces.css';
+import BurgerBtn from '../../components/BurgerBtn/BurgerBtn';
+import { useState } from 'react';
+import BurgerMenu from '../../components/BurgerMenu/BurgerMenu';
 
 const Teamspaces = ({
   isLoggedIn,
@@ -24,6 +28,19 @@ const Teamspaces = ({
   // if (!isLoggedIn) {
   //   return <Navigate to="/" replace={true} />;
   // }
+  const [isBurgerOpen, setIsBurgerOpen] = useState(false);
+  const windowDimensions = useWindowDimensions();
+
+  if (isBurgerOpen) {
+    return (
+      <BurgerMenu
+        notes={notes}
+        teamspaces={teamspaces}
+        setIsBurgerOpen={setIsBurgerOpen}
+        isLoggedIn={isLoggedIn}
+      />
+    );
+  }
 
   return (
     <Row className="teamspaces-main-container">
@@ -39,7 +56,7 @@ const Teamspaces = ({
 
       <Col>
         <Container>
-          <Row className="align-items-end justify-content-end mb-4">
+          <Row className="align-items-center justify-content-end mb-4">
             <Col>
               <h1 className="note-title">My Teamspaces</h1>
             </Col>
@@ -72,6 +89,11 @@ const Teamspaces = ({
                     Back
                   </Button>
                 </Link>
+                {windowDimensions.width < 1100 && (
+                  <Col>
+                    <BurgerBtn action={setIsBurgerOpen} />
+                  </Col>
+                )}
               </Stack>
             </Col>
           </Row>

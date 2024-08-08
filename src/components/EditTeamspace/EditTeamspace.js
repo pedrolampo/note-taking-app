@@ -1,12 +1,16 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Col, Container, Row, Stack } from 'react-bootstrap';
-import SideBar from '../SideBar/SideBar';
 import { useTeamspace } from '../../views/TeamspaceLayout/TeamspaceLayout';
+import SideBar from '../SideBar/SideBar';
 import TeamspaceForm from '../TeamspaceForm/TeamspaceForm';
+import BurgerBtn from '../BurgerBtn/BurgerBtn';
+import useWindowDimensions from '../../utils/getWindowDimensions';
+import BurgerMenu from '../BurgerMenu/BurgerMenu';
+import { getUserData } from '../../utils/getUserData';
 import { moon, sun } from '../../utils/icons';
 
 import './EditTeamspace.css';
-import { getUserData } from '../../utils/getUserData';
 
 export default function EditTeamspace({
   lightmode,
@@ -18,6 +22,19 @@ export default function EditTeamspace({
   onSubmit,
 }) {
   const teamspace = useTeamspace();
+  const [isBurgerOpen, setIsBurgerOpen] = useState(false);
+  const windowDimensions = useWindowDimensions();
+
+  if (isBurgerOpen) {
+    return (
+      <BurgerMenu
+        notes={notes}
+        teamspaces={teamspaces}
+        setIsBurgerOpen={setIsBurgerOpen}
+        isLoggedIn={isLoggedIn}
+      />
+    );
+  }
 
   return (
     <Row className="teamspaces-main-container">
@@ -33,7 +50,7 @@ export default function EditTeamspace({
 
       <Col>
         <Container>
-          <Row className="align-items-end justify-content-end mb-4">
+          <Row className="align-items-center justify-content-end mb-4">
             <Col>
               <h1 className="note-title">Edit Teamspace</h1>
             </Col>
@@ -66,6 +83,11 @@ export default function EditTeamspace({
                     Back
                   </Button>
                 </Link>
+                {windowDimensions.width < 1100 && (
+                  <Col>
+                    <BurgerBtn action={setIsBurgerOpen} />
+                  </Col>
+                )}
               </Stack>
             </Col>
           </Row>
