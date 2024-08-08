@@ -75,7 +75,9 @@ function App() {
           )
         );
       }
-      setTeamspaces(filteredTeamspaces);
+      setTeamspaces(
+        filteredTeamspaces.sort((a, b) => a.name.localeCompare(b.name))
+      );
     });
     // getTodos('owner', '==', getUserData()?.email).then((toDos) => {
     //   setTodos(toDos);
