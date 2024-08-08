@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.9] - 2024-08-08
+
+### Added
+
+- Teamspaces
+  - Personal teamspace is created when a new account is created
+  - Create new teamspaces and add Notes to it to share them with collaborators
+  - Collaborators can be added to a teamspace in the edit page
+  - Each collaborator will be able to see the Notes that are included in it, and they will be able to add their own Notes to it
+  - Only the Teamspace owner can edit it
+
+### Fixed
+
+- Fixed some bugs with UI while lightmode was active
+
 ## [2.1.3] - 2024-08-06
 
 ### Added
