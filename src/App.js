@@ -51,14 +51,6 @@ function App() {
   useEffect(() => {
     const currentUser = getUserData();
     // Get all data and log in info on load
-    getNotes().then((notes) => {
-      setNotes(
-        notes.filter(
-          (note) =>
-            !note.private || (note.private && note.owner === currentUser?.email)
-        )
-      );
-    });
     getTags().then((tags) => {
       setTags(tags);
     });
@@ -98,6 +90,32 @@ function App() {
   }, [isLoggedIn]); // eslint-disable-line
 
   useEffect(() => {
+    const currentUser = getUserData();
+    getNotes().then((notes) => {
+      setNotes(
+        notes.filter((note) => {
+          // Add note if it isn't private
+          if (!note.private) return true;
+
+          // Add note if it is private, and the owner is logged in
+          if (note.private && note.owner === currentUser?.email) return true;
+
+          // Add note if it is private, and the user is a collaborator in a teamspace where the note is included
+          return (
+            note.private &&
+            note.teamspaces?.some((teamspaceId) => {
+              const teamspace = teamspaces.find((ts) => ts.id === teamspaceId);
+              return (
+                teamspace &&
+                teamspace.collaborators.some(
+                  (collaborator) => collaborator.uid === currentUser?.uid
+                )
+              );
+            })
+          );
+        })
+      );
+    });
     // Set current user permissions if isPowerUser
     powerUsers?.forEach((admin) => {
       if (admin.email === user?.email && admin.poweruser) {
