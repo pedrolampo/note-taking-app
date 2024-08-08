@@ -388,6 +388,9 @@ function App() {
                   lightmode={lightmode}
                   isLoggedIn={isLoggedIn}
                   teamspaces={teamspaces}
+                  tags={tags}
+                  notes={notesWithTags}
+                  setLightmode={setLightmode}
                 />
               }
             />

@@ -330,7 +330,7 @@ export function NoteCard({ id, title, tags, isPrivate }) {
           className="align-items-center justify-content-center h-100"
         >
           <span className="fs-5">{title}</span>
-          {tags.length > 0 && (
+          {(tags.length > 0 || isPrivate) && (
             <Stack
               gap={1}
               direction="horizontal"

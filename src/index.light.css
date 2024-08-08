@@ -109,6 +109,13 @@ body:has(.lightmode) {
 .lightmode .card span:not(.badge) {
   color: var(--black);
 }
+.lightmode .teamspaces .card {
+  background-color: var(--white);
+  box-shadow: none;
+}
+.lightmode .teamspaces .card span:not(.badge) {
+  color: var(--black);
+}
 
 .lightmode .code-copy-btn {
   fill: var(--dark-grey);

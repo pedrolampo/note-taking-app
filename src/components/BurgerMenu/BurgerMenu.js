@@ -46,7 +46,9 @@ export default function BurgerMenu({
 
         {isLoggedIn && (
           <div className="burger-menu-teamspaces-container">
-            <h4 className="burger-menu-teamspaces-header">Teamspaces</h4>
+            <Link to={'/teamspaces'}>
+              <h4 className="burger-menu-teamspaces-header">Teamspaces</h4>
+            </Link>
             <div className="teamspaces-body">
               {teamspaces.map((space) => (
                 <Link

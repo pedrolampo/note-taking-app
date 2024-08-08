@@ -82,6 +82,9 @@
   padding-bottom: 0.75em;
   font-size: 1.15em;
 }
+.sidebar .sidebar-teamspaces-container a:has(.sidebar-teamspaces-header) {
+  margin-bottom: 0.5em;
+}
 .sidebar .sidebar-teamspaces-container .teamspaces-body {
   display: flex;
   flex-direction: column;
@@ -107,10 +110,10 @@
 .lightmode .sidebar .sidebar-teamspaces-container .teamspaces-body a {
   color: var(--black);
 }
-.sidebar .sidebar-teamspaces-container a:hover {
+.sidebar .sidebar-teamspaces-container .teamspaces-body a:hover {
   background-color: #37333d;
 }
-.lightmode .sidebar-teamspaces-container a:hover {
+.lightmode .sidebar-teamspaces-container .teamspaces-body a:hover {
   background-color: #c1c1c1;
 }
 
@@ -167,6 +170,9 @@
 }
 .sidebar .main-search-container .search-form label {
   font-size: 1.5em;
+}
+.lightmode .sidebar .main-search-container .search-form label {
+  color: var(--white);
 }
 .sidebar .main-search-container .search-results {
   overflow: auto;

@@ -163,7 +163,6 @@ export default function NoteForm({
                   };
                 })}
                 onChange={(tspaces) => {
-                  console.log(tspaces);
                   setSelectedTeamspaces(
                     tspaces.map((space) => {
                       return space.value;

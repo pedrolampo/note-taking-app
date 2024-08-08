@@ -17,7 +17,7 @@ export default function TeamspaceCard({ id, title, tags, isPrivate }) {
           className="align-items-left justify-content-center h-100"
         >
           <span className="fs-4">{title}</span>
-          {tags.length > 0 && (
+          {(tags.length > 0 || isPrivate) && (
             <Stack
               gap={1}
               direction="horizontal"

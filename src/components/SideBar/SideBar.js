@@ -54,7 +54,9 @@ export default function SideBar({
 
         {isLoggedIn && (
           <div className="sidebar-teamspaces-container">
-            <h4 className="sidebar-teamspaces-header">Teamspaces</h4>
+            <Link to={'/teamspaces'}>
+              <h4 className="sidebar-teamspaces-header">Teamspaces</h4>
+            </Link>
             <div className="teamspaces-body">
               {teamspaces.map((space) => (
                 <Link
