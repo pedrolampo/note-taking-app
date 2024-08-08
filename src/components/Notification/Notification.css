@@ -1,6 +1,8 @@
 div.notification1 {
   width: 15rem;
-  height: 3rem;
+  height: auto;
+  min-height: 3rem;
+  word-break: break-word;
   padding: 10px;
   background-color: #2b2a34;
   border-radius: 8px;
