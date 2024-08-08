@@ -78,6 +78,18 @@ export default function Teamspace({
                     </svg>
                   </div>
                 )}
+                <Link
+                  style={{ pointerEvents: !isLoggedIn && 'none' }}
+                  to={`/teamspace/${id}/edit`}
+                >
+                  <Button
+                    disabled={!isLoggedIn}
+                    className={lightmode ? undefined : 'white-text'}
+                    variant={lightmode ? 'primary' : 'outline-primary'}
+                  >
+                    Edit
+                  </Button>
+                </Link>
                 <Link to="/">
                   <Button
                     className={lightmode ? undefined : 'white-text'}

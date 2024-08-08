@@ -93,7 +93,12 @@ const Teamspaces = ({
                           Members: {el.collaborators.length}
                         </Badge>
                         <Badge className="text-truncate bg-secondary">
-                          Notes: {el.notesIds.length}
+                          Notes:{' '}
+                          {
+                            notes.filter((note) =>
+                              note.teamspaces?.includes(el.id)
+                            ).length
+                          }
                         </Badge>
                       </Stack>
                     </Stack>

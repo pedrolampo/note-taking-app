@@ -37,6 +37,9 @@ import './App.css';
 import { NotificationContextProvider } from './context/NotificationContext';
 import UserContext from './context/UserContext';
 import { getUserData } from './utils/getUserData';
+import NewTeamspace from './components/NewTeamspace/NewTeamspace';
+import EditTeamspace from './components/EditTeamspace/EditTeamspace';
+import TeamspaceLayout from './views/TeamspaceLayout/TeamspaceLayout';
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -67,7 +70,9 @@ function App() {
       let filteredTeamspaces = [];
       if (isLoggedIn) {
         filteredTeamspaces = tspaces.filter((space) =>
-          space.collaborators.includes(user.uid)
+          space.collaborators.some(
+            (collaborator) => collaborator.uid === user.uid
+          )
         );
       }
       setTeamspaces(filteredTeamspaces);
@@ -255,6 +260,52 @@ function App() {
     await deleteDoc(doc(db, 'tags', searchedTag[0]));
   }
 
+  // Handle create a new teamspace and push it to firebase
+  function onCreateTeamspace({ ...data }) {
+    const newTeamspace = {
+      ...data,
+    };
+
+    const batch = writeBatch(db);
+
+    addDoc(collection(db, 'teamspaces'), newTeamspace)
+      .then(({ id }) => {
+        setTeamspaces((prevTeamspaces) => {
+          return [...prevTeamspaces, { ...data, id: id }];
+        });
+        batch.commit().then(() => console.log(id));
+      })
+      .catch((err) => console.log(err));
+  }
+
+  // Handle update an existing teamspace and push it to firebase
+  function onUpdateTeamspace(id, { ...data }) {
+    setTeamspaces((prevTeamspaces) => {
+      return prevTeamspaces.map((space) => {
+        if (space.id === id) {
+          return { ...space, ...data };
+        } else {
+          return space;
+        }
+      });
+    });
+
+    const batch = writeBatch(db);
+
+    const newTeamspace = {
+      ...data,
+    };
+
+    getDoc(doc(db, 'teamspaces', id))
+      .then((docSnapshot) => {
+        batch.update(doc(db, 'teamspaces', docSnapshot.id), newTeamspace);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        batch.commit();
+      });
+  }
+
   return (
     <Container className={lightmode ? 'lightmode py-4' : 'py-4'}>
       <NotificationContextProvider>
@@ -395,18 +446,57 @@ function App() {
               }
             />
             <Route
-              path={'/teamspace/:id'}
+              path="/teamspaces/new"
               element={
-                <Teamspace
-                  notes={notesWithTags}
-                  tags={tags}
+                <NewTeamspace
+                  onSubmit={onCreateTeamspace}
                   lightmode={lightmode}
-                  teamspaces={teamspaces}
-                  setLightmode={setLightmode}
                   isLoggedIn={isLoggedIn}
+                  teamspaces={teamspaces}
+                  tags={tags}
+                  notes={notesWithTags}
+                  setLightmode={setLightmode}
                 />
               }
             />
+            <Route
+              path={'/teamspace/:id'}
+              element={
+                <TeamspaceLayout
+                  lightmode={lightmode}
+                  setLightmode={handleLightmode}
+                  teamspaces={teamspaces}
+                />
+              }
+            >
+              <Route
+                index
+                element={
+                  <Teamspace
+                    notes={notesWithTags}
+                    tags={tags}
+                    lightmode={lightmode}
+                    teamspaces={teamspaces}
+                    setLightmode={setLightmode}
+                    isLoggedIn={isLoggedIn}
+                  />
+                }
+              />
+              <Route
+                path="edit"
+                element={
+                  <EditTeamspace
+                    onSubmit={onUpdateTeamspace}
+                    lightmode={lightmode}
+                    isLoggedIn={isLoggedIn}
+                    teamspaces={teamspaces}
+                    tags={tags}
+                    notes={notesWithTags}
+                    setLightmode={setLightmode}
+                  />
+                }
+              />
+            </Route>
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
           <Notification />
