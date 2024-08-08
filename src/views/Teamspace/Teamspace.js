@@ -9,6 +9,7 @@ import useWindowDimensions from '../../utils/getWindowDimensions';
 import './Teamspace.css';
 import { moon, sun } from '../../utils/icons';
 import BurgerBtn from '../../components/BurgerBtn/BurgerBtn';
+import { getUserData } from '../../utils/getUserData';
 
 export default function Teamspace({
   tags,
@@ -78,18 +79,20 @@ export default function Teamspace({
                     </svg>
                   </div>
                 )}
-                <Link
-                  style={{ pointerEvents: !isLoggedIn && 'none' }}
-                  to={`/teamspace/${id}/edit`}
-                >
-                  <Button
-                    disabled={!isLoggedIn}
-                    className={lightmode ? undefined : 'white-text'}
-                    variant={lightmode ? 'primary' : 'outline-primary'}
+                {currentTeamspace.uid === getUserData().uid && (
+                  <Link
+                    style={{ pointerEvents: !isLoggedIn && 'none' }}
+                    to={`/teamspace/${id}/edit`}
                   >
-                    Edit
-                  </Button>
-                </Link>
+                    <Button
+                      disabled={!isLoggedIn}
+                      className={lightmode ? undefined : 'white-text'}
+                      variant={lightmode ? 'primary' : 'outline-primary'}
+                    >
+                      Edit
+                    </Button>
+                  </Link>
+                )}
                 <Link to="/">
                   <Button
                     className={lightmode ? undefined : 'white-text'}
