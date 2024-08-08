@@ -2,7 +2,6 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import NewNote from './components/NewNote/NewNote';
-// import { v4 as uuidV4 } from 'uuid';
 import {
   addDoc,
   collection,
@@ -21,13 +20,10 @@ import EditNote from './components/EditNote/EditNote';
 import ScrollToTop from './utils/scrollToTop';
 import Notification from './components/Notification/Notification';
 import CreateUser from './components/CreateUser/CreateUser';
-// import Todo from './components/Todo/Todo';
-// import NewTodo from './components/NewTodo/NewTodo';
 import {
   db,
   getNotes,
   getTags,
-  // getTodos,
   searchTagsId,
   getPowerUsers,
   getTeamspaces,
@@ -331,21 +327,6 @@ function App() {
                 />
               }
             />
-            {/* <Route
-              path="/teamspace/:id"
-              element={
-                <NoteList
-                  notes={notesWithTags}
-                  availableTags={tags}
-                  onUpdateTag={updateTag}
-                  onDeleteTag={deleteTag}
-                  isLoggedIn={isLoggedIn}
-                  setIsLoggedIn={setIsLoggedIn}
-                  lightmode={lightmode}
-                  setLightmode={handleLightmode}
-                />
-              }
-            /> */}
             <Route
               path="/new"
               element={
@@ -399,31 +380,6 @@ function App() {
                 }
               />
             </Route>
-            {/* <Route
-              path="/tasks"
-              element={
-                <Todo
-                  todos={todos}
-                  isLoggedIn={isLoggedIn}
-                  lightmode={lightmode}
-                  setTodos={setTodos}
-                  setLightmode={handleLightmode}
-                  setIsLoggedIn={setIsLoggedIn}
-                  onDeleteTask={onDeleteTask}
-                />
-              }
-            />
-            <Route
-              path="/tasks/new"
-              element={
-                <NewTodo
-                  onSubmit={onCreateTodo}
-                  isLoggedIn={isLoggedIn}
-                  lightmode={lightmode}
-                  setLightmode={handleLightmode}
-                />
-              }
-            /> */}
             <Route
               path="/login"
               element={
