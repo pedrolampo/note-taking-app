@@ -56,6 +56,16 @@ const CreateUser = ({ lightmode }) => {
           addDoc(collection(db, 'users'), userData).catch((err) => {
             console.log(err);
           });
+
+          const teamspaceData = {
+            collaborators: [{ name: userData.name, uid: userData.uid }],
+            name: 'Personal',
+            uid: userData.uid,
+          };
+          addDoc(collection(db, 'teamspaces'), teamspaceData).catch((err) => {
+            console.log(err);
+          });
+
           setNotification('success', `Success`);
           navigate('/login');
         })
