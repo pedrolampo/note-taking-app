@@ -71,7 +71,7 @@ export default function SideBar({
           </div>
         )}
 
-        <div className="tags-container">
+        {/* <div className="tags-container">
           <h4 className="tags-header">Tags</h4>
           <div className="tags-body">
             {sortedTags.map((tag) => (
@@ -83,7 +83,7 @@ export default function SideBar({
               />
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
 
       <Link to="/new" className="create-button">

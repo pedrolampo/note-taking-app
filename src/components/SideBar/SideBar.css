@@ -186,6 +186,7 @@
   border-top: 1px solid #ffffff30;
   color: var(--white);
   text-decoration: none;
+  margin-top: auto;
 }
 .lightmode .sidebar .create-button {
   color: var(--black);
