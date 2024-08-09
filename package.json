@@ -2,7 +2,7 @@
   "name": "note-taking-app",
   "version": "2.2.9",
   "private": true,
-  "homepage": ".",
+  "homepage": "",
   "dependencies": {
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
