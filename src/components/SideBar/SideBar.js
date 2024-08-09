@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Col, Container, Form, Row } from 'react-bootstrap';
 import { NoteCard } from '../../views/NoteList/NoteList';
-import Accordion from '../Accordion/Accordion';
+// import Accordion from '../Accordion/Accordion';
 import { searchIconBlack } from '../../utils/icons';
 import './SideBar.css';
 
@@ -26,15 +26,15 @@ export default function SideBar({
     });
   }, [title, notes]);
 
-  const sortedTags = tags.sort((a, b) => {
-    if (a.label.toLowerCase() < b.label.toLowerCase()) {
-      return -1;
-    }
-    if (a.label.toLowerCase() > b.label.toLowerCase()) {
-      return 1;
-    }
-    return 0;
-  });
+  // const sortedTags = tags.sort((a, b) => {
+  //   if (a.label.toLowerCase() < b.label.toLowerCase()) {
+  //     return -1;
+  //   }
+  //   if (a.label.toLowerCase() > b.label.toLowerCase()) {
+  //     return 1;
+  //   }
+  //   return 0;
+  // });
 
   return (
     <div className="sidebar">
