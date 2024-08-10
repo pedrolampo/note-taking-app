@@ -346,7 +346,7 @@ function App() {
               }
             />
             <Route
-              path="/new"
+              path="/note/new"
               element={
                 <NewNote
                   onSubmit={onCreateNote}
@@ -417,7 +417,7 @@ function App() {
                   teamspaces={teamspaces}
                   tags={tags}
                   notes={notesWithTags}
-                  setLightmode={setLightmode}
+                  setLightmode={handleLightmode}
                 />
               }
             />
@@ -431,7 +431,7 @@ function App() {
                   teamspaces={teamspaces}
                   tags={tags}
                   notes={notesWithTags}
-                  setLightmode={setLightmode}
+                  setLightmode={handleLightmode}
                 />
               }
             />
@@ -453,7 +453,7 @@ function App() {
                     tags={tags}
                     lightmode={lightmode}
                     teamspaces={teamspaces}
-                    setLightmode={setLightmode}
+                    setLightmode={handleLightmode}
                     isLoggedIn={isLoggedIn}
                   />
                 }
@@ -468,7 +468,7 @@ function App() {
                     teamspaces={teamspaces}
                     tags={tags}
                     notes={notesWithTags}
-                    setLightmode={setLightmode}
+                    setLightmode={handleLightmode}
                   />
                 }
               />

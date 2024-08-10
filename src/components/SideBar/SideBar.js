@@ -86,7 +86,7 @@ export default function SideBar({
         </div> */}
       </div>
 
-      <Link to="/new" className="create-button">
+      <Link to="/note/new" className="create-button">
         &#43; Create
       </Link>
 

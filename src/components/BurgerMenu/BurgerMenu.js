@@ -67,7 +67,7 @@ export default function BurgerMenu({
 
       <Link
         onClick={() => setIsBurgerOpen(false)}
-        to="/new"
+        to="/note/new"
         className="create-button"
       >
         New Note

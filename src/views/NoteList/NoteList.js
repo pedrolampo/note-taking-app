@@ -218,7 +218,7 @@ export default function NoteList({
                 {isLoggedIn && (
                   <Link
                     style={{ pointerEvents: !isLoggedIn && 'none' }}
-                    to="/new"
+                    to="/note/new"
                   >
                     <Button
                       disabled={!isLoggedIn}
