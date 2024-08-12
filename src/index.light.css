@@ -34,7 +34,7 @@ body:has(.lightmode) {
 }
 
 .lightmode .note-markdown pre {
-  background-color: var(--white);
+  background-color: #ededed6e;
   border: 1px solid var(--grey);
 }
 
@@ -55,6 +55,9 @@ body:has(.lightmode) {
   color: var(--black);
 }
 
+.lightmode .row:has(> .toc) {
+  background-color: #ededed;
+}
 .lightmode .toc .toc-header {
   color: var(--black);
 }
