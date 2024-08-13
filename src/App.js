@@ -35,7 +35,7 @@ import { getUserData } from './utils/getUserData';
 import NewTeamspace from './components/NewTeamspace/NewTeamspace';
 import EditTeamspace from './components/EditTeamspace/EditTeamspace';
 import TeamspaceLayout from './views/TeamspaceLayout/TeamspaceLayout';
-import UserDashboard from './views/UserDashboard/UserDashboard';
+// import UserDashboard from './views/UserDashboard/UserDashboard';
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -473,7 +473,7 @@ function App() {
                 }
               />
             </Route>
-            <Route
+            {/* <Route
               path="/profile/dashboard"
               element={
                 <UserDashboard
@@ -484,7 +484,7 @@ function App() {
                   setLightmode={handleLightmode}
                 />
               }
-            />
+            /> */}
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
           <Notification />
