@@ -74,6 +74,12 @@ h2.note-title {
   color: #000;
 }
 
+h3.not-found {
+  margin-top: 0 !important;
+  margin-bottom: 1em;
+  color: var(--white);
+}
+
 .todo-btn {
   border: none !important;
 }

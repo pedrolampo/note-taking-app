@@ -29,13 +29,13 @@ import {
   getTeamspaces,
 } from './services/firestore/firebase';
 import './App.css';
-
 import { NotificationContextProvider } from './context/NotificationContext';
 import UserContext from './context/UserContext';
 import { getUserData } from './utils/getUserData';
 import NewTeamspace from './components/NewTeamspace/NewTeamspace';
 import EditTeamspace from './components/EditTeamspace/EditTeamspace';
 import TeamspaceLayout from './views/TeamspaceLayout/TeamspaceLayout';
+import UserDashboard from './views/UserDashboard/UserDashboard';
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -473,6 +473,18 @@ function App() {
                 }
               />
             </Route>
+            <Route
+              path="/profile/dashboard"
+              element={
+                <UserDashboard
+                  notes={notesWithTags}
+                  lightmode={lightmode}
+                  teamspaces={teamspaces}
+                  isLoggedIn={isLoggedIn}
+                  setLightmode={handleLightmode}
+                />
+              }
+            />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
           <Notification />

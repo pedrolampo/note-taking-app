@@ -11,6 +11,10 @@ body:has(.lightmode) {
   color: var(--black);
 }
 
+.lightmode h3.not-found {
+  color: var(--black);
+}
+
 .lightmode .modal.modal-content {
   color: var(--black);
   background-color: var(--white);
