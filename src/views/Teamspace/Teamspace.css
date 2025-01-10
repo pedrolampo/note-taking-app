@@ -4,6 +4,10 @@
   max-width: 99%;
 }
 
+.teamspace-main-container hr {
+  color: var(--white);
+}
+
 .teamspace-main-container > :first-child {
   flex: 0;
 }

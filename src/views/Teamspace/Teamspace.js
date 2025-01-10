@@ -54,7 +54,7 @@ export default function Teamspace({
       </Col>
       <Col>
         <Container className="teamspace-container">
-          <Row className="align-items-center mb-5">
+          <Row className="align-items-center">
             <Col>
               <h1 className="note-title">{currentTeamspace?.name} Teamspace</h1>
             </Col>
@@ -110,6 +110,8 @@ export default function Teamspace({
             </Col>
           </Row>
 
+          <hr/>
+
           {!filteredNotes.length ? (
             <span className="empty-teamspace">
               Such emptiness...
@@ -117,9 +119,9 @@ export default function Teamspace({
               Try adding some notes to the Teamspace
             </span>
           ) : (
-            <Row xs={1} sm={1} lg={2} xl={2} className="g-5">
+            <Row xs={1} sm={1} lg={2} xl={2} className="g-5 mt-1">
               {filteredNotes.map((note) => (
-                <Col key={note.id}>
+                <Col className='p-3 px-4 mt-1' key={note.id}>
                   <TeamspaceCard
                     id={note.id}
                     title={note.title}
